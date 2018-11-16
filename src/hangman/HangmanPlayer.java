@@ -1,4 +1,13 @@
 package hangman;
+/**
+ * This class represents player for Hangman game.
+ * Game is played differently depending on the interface,
+ * therefore this class is defined as abstract.
+ * 
+ * @author Vladimir Igumnov
+ * @version 1.0
+ *
+ */
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -6,14 +15,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
 
-/**
- * This class represents player for Hangman game.
- * 
- * @author Vladimir Igumnov
- * @version 1.0
- *
- */
-public class HangmanPlayer
+abstract public class HangmanPlayer
 {
 	private String firstName,
 	               lastName;
@@ -28,6 +30,9 @@ public class HangmanPlayer
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	
+	// play the game using provided word
+	abstract public void playGame(String word);
 	
 	public void saveResult(HangmanGame game)
 	{	
@@ -58,17 +63,5 @@ public class HangmanPlayer
 	public String getLastName()
 	{
 		return lastName;
-	}
-
-	// set last name (to be called from child class only)
-	protected void setLastName(String lastName)
-	{
-		this.lastName = lastName;
-	}
-
-	// set first name (to be called from child class only)
-	protected void setFirstName(String firstName)
-	{
-		this.firstName = firstName;
 	}
 }

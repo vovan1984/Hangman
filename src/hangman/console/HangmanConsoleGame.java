@@ -2,7 +2,6 @@ package hangman.console;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 
@@ -14,8 +13,8 @@ import hangman.HangmanPlayer;
  */
 public class HangmanConsoleGame extends HangmanGame
 {	
-	private HangmanPlayer player; // player of the game	
-	private BufferedReader reader; // reader from console
+	private final HangmanPlayer player;  // player of the game	
+	private final BufferedReader reader; // reader from console
 	
 	public HangmanConsoleGame(String word, 
 			                  HangmanPlayer player,
@@ -23,7 +22,7 @@ public class HangmanConsoleGame extends HangmanGame
 	{
 		super(word);
 		this.player = player;
-	    this.reader = reader; // To read data from terminal
+	    this.reader = reader;
 	}
 
 	@Override

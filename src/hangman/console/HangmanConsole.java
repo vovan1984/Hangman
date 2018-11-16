@@ -45,7 +45,7 @@ public class HangmanConsole
 					i++;
 					dictionaryFile = args[i];
 				}
-				else if (args[i].equals("-p")&& i < args.length-1 )
+				else if (args[i].equals("-p") && i < args.length-1 )
 				{
 					i++;
 					playersFile = args[i];					
@@ -84,31 +84,30 @@ public class HangmanConsole
 				lastName = "Doe";
 			}
 
-			HangmanPlayer player = new HangmanPlayer(playersFile, firstName, lastName);
+			HangmanPlayer player = new HangmanConsolePlayer(playersFile, 
+					                                        firstName, 
+					                                        lastName, 
+					                                        reader);
 			System.out.println("Hi " + player.getFirstName() + ", nice to meet you!");			
 			
 			// play games for words from dictionary
 			while (exitGame.equalsIgnoreCase(CONTINUE))
-			{	    
-				String currentWord = dictionary.getNextWord();	
-				
-				HangmanGame game = new HangmanConsoleGame(currentWord, player, reader);			
-				game.play();
-				
-				// store result into file
-				player.saveResult(game); 
+			{	
+				// play game for the next word from shuffled list
+				player.playGame(dictionary.getNextWord());
 				
 				System.out.print("Do you want to play another game ? (y/n)\n--> ");
 				exitGame = reader.readLine();
 			}
-		} catch (IOException e)
-		{
-			System.out.println("IO error!");
-			e.printStackTrace();
 		}
 		catch (IllegalArgumentException e)
 		{
 			System.out.println(e.getMessage());
+			return;
+		} catch (IOException e)
+		{
+			System.out.println("IO error!");
+			e.printStackTrace();
 			return;
 		}
 		
