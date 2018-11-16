@@ -1,0 +1,10 @@
+bin/
+outputdir/
+.settings/
+.project
+.classpath
+nbproject
+build.xml
+manifest.mf
+build/
+resources/
