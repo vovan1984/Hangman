@@ -23,7 +23,7 @@ import hangman.*;
 public class HangmanConsole
 {
 	// file with names and scores of players
-	private final static String playersFile = "player.txt";
+	private static String playersFile = "player.txt";
 	
 	// default dictionary file (can be overridden by user input)  
 	private static String dictionaryFile = "dictionary.txt";
@@ -35,16 +35,28 @@ public class HangmanConsole
 	{
 		String exitGame = CONTINUE;
 		
+		// check if players and/or dictionary files are provided in input
 		if (args.length > 0)
-		{
-			if (args.length == 2 && args[0].equals("-d"))
-				dictionaryFile = args[1];
-			else
+		{	
+			for (int i = 0; i < args.length; i++)
 			{
-				System.out.println("Usage: java -jar Hangman.jar [-d dictionary_file]");
-				return;
-			}				
-		}
+				if (args[i].equals("-d") && i < args.length-1)
+				{
+					i++;
+					dictionaryFile = args[i];
+				}
+				else if (args[i].equals("-p")&& i < args.length-1 )
+				{
+					i++;
+					playersFile = args[i];					
+				}
+				else
+				{
+					System.out.println("Usage: java -jar Hangman.jar [-d dictionary_file] [-p players_file]");
+					return;				
+				}
+			}
+		} // end of args.length > 0
 		
 		// To read data from terminal
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
