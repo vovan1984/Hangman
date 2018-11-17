@@ -6,17 +6,19 @@ import java.io.InputStreamReader;
 import hangman.*;
 
 /**
- * This is a simple Hangman Game in Java with a given dictionary.
- * 
+ * This class starts Console Hangman Game with a given dictionary.
+ * <br>
  * It's a one player game. The game is playable in the terminal. 
  * To win, the player has 10 rounds to find the word. Words are not 
  * case sensitive.
- * 
- * Logic: First, program loads and shuffles dictionary. 
- *        Then it creates player. 
- *        Finally, in a loop, it creates and plays the game
- *        for the next word from dictionary.
- * 
+ * <br><br>
+ * <b>Logic:</b>
+ * <ul>
+ *     <li>First, program loads and shuffles dictionary.</li>
+ *     <li>Then it creates player.</li>
+ *     <li>Finally, in a loop, it plays the game
+ *        for the next word from dictionary.</li>
+ * </ul>
  * @author Vladimir Igumnov
  * @version 1.0
  */
@@ -31,6 +33,13 @@ public class HangmanConsole
 	// "n" is to continue the game, "y" is for exit
 	private final static String CONTINUE = "y";
 
+	/**
+	 * @param args Input parameters for running the game in Console:
+	 *             <ul>
+	 *                <li><b>-p &lt;file_path&gt; </b> - Optional. Full path to the players file</li>
+	 *                <li><b>-d &lt;file_path&gt; </b> - Optional. Full path to the dictionary file</li>
+	 *             </ul>
+	 */
 	public static void main(String[] args)
 	{
 		String exitGame = CONTINUE;
