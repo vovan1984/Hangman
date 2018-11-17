@@ -61,7 +61,7 @@ public class HangmanConsole
 				}
 				else
 				{
-					System.out.println("Usage: java -jar Hangman.jar [-d dictionary_file] [-p players_file]");
+					System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
 					return;				
 				}
 			}
