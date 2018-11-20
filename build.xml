@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project default="main">
 
 	<property name="doc.dir"   value="docs"/> 
@@ -37,9 +38,9 @@
 	
 	<target name="javadoc">
 	    <javadoc sourcepath="${src.dir}" 
-		         destdir="${doc.dir}"
-				 author="true"
-				 version="true"
+                 destdir="${doc.dir}"
+                 author="true"
+                 version="true"
 				 encoding="UTF-8"
 				 charset="UTF-8"
 				 docencoding="UTF-8"/>
