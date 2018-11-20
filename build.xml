@@ -1,0 +1,53 @@
+<project default="main">
+
+	<property name="doc.dir"   value="docs"/> 
+    <property name="src.dir"   value="src"/> 	
+	<property name="build.dir"   value="bin"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+	
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+		<delete dir="${doc.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/HangmanNetworkClient.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="hangman.network.HangmanNetworkClient"/>
+            </manifest>
+		</jar>
+		<jar destfile="${jar.dir}/HangmanNetworkServer.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="hangman.network.HangmanNetworkServer"/>
+            </manifest>
+		</jar>
+		<jar destfile="${jar.dir}/HangmanConsole.jar" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="hangman.console.HangmanConsole"/>
+            </manifest>
+        </jar>
+    </target>
+	
+	<target name="javadoc">
+	    <javadoc sourcepath="${src.dir}" 
+		         destdir="${doc.dir}"
+				 author="true"
+				 version="true"
+				 encoding="UTF-8"
+				 charset="UTF-8"
+				 docencoding="UTF-8"/>
+	</target>
+	
+	<!-- Generation of jars -->
+	 <target name="main" depends="jar"/>
+	 
+	<!-- Full clean build (including javadoc) -->
+	<target name="full" depends="clean,jar,javadoc"/>
+</project>

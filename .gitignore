@@ -1,10 +1,8 @@
 bin/
-doc/
+docs/
 .settings/
 .project
 .classpath
 nbproject
-build.xml
 manifest.mf
-build/
 resources/
