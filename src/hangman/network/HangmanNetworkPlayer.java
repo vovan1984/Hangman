@@ -1,19 +1,19 @@
 package hangman.network;
 
-/**
- * This class represents player for Hangman game.
- * Game is played via network.
- * 
- * @author Vladimir Igumnov
- * @version 1.0
- *
- */
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 
+/**
+ * This class represents player for Hangman game.<br>
+ * Game is played via network.
+ * 
+ * @author Vladimir Igumnov
+ * @version 1.0
+ *
+ */
 public class HangmanNetworkPlayer extends HangmanPlayer
 {
 	private final BufferedReader reader;  // read to network connection
@@ -30,7 +30,9 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 		this.writer = writer;
 	}
 	
-	// play the game using provided word
+	/**
+	 *  Play the game using provided word.
+	 */
 	@Override
 	public void playGame(String word)
 	{

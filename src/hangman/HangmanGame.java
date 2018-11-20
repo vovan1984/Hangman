@@ -26,8 +26,15 @@ public abstract class HangmanGame
 	// scores after each round
 	private int[] scores = {100, 50, 25, 10, 5, 0, 0, 0, 0, 0, 0};
 	
-	protected String word;             // secret word in a lower case
-	protected StringBuffer maskedWord; // secret word masked with '*'
+	/**
+	 * Secret word in a lower case
+	 */
+	protected String word;          
+	
+	/**
+	 * Secret word masked with '*'
+	 */
+	protected StringBuffer maskedWord; 
 	
 	public HangmanGame(String word)
 	{
@@ -44,20 +51,37 @@ public abstract class HangmanGame
 		maskedWord = new StringBuffer(new String(tmp));
 	}
 	
-	// Show greeting at the beginning of the game
+	/**
+	 *  Show greeting at the beginning of the game.
+	 */
 	abstract public void showGameGreeting();
 	
-	// Get input characters from player
+	/**
+	 *  Get input characters from player.
+	 * @return Letter, substring or a full word suggestion from a player.
+	 */
 	abstract public String requestInput();
 	
-	/* Inform player of match/miss and show the secret word
-	with letters guessed by now */
+	/**
+	 * Inform player of match/miss and show the secret word with letters guessed by now.<br>
+	 * This abstract class show be defined in children classes.
+	 * 
+	 * @param input Input substring provided by player.
+	 * @param match Result of the substring search in the hidden word:
+	 *        <ul>
+	 *           <li><b>true</b>  - substring was found in the word.
+	 *           <li><b>false</b> - substring was not found.
+	 *        </ul>
+	 */
 	abstract public void showResponse(String input, boolean match);
 	
-	// Show result at the end of the game
+	/**
+	 *  Show result at the end of the game.
+	 */
 	abstract public void showGameResult();
 	
-	/* Implementation of play() depends on type
+	/**
+	 * Implementation of play() depends on type
 	 * of an interaction with user. This interaction is
 	 * defined by abstract methods.
 	 */
@@ -98,19 +122,32 @@ public abstract class HangmanGame
 		showGameResult();
 	} // end of play()
 	
-	// score earned in the game
+	/**
+	 * This method returns score earned in the game.
+	 * @return Game score.
+	 */
 	public int getScore()
 	{
 		return points;
 	}
 	
-	// number of rounds played in the game
+	/**
+	 * Number of rounds played in the game.
+	 * @return Number of played rounds.
+	 */
 	public int getRounds()
 	{
 		return rounds;
 	}
 	
-	// check if player won the game
+	/**
+	 * Check if player won the game.
+	 * @return Result of the game:
+	 * <ul>
+	 *     <li><b>true</b>  - player won the game</li>
+	 *     <li><b>false</b> - player lost the game</li>
+	 * </ul>
+	 */
 	public boolean hasWon()
 	{
 		return won;
@@ -141,7 +178,9 @@ public abstract class HangmanGame
 		return matchFound;
 	}
 	
-	// Return result of the game in String form
+	/**
+	 *  Return result of the game in String form.
+	 */
 	@Override
 	public String toString()
 	{

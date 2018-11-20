@@ -9,6 +9,14 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class represents network server for the 
+ * Hangman game. <br>
+ * The program starts pool of threads for processing network connections.<br>
+ * 
+ * @author Vladimir Igumnov
+ * @version 1.0
+ */
 public class HangmanNetworkServer
 {
 	// file with names and scores of players

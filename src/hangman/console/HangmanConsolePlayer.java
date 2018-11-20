@@ -1,5 +1,10 @@
 package hangman.console;
 
+import java.io.BufferedReader;
+
+import hangman.HangmanGame;
+import hangman.HangmanPlayer;
+
 /**
  * This class represents player for Hangman game.
  * Game is played via console.
@@ -8,11 +13,6 @@ package hangman.console;
  * @version 1.0
  *
  */
-import java.io.BufferedReader;
-
-import hangman.HangmanGame;
-import hangman.HangmanPlayer;
-
 public class HangmanConsolePlayer extends HangmanPlayer
 {
 	private final BufferedReader reader;

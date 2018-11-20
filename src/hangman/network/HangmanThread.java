@@ -1,6 +1,3 @@
-/**
- * 
- */
 package hangman.network;
 
 import java.io.BufferedReader;
@@ -17,8 +14,11 @@ import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
 
 /**
+ * Main flow of the server to client communication 
+ * during the Hangman game.
+ * 
  * @author Vladimir Igumnov
- *
+ * @version 1.0.
  */
 public class HangmanThread implements Runnable
 {
@@ -33,6 +33,13 @@ public class HangmanThread implements Runnable
 	
 	private final static Logger logger = Logger.getLogger(HangmanThread.class.getName());
 	
+	/**
+	 * Create server-client interaction thread.
+	 * 
+	 * @param client Hangman game remote client.
+	 * @param dictionaryFile Dictionary file.
+	 * @param playersFile File to store players statistics. 
+	 */
 	public HangmanThread(Socket client,
 			             String dictionaryFile,
 			             String playersFile)
@@ -44,8 +51,8 @@ public class HangmanThread implements Runnable
 		logPrefix = "[" + clientAddress + "] ";
 	}
 
-	/* Interaction with network client
-	 * @see java.lang.Runnable#run()
+	/**
+	 *  Interaction with a network client.
 	 */
 	@Override
 	public void run()

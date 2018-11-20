@@ -11,7 +11,8 @@ import java.util.logging.Logger;
 import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 
-/**
+/** 
+ * Network Hangman game in Java.
  * @author Vladimir Igumnov
  *
  */

@@ -1,13 +1,4 @@
 package hangman;
-/**
- * This class represents player for Hangman game.
- * Game is played differently depending on the interface,
- * therefore this class is defined as abstract.
- * 
- * @author Vladimir Igumnov
- * @version 1.0
- *
- */
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,6 +6,15 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
 
+/**
+ * Abstract class representing player for a Hangman game.
+ * Game is played differently depending on the interface,
+ * therefore this class is defined as abstract.
+ * 
+ * @author Vladimir Igumnov
+ * @version 1.0
+ *
+ */
 abstract public class HangmanPlayer
 {
 	private String firstName,

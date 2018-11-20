@@ -8,11 +8,11 @@ import java.util.List;
 
 /**
  * This class contains methods to work with
- * Dictionary for Hangman game.
- * 
- * Constructor loads words from the input file.
- * Method shuffle() shuffles words in random order.
- * 
+ * Dictionary for a Hangman game.
+ * <ul>
+ * <li>Constructor loads words from the input file.</li>
+ * <li>Method shuffle() shuffles words in random order.</li>
+ * </ul>
  * @author Vladimir Igumnov
  * @version 1.0
  * 
@@ -28,14 +28,21 @@ public class HangmanDictionary
 	//  random number generator
 	private final static SecureRandom randomNumber = new SecureRandom();
 	
-	// Constructor for default charset 
+	/**
+	 * Constructor for a default charset 
+	 * @param dictionaryPath Path to a dictionary file
+	 */
 	public HangmanDictionary(String dictionaryPath)
 	{
 		this(dictionaryPath, def);
 	}
 	
-	// Constructor for input charset
-	HangmanDictionary(String dictionaryPath, Charset charset)
+	/**
+	 *  Constructor for an input charset
+	 * @param dictionaryPath Path to a dictionary file
+	 * @param charset Encoding of a dictionary file
+	 */
+	public HangmanDictionary(String dictionaryPath, Charset charset)
 	{
 		File dictionary = new File(dictionaryPath);
 		
@@ -61,7 +68,9 @@ public class HangmanDictionary
 		}
 	} 
 	
-	// This method shuffles words in random order
+	/**
+	 *  This method shuffles words in a random order.
+	 */
 	public void shuffle()
 	{
 		// next call to getNextWord should start with words[0] again
@@ -78,6 +87,11 @@ public class HangmanDictionary
 		}
 	} // end of shuffle
 
+	/**
+	 * This method identifies the next word from the dictionary to
+	 * be played in a Hangman game.
+	 * @return Next word from a randomly shuffled dictionary.
+	 */
 	public String getNextWord()
 	{
 		/* determine if any word is left to be dealt, 
