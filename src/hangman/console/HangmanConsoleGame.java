@@ -16,6 +16,13 @@ public class HangmanConsoleGame extends HangmanGame
 	private final HangmanPlayer player;  // player of the game	
 	private final BufferedReader reader; // reader from console
 	
+	/**
+	 * Constructor for Console version of a Hangman game.
+	 * 
+	 * @param word Word to be played.
+	 * @param player Player who should guess the word. 
+	 * @param reader Input stream to read from console.
+	 */
 	public HangmanConsoleGame(String word, 
 			                  HangmanPlayer player,
 			                  BufferedReader reader)
@@ -24,12 +31,19 @@ public class HangmanConsoleGame extends HangmanGame
 		this.player = player;
 	    this.reader = reader;
 	}
-
+	
+	/**
+	 * Adding console interface to the basic implementation of the game.
+	 */
 	@Override
-	public void showGameGreeting()
+	public void play()
 	{
 		System.out.println("Ok, let's start!");		
 		System.out.println("Your word has " + getMaskedWord().length() + " letters");
+		
+		super.play();
+		
+		System.out.println(this);
 	}
 	
 	@Override
@@ -65,11 +79,5 @@ public class HangmanConsoleGame extends HangmanGame
 			System.out.println("Well done, " + player.getFirstName() + "!");
 		else
 			System.out.println("Sorry, there is no \"" + input + "\" in your secret word :(");		
-	}
-	
-	@Override
-	public void showGameResult()
-	{
-		System.out.println(this);
 	}
 }

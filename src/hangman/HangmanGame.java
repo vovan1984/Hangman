@@ -40,12 +40,7 @@ public abstract class HangmanGame
 	}
 	
 	/**
-	 *  Show greeting at the beginning of the game.
-	 */
-	abstract public void showGameGreeting();
-	
-	/**
-	 *  Get input characters from player.
+	 * Get input characters from player.
 	 * @return Letter, substring or a full word suggestion from a player.
 	 */
 	abstract public String requestInput();
@@ -64,14 +59,9 @@ public abstract class HangmanGame
 	abstract public void showResponse(String input, boolean match);
 	
 	/**
-	 *  Show result at the end of the game.
-	 */
-	abstract public void showGameResult();
-	
-	/**
 	 * Implementation of play() depends on type
-	 * of an interaction with user. This interaction is
-	 * defined by abstract methods.
+	 * of an interaction with user. <br>
+	 * This method should be further elaborated by descendants.
 	 */
 	public void play()
 	{
@@ -81,8 +71,6 @@ public abstract class HangmanGame
 		 * the word again.
 		 */
 		if (gamePlayed) setMaskedWord();
-		
-		showGameGreeting();
 		
 		// play while there are letters to be guessed
 		while (rounds < MAX_ROUNDS && maskedWord.indexOf("*") != -1)
@@ -108,8 +96,6 @@ public abstract class HangmanGame
 		}
 		gamePlayed = true;
 		
-		// Show result of the game
-		showGameResult();
 	} // end of play()
 	
 	/**

@@ -34,23 +34,31 @@ public class HangmanNetworkGame extends HangmanGame
 	    this.reader = reader;
 	    this.writer = writer;
 	}
-
-	/* (non-Javadoc)
-	 * @see hangman.HangmanGame#showGameGreeting()
+	
+	/**
+	 * Play game via network.<br>
+	 * Server shows masked word and asks for letters, 
+	 * while client tries to guess remained characters. 
 	 */
-	@Override 
-	public void showGameGreeting()
+	@Override
+	public void play()
 	{
 		try
 		{
 			writer.write("Ok, let's start!" + "\r\n");
 			writer.write("Your word has " + getMaskedWord().length() + " letters" + "\r\n");
 			writer.flush();
-		} catch (IOException e)
+
+			super.play();
+
+			writer.write(this + "\r\n");
+			writer.flush();
+		} 
+		catch (IOException e)
 		{
-			logger.severe("IO error while writing greeting to the client!");
+			logger.info("IO error while communicating to client!");
 			e.printStackTrace();
-		}		
+		}
 	}
 
 	/* 
@@ -109,22 +117,4 @@ public class HangmanNetworkGame extends HangmanGame
 			e.printStackTrace();
 		}
 	}
-
-	/* (non-Javadoc)
-	 * @see hangman.HangmanGame#showGameResult()
-	 */
-	@Override
-	public void showGameResult()
-	{
-		try
-		{
-			writer.write(this + "\r\n");
-		} catch (IOException e)
-		{
-			logger.info("IO error while sending game result to client!");
-			e.printStackTrace();
-		}
-
-	}
-
 }
