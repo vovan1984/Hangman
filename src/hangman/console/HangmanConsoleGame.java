@@ -29,7 +29,7 @@ public class HangmanConsoleGame extends HangmanGame
 	public void showGameGreeting()
 	{
 		System.out.println("Ok, let's start!");		
-		System.out.println("Your word has " + maskedWord.length() + " letters");
+		System.out.println("Your word has " + getMaskedWord().length() + " letters");
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class HangmanConsoleGame extends HangmanGame
 		// Get non-empty input
 		while (input == null || input.equals(""))
 		{
-			System.out.println("The secret word is " + maskedWord);
+			System.out.println("The secret word is " + getMaskedWord());
 			System.out.print("Your input: ");
 
 			try

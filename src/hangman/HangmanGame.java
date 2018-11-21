@@ -1,7 +1,5 @@
 package hangman;
 
-import java.util.Arrays;
-
 /**
  * Abstract class defining the logic of Hangman game.
  * This logic doesn't depend on the method of user input (e.g. it
@@ -17,24 +15,16 @@ public abstract class HangmanGame
 {
 	// max number of rounds to be played
 	private final static int MAX_ROUNDS = 10;
-	
-	private int points;         // points for the game
-	private int rounds;         // rounds for the game
-	private boolean won;        // if player won
-	private boolean gamePlayed; // if game was already played
-	
+
+	private final String word;       // secret word in a lower case
+	private StringBuffer maskedWord; // secret word masked with '*'
+	private int points;              // points for the game
+	private int rounds;              // rounds for the game
+	private boolean won;             // if player won
+	private boolean gamePlayed;      // if game was already played
+
 	// scores after each round
-	private int[] scores = {100, 50, 25, 10, 5, 0, 0, 0, 0, 0, 0};
-	
-	/**
-	 * Secret word in a lower case
-	 */
-	protected String word;          
-	
-	/**
-	 * Secret word masked with '*'
-	 */
-	protected StringBuffer maskedWord; 
+	private final int[] scores = {100, 50, 25, 10, 5, 0, 0, 0, 0, 0, 0};         
 	
 	public HangmanGame(String word)
 	{
@@ -45,10 +35,8 @@ public abstract class HangmanGame
 		won = false;
 		gamePlayed = false;
 		
-		// mask letters with '*' (Unicode basic multilingual plane is assumed)
-		char[] tmp = word.toCharArray();
-		Arrays.fill(tmp, '*');
-		maskedWord = new StringBuffer(new String(tmp));
+		maskedWord = new StringBuffer(word);
+		setMaskedWord(); // mask letters with '*' 
 	}
 	
 	/**
@@ -89,8 +77,10 @@ public abstract class HangmanGame
 	{
 		String input;
 		
-		// game was already played
-		if (gamePlayed) return;
+		/* If game was already played, then mask
+		 * the word again.
+		 */
+		if (gamePlayed) setMaskedWord();
 		
 		showGameGreeting();
 		
@@ -153,6 +143,44 @@ public abstract class HangmanGame
 		return won;
 	}
 	
+	/**
+	 *  Return result of the game in String form.
+	 */
+	@Override
+	public String toString()
+	{
+		String result;
+		
+		if (gamePlayed)
+		{
+		    String postfix = getRounds() > 1 ? " rounds." : " round.";
+		    String prefix = hasWon() ? "You won! " : "";
+		    result = "The word was \"" + word + "\". "
+				+ prefix + getScore() + " points earned after " + getRounds() + postfix;
+		}
+		else
+			result = "Game was not yet played!";
+		
+		return result;
+	}
+	
+	/**
+	 * Show current status of a secret word (with asterisks in
+	 * place of not yet guessed letters).
+	 * @return Secret word with unknown letters masked with '*'.
+	 */
+	protected StringBuffer getMaskedWord()
+	{
+		return maskedWord;
+	}
+
+	// mask letters with '*' (Unicode basic multilingual plane is assumed)
+	private void setMaskedWord()
+	{
+		for (int i=0; i<maskedWord.length(); i++)
+			maskedWord.setCharAt(i, '*');
+	}
+	
 	// reveal matching substrings in maskedWord  
 	private boolean findMatches(String input)
 	{
@@ -176,26 +204,5 @@ public abstract class HangmanGame
 		}
 
 		return matchFound;
-	}
-	
-	/**
-	 *  Return result of the game in String form.
-	 */
-	@Override
-	public String toString()
-	{
-		String result;
-		
-		if (gamePlayed)
-		{
-		    String postfix = getRounds() > 1 ? " rounds." : " round.";
-		    String prefix = hasWon() ? "You won! " : "";
-		    result = "The word was \"" + word + "\". "
-				+ prefix + getScore() + " points earned after " + getRounds() + postfix;
-		}
-		else
-			result = "Game was not yet played!";
-		
-		return result;
 	}
 }

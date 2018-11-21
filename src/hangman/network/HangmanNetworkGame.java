@@ -44,7 +44,7 @@ public class HangmanNetworkGame extends HangmanGame
 		try
 		{
 			writer.write("Ok, let's start!" + "\r\n");
-			writer.write("Your word has " + maskedWord.length() + " letters" + "\r\n");
+			writer.write("Your word has " + getMaskedWord().length() + " letters" + "\r\n");
 			writer.flush();
 		} catch (IOException e)
 		{
@@ -66,7 +66,7 @@ public class HangmanNetworkGame extends HangmanGame
 		{
 			try
 			{
-				writer.write("The secret word is " + maskedWord + "\r\n");
+				writer.write("The secret word is " + getMaskedWord() + "\r\n");
 				writer.write("Your input: " + "\r\n");
 				writer.flush();
 				
