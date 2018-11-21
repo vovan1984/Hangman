@@ -22,6 +22,12 @@ abstract public class HangmanPlayer
 
 	private File playersFile; // file with all player names
 
+	/**
+	 * Constructor for the player of a Hangman game.
+	 * @param fileName File with statistics of users who played the game.
+	 * @param firstName First name of the player.
+	 * @param lastName Last name of the player.
+	 */
 	public HangmanPlayer(String fileName, 
 			             String firstName, 
 			             String lastName)
@@ -31,9 +37,16 @@ abstract public class HangmanPlayer
 		this.lastName = lastName;
 	}
 	
-	// play the game using provided word
+	/**
+	 * Play the game using provided word.
+	 * @param word Secret word.
+	 */
 	abstract public void playGame(String word);
 	
+	/**
+	 * Save result of the game into players file.
+	 * @param game Instance of the Hangman game which was played.
+	 */
 	public void saveResult(HangmanGame game)
 	{	
 		try (
@@ -53,13 +66,19 @@ abstract public class HangmanPlayer
 		} 
 	}
 
-	// return first name
+	/**
+	 *  Returns first name of the player.
+	 * @return First name of the player.
+	 */
 	public String getFirstName()
 	{
 		return firstName;
 	}
 
-	// return last name
+	/**
+	 *  Returns last name name of the player.
+	 * @return Last name of the player.
+	 */
 	public String getLastName()
 	{
 		return lastName;

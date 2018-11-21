@@ -7,7 +7,7 @@ import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 
 /**
- * This class represents player for Hangman game.<br>
+ * This class represents player for a Hangman game.<br>
  * Game is played via network.
  * 
  * @author Vladimir Igumnov
@@ -31,7 +31,8 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 	}
 	
 	/**
-	 *  Play the game using provided word.
+	 * Play the game using provided word.
+	 * @param word Secret word.
 	 */
 	@Override
 	public void playGame(String word)

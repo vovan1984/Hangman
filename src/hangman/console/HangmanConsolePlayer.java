@@ -26,7 +26,10 @@ public class HangmanConsolePlayer extends HangmanPlayer
 		this.reader = reader;
 	}
 	
-	// play the game using provided word
+	/**
+	 * Play the game using provided word.
+	 * @param word Secret word.
+	 */
 	@Override
 	public void playGame(String word)
 	{
