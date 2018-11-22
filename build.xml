@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="main">
+<project default="full">
 
 	<property name="doc.dir"   value="docs"/> 
     <property name="src.dir"   value="src"/> 	
@@ -17,14 +17,19 @@
         <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}"/>
     </target>
 
+	<!-- Generation of jars -->
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/HangmanNetworkClient.jar" basedir="${classes.dir}">
+        <jar destfile="${jar.dir}/HangmanNetworkClient.jar" 
+        	 basedir="${classes.dir}"
+        	 includes="hangman/network/HangmanNetworkClient.class">
             <manifest>
                 <attribute name="Main-Class" value="hangman.network.HangmanNetworkClient"/>
             </manifest>
 		</jar>
-		<jar destfile="${jar.dir}/HangmanNetworkServer.jar" basedir="${classes.dir}">
+		<jar destfile="${jar.dir}/HangmanNetworkServer.jar" 
+			 basedir="${classes.dir}"
+			 includes="hangman/*class hangman/network/*class">
             <manifest>
                 <attribute name="Main-Class" value="hangman.network.HangmanNetworkServer"/>
             </manifest>
@@ -34,6 +39,16 @@
                 <attribute name="Main-Class" value="hangman.console.HangmanConsole"/>
             </manifest>
         </jar>
+        <jar destfile="${jar.dir}/HangmanHttpServer.jar" basedir="${classes.dir}">
+             <manifest>
+                 <attribute name="Main-Class" value="hangman.http.HangmanHttpServer"/>
+             </manifest>
+         </jar>
+        <jar destfile="${jar.dir}/HangmanHttpClient.jar" basedir="${classes.dir}">
+             <manifest>
+                 <attribute name="Main-Class" value="hangman.http.HangmanHttpClient"/>
+             </manifest>
+         </jar>
     </target>
 	
 	<target name="javadoc">
@@ -45,10 +60,7 @@
 				 charset="UTF-8"
 				 docencoding="UTF-8"/>
 	</target>
-	
-	<!-- Generation of jars -->
-	 <target name="main" depends="jar"/>
 	 
-	<!-- Full clean build (including javadoc) -->
+	<!-- Full clean build (including jars and javadoc) -->
 	<target name="full" depends="clean,jar,javadoc"/>
 </project>
