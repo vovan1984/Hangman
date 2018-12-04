@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="full">
 
-	<property name="doc.dir"   value="docs"/> 
-    <property name="src.dir"   value="src"/> 	
-	<property name="build.dir"   value="bin"/>
-	<property name="classes.dir" value="${build.dir}/classes"/>
-    <property name="jar.dir"     value="${build.dir}/jar"/>
+	<property name="doc.dir"       value="docs"/> 
+    <property name="src.dir"       value="src"/> 	
+	<property name="build.dir"     value="bin"/>
+	<property name="resources.dir" value="resources/"/>
+	<property name="classes.dir"   value="${build.dir}/classes"/>
+    <property name="jar.dir"       value="${build.dir}/jar"/>
 	
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -34,11 +35,17 @@
                 <attribute name="Main-Class" value="hangman.network.HangmanNetworkServer"/>
             </manifest>
 		</jar>
-		<jar destfile="${jar.dir}/HangmanConsole.jar" basedir="${classes.dir}">
+    	  	
+		<jar destfile="${jar.dir}/HangmanConsole.jar" 
+			 basedir="${classes.dir}"
+			 includes="hangman/*class hangman/console/*class">
             <manifest>
                 <attribute name="Main-Class" value="hangman.console.HangmanConsole"/>
             </manifest>
+			<fileset dir = "${resources.dir}" />
         </jar>
+    	
+    	
         <jar destfile="${jar.dir}/HangmanHttpServer.jar" basedir="${classes.dir}">
              <manifest>
                  <attribute name="Main-Class" value="hangman.http.HangmanHttpServer"/>

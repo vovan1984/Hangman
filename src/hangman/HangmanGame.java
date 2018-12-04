@@ -47,7 +47,7 @@ public abstract class HangmanGame
 	
 	/**
 	 * Inform player of match/miss and show the secret word with letters guessed by now.<br>
-	 * This abstract class show be defined in children classes.
+	 * This abstract method show be defined in children classes.
 	 * 
 	 * @param input Input substring provided by player.
 	 * @param match Result of the substring search in the hidden word:
@@ -79,12 +79,12 @@ public abstract class HangmanGame
 
 			// try to find and reveal matches of input substring in secret word
 			boolean match = findMatches(input.toLowerCase());
+
+			// Increase number of failed rounds in case of miss
+			if (!match) rounds++;
 			
 			// Communicate match or miss to the user
 			showResponse(input, match);	
-			
-			// Start next round in case of miss
-			if (!match) rounds++;
 		}	
 		
 		// Calculate final score
