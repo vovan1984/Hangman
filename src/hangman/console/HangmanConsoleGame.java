@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.LinkedList;
+import java.util.List;
+
 import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 
@@ -18,6 +21,7 @@ public class HangmanConsoleGame extends HangmanGame
 {	
 	private final HangmanPlayer player;  // player of the game	
 	private final BufferedReader reader; // reader from console
+	private List<String> guesses;  // history of guesses
 	
 	/**
 	 * Constructor for Console version of a Hangman game.
@@ -33,6 +37,7 @@ public class HangmanConsoleGame extends HangmanGame
 		super(word);
 		this.player = player;
 	    this.reader = reader;
+	    this.guesses = new LinkedList<String>();
 	}
 	
 	/**
@@ -89,6 +94,14 @@ public class HangmanConsoleGame extends HangmanGame
 	@Override
 	public void showResponse(String input, boolean match)
 	{
+		// save user's input
+		guesses.add("Your input: " + input);
+		
+		// clear terminal screen
+		clearScreen();
+		
+		// display communication up to now
+		guesses.forEach(s -> System.out.println(s));
 	
 		// display current presentation of the gallows
 		switch (getRounds())
@@ -117,11 +130,18 @@ public class HangmanConsoleGame extends HangmanGame
 		    default: break;
 		}
 		
+		String response;
+		
 		if (match)
-			System.out.println("Well done, " + player.getFirstName() + "!");
+			response = "Well done, " + player.getFirstName() + "!";
 		else
-			System.out.println("Sorry, there is no \"" + input + "\" in your secret word :(");
+			response = "Sorry, there is no \"" + input + "\" in your secret word :(";
+		
+		System.out.println(response);
 		System.out.println();
+		
+		// save response
+		guesses.add(response);
 	}
 	
 	/**
@@ -131,7 +151,7 @@ public class HangmanConsoleGame extends HangmanGame
 	 */
 	private void printFile(String fileName)
 	{	
-		// default charset or resource files
+		// default charset of resource files
 		Charset def = Charset.forName("ISO-8859-1");
 		
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(fileName), def)))
@@ -139,9 +159,47 @@ public class HangmanConsoleGame extends HangmanGame
 			String line;
 			while ( (line = br.readLine()) != null)
 				System.out.println(line);
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			System.out.println("IO error while processing " + fileName + "!");
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Clear the console window by ringing corresponding ANSI escape codes
+	 * (clear screen, followed by home).
+	 * On Windows we do the cleaning by running cls command from cmd terminal.
+	 */
+	private static void clearScreen()
+	{
+		for (int i = 0; i<100; i++)
+			System.out.println();
+		
+	    try
+	    {
+	        final String os = System.getProperty("os.name");
+
+	        if (os.contains("Windows"))
+	        {
+	        	new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+	        }
+	        else
+	        {
+	        	// Should work in console supporting ANSI 
+	        	System.out.print("\033[H\033[2J");  
+	            System.out.flush();  
+	        }
+	    }
+	    catch (IOException e) 
+	    {
+			System.out.println("IO error while clearing the screen!");
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    System.out.println();
 	}
 }
