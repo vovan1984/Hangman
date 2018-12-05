@@ -4,11 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.util.LinkedList;
-import java.util.List;
-
 import hangman.HangmanGame;
-import hangman.HangmanPlayer;
 
 
 /**
@@ -19,9 +15,8 @@ import hangman.HangmanPlayer;
  */
 public class HangmanConsoleGame extends HangmanGame
 {	
-	private final HangmanPlayer player;  // player of the game	
+	private final HangmanConsolePlayer player;  // player of the game	
 	private final BufferedReader reader; // reader from console
-	private List<String> guesses;  // history of guesses
 	
 	/**
 	 * Constructor for Console version of a Hangman game.
@@ -31,13 +26,12 @@ public class HangmanConsoleGame extends HangmanGame
 	 * @param reader Input stream to read from console.
 	 */
 	public HangmanConsoleGame(String word, 
-			                  HangmanPlayer player,
+			                  HangmanConsolePlayer player,
 			                  BufferedReader reader)
 	{
 		super(word);
 		this.player = player;
 	    this.reader = reader;
-	    this.guesses = new LinkedList<String>();
 	}
 	
 	/**
@@ -46,12 +40,12 @@ public class HangmanConsoleGame extends HangmanGame
 	@Override
 	public void play()
 	{
-		System.out.println("Ok, let's start!");		
-		System.out.println("Your word has " + getMaskedWord().length() + " letters");
+		player.showAndAddToConversation("Ok, let's start!");		
+		player.showAndAddToConversation("Your word has " + getMaskedWord().length() + " letters");
 		
 		super.play();
 		
-		System.out.println(this);
+		player.showAndAddToConversation(this.toString());
 	}
 	
 	@Override
@@ -62,17 +56,19 @@ public class HangmanConsoleGame extends HangmanGame
 		// Get non-empty input
 		while (input == null || input.equals(""))
 		{
-			System.out.println("The secret word is " + getMaskedWord());
+		    player.showAndAddToConversation("The secret word is " + getMaskedWord());
 			System.out.print("Your input: ");
 
 			try
 			{
 				input = reader.readLine();
+				player.addToConversation("Your input: " + input);
+				
 				if (input.equals(""))
-					System.out.println("Please provide non-empty input!");
+				    player.showAndAddToConversation("Please provide non-empty input!");
 			} catch (IOException e)
 			{
-				System.out.println("IO error occured! Please re-enter your choice!");
+			    player.showAndAddToConversation("IO error occured! Please re-enter your choice!");
 				e.printStackTrace();
 			}
 		}
@@ -93,16 +89,22 @@ public class HangmanConsoleGame extends HangmanGame
 	 */
 	@Override
 	public void showResponse(String input, boolean match)
-	{
-		// save user's input
-		guesses.add("Your input: " + input);
-		
+	{		
 		// clear terminal screen
 		clearScreen();
 		
 		// display communication up to now
-		guesses.forEach(s -> System.out.println(s));
+		player.getConversation().forEach(s -> System.out.println(s));
 	
+	    String response;
+	        
+	    if (match)
+	        response = "Well done, " + player.getFirstName() + "!";
+	    else
+	        response = "Sorry, there is no \"" + input + "\" in your secret word :(";
+
+	    player.showAndAddToConversation(response + "\n");
+	    
 		// display current presentation of the gallows
 		switch (getRounds())
 		{
@@ -129,19 +131,6 @@ public class HangmanConsoleGame extends HangmanGame
                     break;
 		    default: break;
 		}
-		
-		String response;
-		
-		if (match)
-			response = "Well done, " + player.getFirstName() + "!";
-		else
-			response = "Sorry, there is no \"" + input + "\" in your secret word :(";
-		
-		System.out.println(response);
-		System.out.println();
-		
-		// save response
-		guesses.add(response);
 	}
 	
 	/**

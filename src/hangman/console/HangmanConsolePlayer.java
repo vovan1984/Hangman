@@ -1,6 +1,8 @@
 package hangman.console;
 
 import java.io.BufferedReader;
+import java.util.LinkedList;
+import java.util.List;
 
 import hangman.HangmanGame;
 import hangman.HangmanPlayer;
@@ -16,6 +18,8 @@ import hangman.HangmanPlayer;
 public class HangmanConsolePlayer extends HangmanPlayer
 {
 	private final BufferedReader reader;
+		   
+    private List<String> conversation; // conversation with a player
 	
 	public HangmanConsolePlayer(String fileName, 
 			String firstName, 
@@ -24,6 +28,7 @@ public class HangmanConsolePlayer extends HangmanPlayer
 	{				
 		super(fileName, firstName, lastName);
 		this.reader = reader;
+	    conversation = new LinkedList<String>();
 	}
 	
 	/**
@@ -39,5 +44,33 @@ public class HangmanConsolePlayer extends HangmanPlayer
 		// store result into file
 		saveResult(game); 
 	}
+	
+	/**
+     * Return console conversation with a player.   
+     * @return Conversation.
+     */
+    public List<String> getConversation() 
+    {
+        return conversation;
+    }
+
+    /**
+     * Store message to a conversation.
+     * @param msg Message to add.
+     */
+    public void addToConversation(String msg) 
+    {
+        conversation.add(msg);
+    }
+    
+    /**
+     * Display a message and store it to a conversation.
+     * @param msg Message to add and display.
+     */
+    public void showAndAddToConversation(String msg) 
+    {
+        System.out.println(msg);
+        conversation.add(msg);
+    }
 	
 }

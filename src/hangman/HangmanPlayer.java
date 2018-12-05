@@ -36,8 +36,8 @@ abstract public class HangmanPlayer
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
-	/**
+
+    /**
 	 * Play the game using provided word.
 	 * @param word Secret word.
 	 */

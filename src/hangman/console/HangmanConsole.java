@@ -93,11 +93,11 @@ public class HangmanConsole
 				lastName = "Doe";
 			}
 
-			HangmanPlayer player = new HangmanConsolePlayer(playersFile, 
-					                                        firstName, 
-					                                        lastName, 
-					                                        reader);
-			System.out.println("Hi " + player.getFirstName() + ", nice to meet you!");			
+			HangmanConsolePlayer player = new HangmanConsolePlayer(playersFile, 
+					                                               firstName, 
+					                                               lastName, 
+					                                               reader);
+			player.showAndAddToConversation("Hi " + player.getFirstName() + ", nice to meet you!");			
 			
 			// play games for words from dictionary
 			while (exitGame.equalsIgnoreCase(CONTINUE))
@@ -107,6 +107,7 @@ public class HangmanConsole
 				
 				System.out.print("Do you want to play another game ? (y/n)\n--> ");
 				exitGame = reader.readLine();
+				player.addToConversation("Do you want to play another game ? (y/n)\n--> " + exitGame);
 			}
 		}
 		catch (IllegalArgumentException e)
