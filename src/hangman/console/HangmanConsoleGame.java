@@ -162,23 +162,27 @@ public class HangmanConsoleGame extends HangmanGame
 	 * On Windows we do the cleaning by running cls command from cmd terminal.
 	 */
 	private static void clearScreen()
-	{
-		for (int i = 0; i<100; i++)
-			System.out.println();
-		
+	{		        
 	    try
 	    {
 	        final String os = System.getProperty("os.name");
 
-	        if (os.contains("Windows"))
+	        if (System.console() != null && os.contains("Windows"))
 	        {
+	            // Clear screen in Windows
 	        	new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+	        }
+	        else if (System.console() != null && System.getenv().get("TERM") != null)
+	        {
+	        	// Clear screen in console supporting ANSI 
+	        	System.out.print("\033[H\033[2J");  
+	            System.out.flush();  
 	        }
 	        else
 	        {
-	        	// Should work in console supporting ANSI 
-	        	System.out.print("\033[H\033[2J");  
-	            System.out.flush();  
+	            // just print empty lines to clear the screen
+	            for (int i = 0; i<100; i++)
+	                System.out.println();
 	        }
 	    }
 	    catch (IOException e) 
