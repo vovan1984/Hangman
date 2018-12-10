@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="full">
 
-	<property name="doc.dir"       value="docs"/> 
+	<property name="doc.dir"       value="doc"/> 
     <property name="src.dir"       value="src"/> 	
 	<property name="build.dir"     value="bin"/>
 	<property name="resources.dir" value="resources/"/>
