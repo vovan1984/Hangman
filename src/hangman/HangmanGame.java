@@ -1,120 +1,144 @@
 package hangman;
 
 /**
- * Abstract class defining the logic of Hangman game.
- * This logic doesn't depend on the method of user input (e.g. it
+ * Abstract class defining the logic of Hangman game.<br>
+ * Its content doesn't depend on the method of user input (e.g. it
  * doesn't matter if input is provided from terminal, Web or GUI).
- * 
- * Methods for communication with player are declared as abstract,
- * and should be overriden by every concrete implementation.
  * 
  * @author Vladimir Igumnov
  *
  */
 public abstract class HangmanGame
 {
-	// max number of rounds to be played
-	private final static int MAX_ROUNDS = 10;
-
+	private final static int MAX_FAILURES = 10; // max number of incorrect guesses
+    private final int[] scores = {100, 50, 25, 10, 5, 0, 0, 0, 0, 0}; // scores after each round
+	
 	private final String word;       // secret word in a lower case
 	private StringBuffer maskedWord; // secret word masked with '*'
-	private int points;              // points for the game
-	private int rounds;              // rounds for the game
-	private boolean won;             // if player won
-	private boolean gamePlayed;      // if game was already played
-
-	// scores after each round
-	private final int[] scores = {100, 50, 25, 10, 5, 0, 0, 0, 0, 0, 0};         
+	private int failures;            // number of incorrect guesses
 	
 	public HangmanGame(String word)
 	{
 		this.word = word.toLowerCase(); 
 		
-		points = 0;
-		rounds = 0;
-		won = false;
-		gamePlayed = false;
+		failures = 0;
 		
 		maskedWord = new StringBuffer(word);
 		setMaskedWord(); // mask letters with '*' 
 	}
 	
 	/**
-	 * Get input characters from player.
-	 * @return Letter, substring or a full word suggestion from a player.
+	 * Implementation of play() depends on a type
+	 * of an interaction with a user. <br>
+	 * This method should be defined by descendants.
 	 */
-	abstract public String requestInput();
+	abstract public void play();
+
+	/**
+     *  Return result of the game in String form.
+     */
+    @Override
+    public String toString()
+    {
+        String result;
+
+        String postfix = getRounds() > 1 ? " rounds." : " round.";
+        String prefix = hasWon() ? "You won! " : "";
+        result = "The word was \"" + word + "\". "
+                + prefix + getScore() + " points earned after " + getRounds() + postfix;
+        
+        return result;
+    }
+    
+    /**
+     * This method returns score earned in the game.
+     * @return Game score.
+     */
+    public int getScore()
+    {
+        int score;
+        
+        if (failures < MAX_FAILURES)
+            score = scores[failures];
+        else
+            score = 0;
+        
+        return score;
+    }
+
+    /**
+     * Number of rounds played in the game.
+     * @return Number of played rounds.
+     */
+    protected int getRounds()
+    {
+        /* 
+         * If user guessed with 0 failures, then only 1 round was played, 
+         * if failed 1 time, then 2 rounds were played, and so on.
+         * 
+         * However, if player failed 10 times, then 10 rounds were played, 
+         * because we don't run iteration #11
+         */
+        int rounds;
+        
+        if (failures < MAX_FAILURES)
+            rounds = failures + 1;
+        else
+            rounds = MAX_FAILURES;
+        
+        return rounds;
+    }
+    
+    protected int getFailures() {
+        return failures;
+    }
+
+    /**
+	 * This method validates if next round of the game can be played.<br>
+	 * For this, it checks if number of failed guesses didn't yet exceed
+	 * the max, and that the word is not yet discovered.
+	 */
+	protected boolean canContinueGame()
+	{
+	    return failures < MAX_FAILURES && maskedWord.indexOf("*") != -1;
+	}
 	
 	/**
-	 * Inform player of match/miss and show the secret word with letters guessed by now.<br>
-	 * This abstract method show be defined in children classes.
+	 * This method searches for matching substrings in a hidden word.
 	 * 
-	 * @param input Input substring provided by player.
-	 * @param match Result of the substring search in the hidden word:
-	 *        <ul>
-	 *           <li><b>true</b>  - substring was found in the word.
-	 *           <li><b>false</b> - substring was not found.
-	 *        </ul>
+	 * @param input Input substring to search in the hidden word.
+	 * @return Result of the search:
+     *        <ul>
+     *           <li><b>true</b>  - substring was found in the word.
+     *           <li><b>false</b> - substring was not found.
+     *        </ul>
 	 */
-	abstract public void showResponse(String input, boolean match);
-	
-	/**
-	 * Implementation of play() depends on type
-	 * of an interaction with user. <br>
-	 * This method should be further elaborated by descendants.
-	 */
-	public void play()
-	{
-		String input;
-		
-		/* If game was already played, then mask
-		 * the word again.
-		 */
-		if (gamePlayed) setMaskedWord();
-		
-		// play while there are letters to be guessed
-		while (rounds < MAX_ROUNDS && maskedWord.indexOf("*") != -1)
-		{
-			input = requestInput();
+    protected boolean checkPlayerGuess(String input)
+    {
+        boolean matchFound = false;
+        
+        // if substring exists in the secret word then replace asterisks with letters 
+        int startIdx;
+        if((startIdx = word.indexOf(input)) != -1)
+        {
+            do
+            {
+                // replace asterisks with letters in hidden word
+                maskedWord.replace(startIdx, startIdx + input.length(), input); 
+                startIdx += input.length();
+            }
+            // repeat until all matches replaced
+            while (startIdx < word.length() && 
+                    (startIdx = word.indexOf(input, startIdx)) != -1); 
+            
+            matchFound = true;
+        }
 
-			// try to find and reveal matches of input substring in secret word
-			boolean match = findMatches(input.toLowerCase());
-
-			// Increase number of failed rounds in case of miss
-			if (!match) rounds++;
-			
-			// Communicate match or miss to the user
-			showResponse(input, match);	
-		}	
-		
-		// Calculate final score
-		points = scores[rounds];
-		if (rounds < MAX_ROUNDS)
-		{
-			won = true;
-			rounds++; // rounds start with zero, so increment the # for display purposes
-		}
-		gamePlayed = true;
-		
-	} // end of play()
-	
-	/**
-	 * This method returns score earned in the game.
-	 * @return Game score.
-	 */
-	public int getScore()
-	{
-		return points;
-	}
-	
-	/**
-	 * Number of rounds played in the game.
-	 * @return Number of played rounds.
-	 */
-	public int getRounds()
-	{
-		return rounds;
-	}
+        // Increase number of failed rounds in a case of a miss.
+        if (!matchFound) failures++;
+        
+        return matchFound;
+    }
 	
 	/**
 	 * Check if player won the game.
@@ -124,30 +148,9 @@ public abstract class HangmanGame
 	 *     <li><b>false</b> - player lost the game</li>
 	 * </ul>
 	 */
-	public boolean hasWon()
+	protected boolean hasWon()
 	{
-		return won;
-	}
-	
-	/**
-	 *  Return result of the game in String form.
-	 */
-	@Override
-	public String toString()
-	{
-		String result;
-		
-		if (gamePlayed)
-		{
-		    String postfix = getRounds() > 1 ? " rounds." : " round.";
-		    String prefix = hasWon() ? "You won! " : "";
-		    result = "The word was \"" + word + "\". "
-				+ prefix + getScore() + " points earned after " + getRounds() + postfix;
-		}
-		else
-			result = "Game was not yet played!";
-		
-		return result;
+		return failures < MAX_FAILURES;
 	}
 	
 	/**
@@ -155,40 +158,15 @@ public abstract class HangmanGame
 	 * place of not yet guessed letters).
 	 * @return Secret word with unknown letters masked with '*'.
 	 */
-	protected StringBuffer getMaskedWord()
+	protected String getMaskedWord()
 	{
-		return maskedWord;
+		return maskedWord.toString(); // return unmodifiable copy
 	}
-
+	
 	// mask letters with '*' (Unicode basic multilingual plane is assumed)
 	private void setMaskedWord()
 	{
 		for (int i=0; i<maskedWord.length(); i++)
 			maskedWord.setCharAt(i, '*');
-	}
-	
-	// reveal matching substrings in maskedWord  
-	private boolean findMatches(String input)
-	{
-		boolean matchFound = false;
-		
-		// if substring exists in the secret word then replace asterisks with letters 
-		int startIdx;
-		if((startIdx = word.indexOf(input)) != -1)
-		{
-			do
-			{
-				// replace asterisks with letters in hidden word
-				maskedWord.replace(startIdx, startIdx + input.length(), input);	
-				startIdx += input.length();
-			}
-			// repeat until all matches replaced
-			while (startIdx < word.length() && 
-					(startIdx = word.indexOf(input, startIdx)) != -1); 
-			
-			matchFound = true;
-		}
-
-		return matchFound;
 	}
 }

@@ -1,6 +1,7 @@
 package hangman.http;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
@@ -19,11 +20,12 @@ public class HangmanHttpClient
 	private final static Logger logger = Logger.getLogger(HangmanHttpClient.class.getCanonicalName());
 
 	public static void main(String[] args)
-	{
+	{        
+	    InputStream is = null;
 		try
 		{
-			var url = new URL(SERVER);
-			var is = url.openStream();
+	        var url = new URL(SERVER);
+		    is = url.openStream();
 		} catch (MalformedURLException e)
 		{
 			logger.severe("Malformed URL: " + SERVER);
@@ -33,6 +35,17 @@ public class HangmanHttpClient
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally
+		{
+		    try
+		    {
+		        if (is != null)
+		            is.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 		}
 
 	}

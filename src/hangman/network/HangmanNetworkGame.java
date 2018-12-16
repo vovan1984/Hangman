@@ -49,7 +49,19 @@ public class HangmanNetworkGame extends HangmanGame
 			writer.write("Your word has " + getMaskedWord().length() + " letters" + "\r\n");
 			writer.flush();
 
-			super.play();
+			String input;
+			
+		    // play while there are letters to be guessed
+	        while (canContinueGame())
+	        {
+	            input = requestInput();
+
+	            // try to find matches of input substring in secret word
+	            boolean match = checkPlayerGuess(input.toLowerCase());
+
+	            // Communicate match or miss to the user
+	            showResponse(input, match); 
+	        }   
 
 			writer.write(this + "\r\n");
 			writer.flush();
@@ -64,7 +76,6 @@ public class HangmanNetworkGame extends HangmanGame
 	/* 
 	 * Get substring from the network client
 	 */
-	@Override
 	public String requestInput()
 	{
 		String input = null;
@@ -98,10 +109,9 @@ public class HangmanNetworkGame extends HangmanGame
 		return input;
 	}
 
-	/* (non-Javadoc)
-	 * @see hangman.HangmanGame#showResponse(java.lang.String, boolean)
+	/**
+	 *  Inform player of match/miss and show the secret word with letters guessed by now.
 	 */
-	@Override
 	public void showResponse(String input, boolean match)
 	{
 		try

@@ -6,9 +6,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import hangman.HangmanGame;
 
-
 /**
- * Console hangman game in Java.
+ * Console Hangman game in Java.
  * 
  * @author Vladimir Igumnov
  * @version 1.0
@@ -17,6 +16,7 @@ public class HangmanConsoleGame extends HangmanGame
 {	
 	private final HangmanConsolePlayer player;  // player of the game	
 	private final BufferedReader reader; // reader from console
+	private boolean gameCompleted;       // indication if game completed
 	
 	/**
 	 * Constructor for Console version of a Hangman game.
@@ -32,23 +32,43 @@ public class HangmanConsoleGame extends HangmanGame
 		super(word);
 		this.player = player;
 	    this.reader = reader;
+	    gameCompleted = false;
 	}
 	
 	/**
-	 * Adding console interface to the basic implementation of the game.
+	 * Implementation of the game for console interface.
 	 */
 	@Override
 	public void play()
 	{
+	    if (gameCompleted)
+	        throw new IllegalStateException("You are trying to continue already completed game!");
+	        
 		player.showAndAddToConversation("Ok, let's start!");		
 		player.showAndAddToConversation("Your word has " + getMaskedWord().length() + " letters");
 		
-		super.play();
+		String input;
+
+		// play while there are letters to be guessed
+		while (canContinueGame())
+		{
+		    input = requestInput();
+
+		    // try to find matches of input substring in secret word
+		    boolean match = checkPlayerGuess(input.toLowerCase());
+
+		    // Communicate match or miss to the user
+		    showResponse(input, match); 
+		}       
 		
+		gameCompleted = true;
 		player.showAndAddToConversation(this.toString());
 	}
 	
-	@Override
+	/**
+     * Get input characters from player.
+     * @return Letter, substring or a full word suggestion from a player.
+     */
 	public String requestInput()
 	{
 		String input = null;
@@ -87,7 +107,6 @@ public class HangmanConsoleGame extends HangmanGame
 	 *           <li><b>false</b> - substring was not found.
 	 *        </ul>
 	 */
-	@Override
 	public void showResponse(String input, boolean match)
 	{		
 		// clear terminal screen
@@ -106,7 +125,7 @@ public class HangmanConsoleGame extends HangmanGame
 	    player.showAndAddToConversation(response + "\n");
 	    
 		// display current presentation of the gallows
-		switch (getRounds())
+		switch (getFailures())
 		{
 		    case 0: break;
 		    case 1: printFile("/stage1.txt");
@@ -195,4 +214,22 @@ public class HangmanConsoleGame extends HangmanGame
 		}
 	    System.out.println();
 	}
+	
+	/**
+     *  Return result of the game in String form.
+     */
+    @Override
+    public String toString()
+    {
+        String result;
+        
+        if (gameCompleted)
+        {
+            result = super.toString();
+        }
+        else
+            result = "Game was not yet played!";
+        
+        return result;
+    }
 }

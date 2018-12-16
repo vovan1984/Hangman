@@ -16,7 +16,7 @@ import hangman.*;
  * <ul>
  *     <li>First, program loads and shuffles dictionary.</li>
  *     <li>Then it creates player.</li>
- *     <li>Finally, in a loop, it plays the game
+ *     <li>Finally, in a loop, user plays the game
  *        for the next word from dictionary.</li>
  * </ul>
  * @author Vladimir Igumnov
