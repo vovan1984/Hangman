@@ -17,3 +17,9 @@
 [Sun Dec 16 12:10:09 EST 2018] d I: 0 points in 10 rounds.
 [Sun Dec 16 12:59:02 EST 2018] Vladimir I: 0 points in 10 rounds.
 [Sun Dec 16 13:08:28 EST 2018] g u: 0 points in 10 rounds.
+[Sun Dec 16 15:20:53 EST 2018] Vladimir I: 0 points in 10 rounds.
+[Sun Dec 16 15:21:25 EST 2018] Vladimir I: 0 points in 6 rounds.
+[Sun Dec 16 15:30:06 EST 2018] V I: 10 points in 4 rounds.
+[Sun Dec 16 15:30:51 EST 2018] V I: 0 points in 10 rounds.
+[Sun Dec 16 15:31:03 EST 2018] V I: 100 points in 1 round.
+[Sun Dec 16 15:31:23 EST 2018] V I: 5 points in 5 rounds.

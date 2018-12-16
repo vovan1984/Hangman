@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="full">
 
-	<property name="doc.dir"       value="doc"/> 
+    <property name="doc.dir"       value="doc"/> 
     <property name="src.dir"       value="src"/>
-	<property name="classes.dir"   value="bin"/>
+    <property name="classes.dir"   value="bin"/>
     <property name="jar.dir"       value="${classes.dir}/jar"/>
-	
+
     <target name="clean">
         <delete dir="${classes.dir}"/>
-		<delete dir="${doc.dir}"/>
+        <delete dir="${doc.dir}"/>
     </target>
 
     <target name="compile">
@@ -16,11 +16,11 @@
         <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}"/>
     </target>
 
-	<!-- Generation of jars -->
+    <!-- Generation of jars -->
     <target name="jar" depends="compile">
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/HangmanNetworkClient.jar" 
-        	 basedir="${classes.dir}"
+             basedir="${classes.dir}"
         	 includes="hangman/network/HangmanNetworkClient.class">
             <manifest>
                 <attribute name="Main-Class" value="hangman.network.HangmanNetworkClient"/>

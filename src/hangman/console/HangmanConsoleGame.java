@@ -14,9 +14,15 @@ import hangman.HangmanGame;
  */
 public class HangmanConsoleGame extends HangmanGame
 {	
+    // Default encoding of resource files.
+    private final static Charset DEF_ENC = Charset.forName("ISO-8859-1");
+    
+    // Directory of resource files in the CLASSPATH.
+    private final static String RES_DIR = "/resources/";
+    
 	private final HangmanConsolePlayer player;  // player of the game	
-	private final BufferedReader reader; // reader from console
-	private boolean gameCompleted;       // indication if game completed
+	private final BufferedReader reader;        // reader from console
+	private boolean gameCompleted;              // indication if game completed
 	
 	/**
 	 * Constructor for Console version of a Hangman game.
@@ -108,7 +114,13 @@ public class HangmanConsoleGame extends HangmanGame
 	 *        </ul>
 	 */
 	public void showResponse(String input, boolean match)
-	{		
+	{	
+	    /* 
+	     * Indication if Hangman stage picture should be stored 
+	     * to a conversation history.
+	     */
+	    boolean addImgToConversation = !canContinueGame(); // if can't continue, then store image.
+	    
 		// clear terminal screen
 		clearScreen();
 		
@@ -127,27 +139,27 @@ public class HangmanConsoleGame extends HangmanGame
 		// display current presentation of the gallows
 		switch (getFailures())
 		{
-		    case 0: break;
-		    case 1: printFile("/stage1.txt");
-		            break;
-		    case 2: printFile("/stage2.txt");
-                    break;
-		    case 3: printFile("/stage3.txt");
-                    break;
-		    case 4: printFile("/stage4.txt");
-                    break;
-		    case 5: printFile("/stage5.txt");
-                    break;
-		    case 6: printFile("/stage6.txt");
-                    break;
-		    case 7: printFile("/stage7.txt");
-                    break;
-		    case 8: printFile("/stage8.txt");
-                    break;
-		    case 9: printFile("/stage9.txt");
-                    break;
-		    case 10: printFile("/stage10.txt");
-                    break;
+		    case 0:  break;
+		    case 1:  printFile("stage1.txt", addImgToConversation);
+		             break;
+		    case 2:  printFile("stage2.txt", addImgToConversation);
+                     break;
+		    case 3:  printFile("stage3.txt", addImgToConversation);
+                     break;
+		    case 4:  printFile("stage4.txt", addImgToConversation);
+                     break;
+		    case 5:  printFile("stage5.txt", addImgToConversation);
+                     break;
+		    case 6:  printFile("stage6.txt", addImgToConversation);
+                     break;
+		    case 7:  printFile("stage7.txt", addImgToConversation);
+                     break;
+		    case 8:  printFile("stage8.txt", addImgToConversation);
+                     break;
+		    case 9:  printFile("stage9.txt", addImgToConversation);
+                     break;
+		    case 10: printFile("stage10.txt", addImgToConversation);
+                     break;
 		    default: break;
 		}
 	}
@@ -157,17 +169,19 @@ public class HangmanConsoleGame extends HangmanGame
 	 * 
 	 * @param fileName Input file name
 	 */
-	private void printFile(String fileName)
+	private void printFile(String fileName, boolean addImgToConversation)
 	{		    
-		// default charset of resource files
-		Charset def = Charset.forName("ISO-8859-1");
-		
 		try (BufferedReader br = new BufferedReader(
-		        new InputStreamReader(getClass().getResourceAsStream("/resources" + fileName), def)))
+		        new InputStreamReader(getClass().getResourceAsStream(RES_DIR + fileName), DEF_ENC)))
 		{
 			String line;
 			while ( (line = br.readLine()) != null)
-				System.out.println(line);
+			{
+			    if(addImgToConversation)
+			        player.showAndAddToConversation(line);
+			    else
+				    System.out.println(line);
+			}
 		} 
 		catch (IOException e) 
 		{
