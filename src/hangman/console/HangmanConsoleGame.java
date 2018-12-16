@@ -158,11 +158,12 @@ public class HangmanConsoleGame extends HangmanGame
 	 * @param fileName Input file name
 	 */
 	private void printFile(String fileName)
-	{	
+	{		    
 		// default charset of resource files
 		Charset def = Charset.forName("ISO-8859-1");
 		
-		try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(fileName), def)))
+		try (BufferedReader br = new BufferedReader(
+		        new InputStreamReader(getClass().getResourceAsStream("/resources" + fileName), def)))
 		{
 			String line;
 			while ( (line = br.readLine()) != null)

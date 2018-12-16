@@ -2,14 +2,12 @@
 <project default="full">
 
 	<property name="doc.dir"       value="doc"/> 
-    <property name="src.dir"       value="src"/> 	
-	<property name="build.dir"     value="bin"/>
-	<property name="resources.dir" value="resources/"/>
-	<property name="classes.dir"   value="${build.dir}/classes"/>
-    <property name="jar.dir"       value="${build.dir}/jar"/>
+    <property name="src.dir"       value="src"/>
+	<property name="classes.dir"   value="bin"/>
+    <property name="jar.dir"       value="${classes.dir}/jar"/>
 	
     <target name="clean">
-        <delete dir="${build.dir}"/>
+        <delete dir="${classes.dir}"/>
 		<delete dir="${doc.dir}"/>
     </target>
 
@@ -36,13 +34,17 @@
             </manifest>
 		</jar>
     	  	
-		<jar destfile="${jar.dir}/HangmanConsole.jar" 
-			 basedir="${classes.dir}"
-			 includes="hangman/*class hangman/console/*class">
+		<jar destfile="${jar.dir}/HangmanConsole.jar">
             <manifest>
                 <attribute name="Main-Class" value="hangman.console.HangmanConsole"/>
             </manifest>
-			<fileset dir = "${resources.dir}" />
+			<fileset dir="${classes.dir}">
+				<include name="hangman/*class"/>
+				<include name="hangman/console/*class"/>
+			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="resources/*"/>
+			</fileset>
         </jar>
     	
     	

@@ -97,6 +97,8 @@ public abstract class HangmanGame
 	 * This method validates if next round of the game can be played.<br>
 	 * For this, it checks if number of failed guesses didn't yet exceed
 	 * the max, and that the word is not yet discovered.
+	 * 
+	 * @return Indication if player can proceed with next guess.
 	 */
 	protected boolean canContinueGame()
 	{

@@ -111,6 +111,13 @@ public class HangmanNetworkGame extends HangmanGame
 
 	/**
 	 *  Inform player of match/miss and show the secret word with letters guessed by now.
+	 *  
+     * @param input Input substring provided by player.
+     * @param match Result of the substring search in the hidden word:
+     *        <ul>
+     *           <li><b>true</b>  - substring was found in the word.
+     *           <li><b>false</b> - substring was not found.
+     *        </ul>
 	 */
 	public void showResponse(String input, boolean match)
 	{
