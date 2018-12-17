@@ -1,5 +1,6 @@
 package hangman.gui;
 
+import java.awt.Color;
 import java.awt.Frame;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -39,6 +40,8 @@ public class HangmanGUI {
         });
         
         welcome.setSize(500, 500);
+        welcome.setBackground(Color.BLACK);
+        welcome.setForeground(Color.GREEN);
         welcome.setVisible(true);
     }
 
