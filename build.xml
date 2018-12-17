@@ -46,7 +46,16 @@
 				<include name="resources/*"/>
 			</fileset>
         </jar>
-    	
+
+		<jar destfile="${jar.dir}/HangmanGUI.jar">
+            <manifest>
+                <attribute name="Main-Class" value="hangman.gui.HangmanGUI"/>
+            </manifest>
+			<fileset dir="${classes.dir}">
+				<include name="hangman/*class"/>
+				<include name="hangman/gui/*class"/>
+			</fileset>
+        </jar>
     	
         <jar destfile="${jar.dir}/HangmanHttpServer.jar" basedir="${classes.dir}">
              <manifest>
