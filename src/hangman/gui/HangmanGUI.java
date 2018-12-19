@@ -1,10 +1,5 @@
 package hangman.gui;
 
-import java.awt.Color;
-import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
 /**
  * This class starts GUI Hangman Game with a given dictionary.
  * <br>
@@ -23,25 +18,14 @@ import java.awt.event.WindowEvent;
  * @version 1.0
  */
 
-public class HangmanGUI {
+public class HangmanGUI 
+{
 
     public static void main(String[] args) 
     {
         // welcome window to get player details
-        Frame welcome = new Frame("Welcome to the Hangman game!");
-
-        welcome.addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing (WindowEvent e)
-            {
-                System.exit(0);
-            }
-        });
-        
-        welcome.setSize(500, 500);
-        welcome.setBackground(Color.BLACK);
-        welcome.setForeground(Color.GREEN);
+        var welcome = new HangmanWelcomeScreen("Welcome to the Hangman game!");
+       
         welcome.setVisible(true);
     }
 
