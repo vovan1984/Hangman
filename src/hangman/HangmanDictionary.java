@@ -29,8 +29,8 @@ public class HangmanDictionary
 	private final static SecureRandom randomNumber = new SecureRandom();
 	
 	/**
-	 * Constructor for a default charset 
-	 * @param dictionaryPath Path to a dictionary file
+	 * Constructor for a default charset. 
+	 * @param dictionaryPath Path to a dictionary file.
 	 */
 	public HangmanDictionary(String dictionaryPath)
 	{
@@ -38,9 +38,9 @@ public class HangmanDictionary
 	}
 	
 	/**
-	 *  Constructor for an input charset
-	 * @param dictionaryPath Path to a dictionary file
-	 * @param charset Encoding of a dictionary file
+	 *  Constructor for an input charset.
+	 * @param dictionaryPath Path to a dictionary file.
+	 * @param charset Encoding of a dictionary file.
 	 */
 	public HangmanDictionary(String dictionaryPath, Charset charset)
 	{

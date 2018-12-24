@@ -4,10 +4,13 @@
 package hangman.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -25,7 +28,9 @@ public class HangmanWindow extends Frame
     protected static final int INIT_WIDTH = 628;
     protected static final int INIT_HEIGHT = 628;
     
+    // upper and lower panels 
     protected Panel upperPane, lowerPane;
+    
 
     /**
      * Constructor for a basic Hangman Game window. <br>
@@ -67,6 +72,9 @@ public class HangmanWindow extends Frame
         // set initial window size
         setSize(INIT_WIDTH, INIT_HEIGHT);
         
+        // place window to the center of the screen
+        centreWindow(this);
+        
         // handler for close event
         addWindowListener(new WindowAdapter()
         {
@@ -76,5 +84,14 @@ public class HangmanWindow extends Frame
                 System.exit(0);
             }
         });
+    }
+    
+    // place window to the center of the screen
+    private static void centreWindow(Window frame) 
+    {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
     }
 }

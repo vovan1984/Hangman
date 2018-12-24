@@ -16,6 +16,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
+import hangman.HangmanDictionary;
+import hangman.HangmanPlayersInfo;
+
 /**
  * 
  * The first screen displayed to a player in 
@@ -24,37 +27,43 @@ import javax.swing.border.Border;
  * @author Vladimir Igumnov
  *
  */
-public class HangmanWelcomeScreen extends HangmanWindow implements ActionListener
+public class HangmanWelcomeWindow extends HangmanWindow implements ActionListener
 {
     private static final String GAME_NAME = "PENDU";
-    private static final int DEF_BUTTON_HEIGHT = 40;
-    private static final int DEF_BUTTON_WIDTH = 200;
+    private static final int DEF_BUTTON_HEIGHT = 50;
+    private static final int DEF_BUTTON_WIDTH = 220;
+    private static final Font DEF_BUTTON_FONT = new Font("Serif", Font.PLAIN, 20);
     private static final long serialVersionUID = 1L;
     
-    private Font defFont;
-    private Label nameLabel; 
+    // set default font
+    private final Font defFont = new Font("Serif", Font.PLAIN, 80);
     
-    public HangmanWelcomeScreen(String title)
+    private Label nameLabel; 
+    private String title;
+    private HangmanDictionary dictionary;
+    private HangmanPlayersInfo playersInfo;
+    private GridBagConstraints upAlignment, lowAlignment;
+    
+    public HangmanWelcomeWindow(String title,
+                               HangmanDictionary dictionary,
+                               HangmanPlayersInfo playersInfo)
     {
         super(title);
-
-        // set font
-        defFont = new Font("Serif", Font.PLAIN, 80); 
-        
-        // grid layout for panels
-        upperPane.setLayout(new GridBagLayout());
-        lowerPane.setLayout(new GridBagLayout());
-        GridBagConstraints upAlignment = new GridBagConstraints();
-        GridBagConstraints lowAlignment = new GridBagConstraints(); 
+        this.title = title;
+        this.dictionary = dictionary;
+        this.playersInfo = playersInfo;
         
         // add button
         JButton newGameButton = new JButton("NEWGAME");
         newGameButton.setBackground(new Color(0xFFBEDDFC)); // light blue button
         newGameButton.setForeground(Color.WHITE);
+        newGameButton.setFont(DEF_BUTTON_FONT);
         Dimension buttonPrefSize = new Dimension(DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT);
         newGameButton.setPreferredSize(buttonPrefSize);
 
         // place button to the center of a lower panel
+        lowerPane.setLayout(new GridBagLayout());
+        lowAlignment = new GridBagConstraints();
         lowAlignment.anchor = GridBagConstraints.CENTER;  
         
         Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -64,8 +73,9 @@ public class HangmanWelcomeScreen extends HangmanWindow implements ActionListene
 
         lowerPane.add(newGameButton, lowAlignment);
         
-        upAlignment.fill = GridBagConstraints.BOTH;
-        
+        upperPane.setLayout(new GridBagLayout());
+        upAlignment = new GridBagConstraints();
+        upAlignment.fill = GridBagConstraints.BOTH;       
         upAlignment.weightx = 0.4;
         upAlignment.weighty = 0.6; // cell takes 75% of the area height
         upAlignment.gridwidth = 1;
@@ -118,7 +128,10 @@ public class HangmanWelcomeScreen extends HangmanWindow implements ActionListene
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        //this.setVisible(false);
-        System.exit(0);
+        this.setVisible(false);
+        var leaderBoard = new HangmanLeaderboardWindow(title,
+                                                dictionary,
+                                                playersInfo);
+        leaderBoard.setVisible(true);
     }   
 }
