@@ -55,6 +55,9 @@
 				<include name="hangman/*class"/>
 				<include name="hangman/gui/*class"/>
 			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="resources/*jpg"/>
+			</fileset>
         </jar>
     	
         <jar destfile="${jar.dir}/HangmanHttpServer.jar" basedir="${classes.dir}">

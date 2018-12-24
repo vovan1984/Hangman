@@ -1,6 +1,5 @@
 package hangman.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -8,7 +7,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Label;
 import java.awt.Panel;
-
 import javax.swing.JButton;
 
 import hangman.HangmanDictionary;
@@ -20,6 +18,8 @@ public class HangmanGameWindow extends HangmanWindow
     private final static Font DEF_FONT = new Font("Serif", Font.PLAIN, 20);
     
     private Label hiddenWord;
+    private HangmanImageCanvas imageArea;
+    
     private HangmanDictionary dictionary;
     private HangmanPlayersInfo playersInfo;
     
@@ -31,26 +31,41 @@ public class HangmanGameWindow extends HangmanWindow
         super(title);
         this.dictionary = dictionary;
         this.playersInfo = playersInfo;
-        
-        setLettersPane();
-        
-        /*
-         *  Split upper panel to two parts:
-         *  header and image area.
-         */
+
+        setUpperPane();
+        setLowerPane();
+
+    }
+
+    /*
+     *  Split upper panel to two parts:
+     *  header and image area.
+     */
+    private void setUpperPane()
+    {
         // Setup header panel.
         Panel header = new Panel();    
         hiddenWord = new Label();
         hiddenWord.setFont(DEF_FONT);
         header.add(hiddenWord);
         
-        upperPane.setLayout(new BorderLayout());        
-        upperPane.add(header, BorderLayout.NORTH);
+        upperPane.setLayout(new GridBagLayout());   
+        GridBagConstraints gbc = new GridBagConstraints();
+        
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        upperPane.add(header, gbc);
+        
+        // Setup image area.
+        imageArea = new HangmanImageCanvas("pendu00.jpg");
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        upperPane.add(imageArea, gbc);
     }
 
 
  // Setup alphabet letters in a lower pane.
-    private void setLettersPane()
+    private void setLowerPane()
     {
         lowerPane.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -66,7 +81,7 @@ public class HangmanGameWindow extends HangmanWindow
         Label label = new Label();
         
         label.setBackground(new Color(0xFFBEDDFC));
-        lowerPane.add(label, gbc);
+        //lowerPane.add(label, gbc);
         
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
@@ -74,7 +89,7 @@ public class HangmanGameWindow extends HangmanWindow
         gbc.gridwidth = 1;
         gbc.weighty = 0;
         gbc.ipadx = 10;
-        gbc.insets = new Insets(10, 5, 10, 0);  //top padding
+        gbc.insets = new Insets(10, 5, 5, 0);  //top padding
         
         int position = 0;
    

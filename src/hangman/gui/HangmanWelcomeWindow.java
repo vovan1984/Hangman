@@ -104,21 +104,7 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
     {
         Dimension d = getSize(); // get current dimension of the window
         
-        nameLabel.setFont(defFont.deriveFont((float)0.12*Math.min(d.height, d.width)));
-        
-        /*
-                
-        Graphics upperPaneGraphics = upperPane.getGraphics();
-
-        upperPaneGraphics.setFont(defFont.deriveFont((float)0.12*Math.min(d.height, d.width)));
-        FontMetrics f = upperPaneGraphics.getFontMetrics(); // get font metrics to handle text 
-        
-        upperPaneGraphics.drawString(GAME_NAME, (int)(0.44 * d.width), d.height/2);
-        // Draw a line for a length of a printed string.
-        upperPaneGraphics.fillRect( (int)(0.44 * d.width), (int)(0.54 * d.height), 
-                  f.stringWidth(GAME_NAME), 2);
-         */
-        
+        nameLabel.setFont(defFont.deriveFont((float)0.12*Math.min(d.height, d.width)));   
     }
 
     /**
