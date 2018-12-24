@@ -71,6 +71,8 @@ public class HangmanWindow extends Frame
         
         // set initial window size
         setSize(INIT_WIDTH, INIT_HEIGHT);
+        lowerPane.setPreferredSize(new Dimension(INIT_WIDTH, INIT_HEIGHT));
+        upperPane.setPreferredSize(new Dimension(INIT_WIDTH, INIT_HEIGHT));
         
         // place window to the center of the screen
         centreWindow(this);

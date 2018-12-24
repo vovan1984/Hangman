@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -29,7 +31,7 @@ import hangman.HangmanPlayersInfo;
  * @author Vladimir Igumnov
  *
  */
-public class HangmanLeaderboardWindow extends HangmanWindow
+public class HangmanLeaderboardWindow extends HangmanWindow implements ActionListener
 {
     private static final long serialVersionUID = 1L;
     
@@ -43,7 +45,10 @@ public class HangmanLeaderboardWindow extends HangmanWindow
     private final Font defFontBold = new Font("Serif", Font.BOLD, 20);
     
     private JTable table;
+    private JTextField firstName;
+    private JTextField lastName;
     private HangmanDictionary dictionary;
+    private HangmanPlayersInfo playersInfo;
 
     public HangmanLeaderboardWindow(String title,
             HangmanDictionary dictionary,
@@ -51,6 +56,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow
     {
         super(title);
         this.dictionary = dictionary;
+        this.playersInfo = playersInfo;
         
         /*
          *  Split upper panel to two parts:
@@ -83,12 +89,13 @@ public class HangmanLeaderboardWindow extends HangmanWindow
         }); 
         
         // Setup lower panel.
-        JTextField firstName = new JTextField(9);
+        firstName = new JTextField(9);
         firstName.setFont(defFontBold);
         firstName.setText("FIRSTNAME");
         firstName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0xFFBEDDFC)));
         firstName.setForeground(new Color(0xFFBEDDFC));
-        JTextField lastName = new JTextField(9);
+        
+        lastName = new JTextField(9);
         lastName.setFont(defFontBold);
         lastName.setText("LASTNAME");
         lastName.setForeground(new Color(0xFFBEDDFC));
@@ -107,7 +114,9 @@ public class HangmanLeaderboardWindow extends HangmanWindow
         lowerPane.add(firstName, lowAlignment);
         lowerPane.add(lastName,lowAlignment);
         lowerPane.add(newGameButton,lowAlignment);
-        lowerPane.setPreferredSize(new Dimension(628,628));
+        
+        // handler for pressing Start button.
+        newGameButton.addActionListener(this);
     }
 
     /**
@@ -181,5 +190,19 @@ public class HangmanLeaderboardWindow extends HangmanWindow
             int pWidth = Math.round(columnWidthPercentage[i] * tW);
             column.setPreferredWidth(pWidth);
         }
+    }
+
+    /**
+     * This method is called when Start button is pressed.<br>
+     * The method hides LeaderBoard window, and opens Game window.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        this.setVisible(false);
+        var gameWindow = new HangmanGameWindow("Welcome to the Hangman Game, " + firstName.getText() + "!",
+                                               dictionary,
+                                               playersInfo);
+        gameWindow.setVisible(true); 
     }
 }
