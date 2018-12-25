@@ -23,7 +23,9 @@ public class HangmanPlayersInfo
     private String[] names;  // names of players.
     private String[] scores; // scores of players.
     private String[] dates;  // dates when games were played.
-    
+ 
+    private String playersFilePath; // path to statistics file.
+
     /**
      * Constructor for a default charset. 
      * @param playersFilePath Path to a file with players statistics.
@@ -40,7 +42,8 @@ public class HangmanPlayersInfo
      */
     public HangmanPlayersInfo(String playersFilePath, Charset charset)
     {
-        File playersFile = new File(playersFilePath);
+        this.playersFilePath = playersFilePath; 
+        File playersFile = new File(playersFilePath);          
         
         names = null; //new String[] {"Vladimir Igumnov", "Matt Oloun"};
         scores = null; //new String[] {"10", "10"};
@@ -90,6 +93,16 @@ public class HangmanPlayersInfo
             // TODO Auto-generated catch block
             e.printStackTrace();
         } 
+    }
+    
+    /**
+     * Retrieve path to the players statistics file.
+     * 
+     * @return Path to the statistics file.
+     */
+    public String getPlayersFilePath()
+    {
+        return playersFilePath;
     }
 
     public String[] getNames()

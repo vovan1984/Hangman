@@ -194,15 +194,19 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
 
     /**
      * This method is called when Start button is pressed.<br>
-     * The method hides LeaderBoard window, and opens Game window.
+     * The method hides LeaderBoard window, creates player, and plays
+     * games in a loop.
      */
     @Override
     public void actionPerformed(ActionEvent e)
     {
         this.setVisible(false);
-        var gameWindow = new HangmanGameWindow("Welcome to the Hangman Game, " + firstName.getText() + "!",
-                                               dictionary,
-                                               playersInfo);
-        gameWindow.setVisible(true); 
+        
+        // Create a player with name taken from text fields.
+        HangmanGuiPlayer player = new HangmanGuiPlayer(playersInfo.getPlayersFilePath(), 
+                                                       firstName.getText(), 
+                                                       lastName.getText());
+        // play the game for the next word.
+        player.playGame(dictionary.getNextWord());
     }
 }

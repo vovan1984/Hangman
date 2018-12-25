@@ -6,31 +6,24 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Label;
-import java.awt.Panel;
 import javax.swing.JButton;
-
-import hangman.HangmanDictionary;
-import hangman.HangmanPlayersInfo;
 
 public class HangmanGameWindow extends HangmanWindow
 {
     private static final long serialVersionUID = 1L;
     private final static Font DEF_FONT = new Font("Serif", Font.PLAIN, 20);
     
-    private Label hiddenWord;
+    private String word;
+    private Label hiddenWordLabel;
     private HangmanImageCanvas imageArea;
-    
-    private HangmanDictionary dictionary;
-    private HangmanPlayersInfo playersInfo;
     
     
     public HangmanGameWindow(String title,
-           HangmanDictionary dictionary,
-           HangmanPlayersInfo playersInfo)
+           String word)
     {
         super(title);
-        this.dictionary = dictionary;
-        this.playersInfo = playersInfo;
+        
+        this.word = word.toUpperCase();
 
         setUpperPane();
         setLowerPane();
@@ -43,28 +36,28 @@ public class HangmanGameWindow extends HangmanWindow
      */
     private void setUpperPane()
     {
-        // Setup header panel.
-        Panel header = new Panel();    
-        hiddenWord = new Label();
-        hiddenWord.setFont(DEF_FONT);
-        header.add(hiddenWord);
+        // Setup header panel.  
+        hiddenWordLabel = new Label(word);
+        hiddenWordLabel.setFont(DEF_FONT);
         
         upperPane.setLayout(new GridBagLayout());   
         GridBagConstraints gbc = new GridBagConstraints();
         
         gbc.gridx = 0;
         gbc.gridy = 0;
-        upperPane.add(header, gbc);
+        gbc.weighty = 1.0;
+        upperPane.add(hiddenWordLabel, gbc);
         
         // Setup image area.
         imageArea = new HangmanImageCanvas("pendu00.jpg");
         gbc.gridx = 0;
         gbc.gridy = 1;
+        
         upperPane.add(imageArea, gbc);
     }
 
 
- // Setup alphabet letters in a lower pane.
+    // Setup alphabet letters in a lower pane.
     private void setLowerPane()
     {
         lowerPane.setLayout(new GridBagLayout());
