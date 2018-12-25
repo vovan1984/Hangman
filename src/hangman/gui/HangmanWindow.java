@@ -90,7 +90,7 @@ public class HangmanWindow extends Frame
     }
     
     // place window to the center of the screen
-    private static void centreWindow(Window frame) 
+    public static void centreWindow(Window frame) 
     {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);

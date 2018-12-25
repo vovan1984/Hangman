@@ -19,7 +19,7 @@ public abstract class HangmanGame
 	
 	public HangmanGame(String word)
 	{
-		this.word = word.toLowerCase(); 
+		this.word = word.toUpperCase(); 
 		
 		failures = 0;
 		
@@ -105,7 +105,7 @@ public abstract class HangmanGame
 	 * 
 	 * @return Indication if player can proceed with next guess.
 	 */
-	protected boolean canContinueGame()
+	public boolean canContinueGame()
 	{
 	    return failures < MAX_FAILURES && maskedWord.indexOf("*") != -1;
 	}
@@ -122,6 +122,9 @@ public abstract class HangmanGame
 	 */
     public boolean checkPlayerGuess(String input)
     {
+        // Secret word is stored in upper case.
+        input = input.toUpperCase();
+        
         boolean matchFound = false;
         
         // if substring exists in the secret word then replace asterisks with letters 

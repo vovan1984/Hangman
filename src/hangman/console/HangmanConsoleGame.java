@@ -61,7 +61,7 @@ public class HangmanConsoleGame extends HangmanGame
 		    input = requestInput();
 
 		    // try to find matches of input substring in secret word
-		    boolean match = checkPlayerGuess(input.toLowerCase());
+		    boolean match = checkPlayerGuess(input);
 
 		    // Communicate match or miss to the user
 		    showResponse(input, match); 

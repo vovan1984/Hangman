@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.border.LineBorder;
 
 import hangman.HangmanGame;
 
@@ -21,13 +22,14 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
     private static final Font DEF_FONT = new Font("Serif", Font.PLAIN, 20);
     
     // Colors of buttons after miss or match.
-    private static final Color matchColor = HangmanWindow.LIGHT_BLUE;
-    private static final Color missColor = Color.RED;
+    private static final Color MATCH_COLOR = HangmanWindow.LIGHT_BLUE;
+    private static final Color MISS_COLOR = Color.RED;
     
     private Label hiddenWordLabel;
     private HangmanGame game;
     private HangmanImageCanvas imageArea;
     private Map<String, JButton> buttons;
+    private HangmanDialog continueDialog; // dialog to show result of the game
     
     
     public HangmanGameWindow(String title,
@@ -43,6 +45,10 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         
         setUpperPane();
         setLowerPane();
+        
+        // modal dialog to display result of the game
+        continueDialog = new HangmanDialog(this, "Thanks for your game!",
+                true);
     }
 
     /*
@@ -157,7 +163,7 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         String letter = e.getActionCommand();
         
         // Check if letter exists in a secret word.
-        boolean match = game.checkPlayerGuess(letter.toLowerCase());
+        boolean match = game.checkPlayerGuess(letter);
         
         // Handle match or miss.
         showResponse(letter, match);
@@ -186,13 +192,15 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
             hiddenWordLabel.setText(game.getMaskedWord());
             
             // Change button color and background.
-            curButton.setBackground(matchColor);
+            curButton.setBackground(MATCH_COLOR);
             curButton.setForeground(Color.WHITE);
+            curButton.setBorderPainted(false);
         }
         else
         {
             // Change button color and background in case of miss.
-            curButton.setForeground(missColor);
+            curButton.setForeground(MISS_COLOR);
+            curButton.setBorder(new LineBorder(MISS_COLOR));
         }
         
         // display current presentation of the gallows
@@ -220,6 +228,15 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
             case 10: imageArea.setImg("pendu10.jpg");
                      break;
             default: break;
+        }
+        
+        // Check if we can continue guessing the word.
+        if (!game.canContinueGame())
+        {
+            continueDialog.setMessage(game.toString());
+            continueDialog.setVisible(true);
+            System.out.println(game);
+            System.exit(0);
         }
     }
     
