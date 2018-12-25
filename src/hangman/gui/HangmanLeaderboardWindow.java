@@ -37,7 +37,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
     
     //Percentage of column widths in the table. It should sum to 100%
     private static final float[] columnWidthPercentage = 
-                           {15.0f, 40.0f, 20.0f, 25.0f};
+                           {15.0f, 45.0f, 15.0f, 25.0f};
     
     // set default font
     private final Font defHeaderFont = new Font("Serif", Font.PLAIN, 40);
@@ -205,8 +205,10 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         // Create a player with name taken from text fields.
         HangmanGuiPlayer player = new HangmanGuiPlayer(playersInfo.getPlayersFilePath(), 
                                                        firstName.getText(), 
-                                                       lastName.getText());
-        // play the game for the next word.
-        player.playGame(dictionary.getNextWord());
+                                                       lastName.getText(),
+                                                       dictionary);
+        
+        // Play the game.
+        player.play();  
     }
 }

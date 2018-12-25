@@ -1,5 +1,6 @@
 package hangman.gui;
 
+import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
 
 /**
@@ -11,10 +12,13 @@ import hangman.HangmanPlayer;
  */
 public class HangmanGuiPlayer extends HangmanPlayer
 {
+    private HangmanDictionary dictionary;
 
-    public HangmanGuiPlayer(String fileName, String firstName, String lastName)
+    public HangmanGuiPlayer(String fileName, String firstName, String lastName,
+                            HangmanDictionary dictionary)
     {
         super(fileName, firstName, lastName);
+        this.dictionary = dictionary;
     }
 
     /**
@@ -26,9 +30,18 @@ public class HangmanGuiPlayer extends HangmanPlayer
         // Open game window for an input word.
         var gameWindow = new HangmanGameWindow(
                 "Welcome to the Hangman Game, " + getFirstName() + "!",
-                word);
+                word,
+                this);
         
         gameWindow.setVisible(true); 
+    }
+    
+    /**
+     * Play game for the next word from dictionary.
+     */
+    public void play()
+    {
+        playGame(dictionary.getNextWord());
     }
 
 }

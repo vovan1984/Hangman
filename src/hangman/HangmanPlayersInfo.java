@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -140,6 +143,41 @@ public class HangmanPlayersInfo
             int score2 = Integer.parseInt(o2.trim().substring(startScore2Indx, endScore2Indx));
             
             return score1 - score2;
+        }
+        
+    }
+    
+    /* 
+     *  Compare strings by date.
+     */
+    private class CompDate implements Comparator<String>
+    {
+
+        @Override
+        public int compare(String o1, String o2)
+        {
+            // field #9 contains score just after ':'
+            int startDate1Indx = o1.trim().lastIndexOf("[") + 5;
+            int startDate2Indx = o2.trim().lastIndexOf("] ");
+            int endDate1Indx = o1.trim().lastIndexOf("[") + 5;
+            int endDate2Indx = o2.trim().lastIndexOf("] ");
+            
+            // compare scores
+            String dateStr1 = o1.trim().substring(startDate1Indx, endDate1Indx);
+            String dateStr2 = o2.trim().substring(startDate2Indx, endDate2Indx);
+            
+            Date date1, date2;
+            try
+            {
+                date1 = new SimpleDateFormat().parse(dateStr1);
+                date2 = new SimpleDateFormat().parse(dateStr2);
+            } catch (ParseException e)
+            {
+                e.printStackTrace();
+                throw new IllegalArgumentException("Wrong date format in players file!");
+            }
+            
+            return date1.compareTo(date2);
         }
         
     }

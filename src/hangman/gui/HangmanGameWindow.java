@@ -27,16 +27,20 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
     
     private Label hiddenWordLabel;
     private HangmanGame game;
+    private HangmanGuiPlayer player;
     private HangmanImageCanvas imageArea;
     private Map<String, JButton> buttons;
     private HangmanDialog continueDialog; // dialog to show result of the game
     
     
     public HangmanGameWindow(String title,
-           String word)
+                             String word,
+                             HangmanGuiPlayer player)
     {
         super(title);
 
+        this.player = player;
+        
         // create a game instance
         game = new HangmanGuiGame(word);
         
@@ -233,10 +237,13 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         // Check if we can continue guessing the word.
         if (!game.canContinueGame())
         {
+            player.saveResult(game);
             continueDialog.setMessage(game.toString());
             continueDialog.setVisible(true);
-            System.out.println(game);
-            System.exit(0);
+            
+            // start another game and dispose this window.
+            player.play();
+            dispose();
         }
     }
     

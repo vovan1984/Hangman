@@ -24,3 +24,7 @@
 [Sun Dec 16 15:31:03 EST 2018] V I: 100 points in 1 round.
 [Sun Dec 16 15:31:23 EST 2018] V I: 5 points in 5 rounds.
 [Sun Dec 23 20:28:30 EST 2018] Vladimir I: 0 points in 10 rounds.
+[Tue Dec 25 00:08:42 EST 2018] FIRSTNAME LASTNAME: 100 points in 1 round.
+[Tue Dec 25 01:15:22 EST 2018] FIRSTNAME LASTNAME: 0 points in 10 rounds.
+[Tue Dec 25 01:15:47 EST 2018] FIRSTNAME LASTNAME: 50 points in 2 rounds.
+[Tue Dec 25 01:15:58 EST 2018] FIRSTNAME LASTNAME: 0 points in 10 rounds.
