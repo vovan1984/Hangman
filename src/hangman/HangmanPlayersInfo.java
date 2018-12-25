@@ -48,9 +48,9 @@ public class HangmanPlayersInfo
         this.playersFilePath = playersFilePath; 
         File playersFile = new File(playersFilePath);          
         
-        names = null; //new String[] {"Vladimir Igumnov", "Matt Oloun"};
-        scores = null; //new String[] {"10", "10"};
-        dates = null; //new String[] {"test1", "test2"};
+        names = null; 
+        scores = null; 
+        dates = null; 
         
         // check if players file exists and is a regular file.
         if (!playersFile.isFile())
@@ -70,8 +70,8 @@ public class HangmanPlayersInfo
             scores = new String[lines.size()];
             dates = new String[lines.size()];
             
-            // Sort lines by score in reversed order (descending)
-            lines.sort(new CompScore().reversed());
+            // Sort lines by score descending and then by date ascending
+            lines.sort(new CompScore().reversed().thenComparing(new CompDate()));
             
             String[] stats = lines.toArray(new String[lines.size()]);
 
@@ -157,20 +157,20 @@ public class HangmanPlayersInfo
         public int compare(String o1, String o2)
         {
             // field #9 contains score just after ':'
-            int startDate1Indx = o1.trim().lastIndexOf("[") + 5;
-            int startDate2Indx = o2.trim().lastIndexOf("] ");
-            int endDate1Indx = o1.trim().lastIndexOf("[") + 5;
-            int endDate2Indx = o2.trim().lastIndexOf("] ");
+            int start1 = o1.trim().lastIndexOf("[") + 5;
+            int start2 = o2.trim().lastIndexOf("[") + 5;
+            int end1 = o1.trim().lastIndexOf("] ");
+            int end2 = o2.trim().lastIndexOf("] ");
             
             // compare scores
-            String dateStr1 = o1.trim().substring(startDate1Indx, endDate1Indx);
-            String dateStr2 = o2.trim().substring(startDate2Indx, endDate2Indx);
+            String dateStr1 = o1.substring(start1, start1 + 7) + o1.substring(start1 + 20, end1);
+            String dateStr2 = o2.substring(start2, start2 + 7) + o2.substring(start2 + 20, end2);
             
             Date date1, date2;
             try
             {
-                date1 = new SimpleDateFormat().parse(dateStr1);
-                date2 = new SimpleDateFormat().parse(dateStr2);
+                date1 = new SimpleDateFormat("MMM dd yyyy").parse(dateStr1);
+                date2 = new SimpleDateFormat("MMM dd yyyy").parse(dateStr2);
             } catch (ParseException e)
             {
                 e.printStackTrace();
