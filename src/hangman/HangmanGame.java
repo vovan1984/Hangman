@@ -89,7 +89,12 @@ public abstract class HangmanGame
         return rounds;
     }
     
-    protected int getFailures() {
+    /**
+     * This method returns current number of incorrect guesses in
+     * an ongoing Hangman game.
+     * @return Number of incorrect guesses.
+     */
+    public int getFailures() {
         return failures;
     }
 
@@ -115,7 +120,7 @@ public abstract class HangmanGame
      *           <li><b>false</b> - substring was not found.
      *        </ul>
 	 */
-    protected boolean checkPlayerGuess(String input)
+    public boolean checkPlayerGuess(String input)
     {
         boolean matchFound = false;
         
@@ -160,7 +165,7 @@ public abstract class HangmanGame
 	 * place of not yet guessed letters).
 	 * @return Secret word with unknown letters masked with '*'.
 	 */
-	protected String getMaskedWord()
+	public String getMaskedWord()
 	{
 		return maskedWord.toString(); // return unmodifiable copy
 	}

@@ -27,6 +27,7 @@ public class HangmanWindow extends Frame
     
     protected static final int INIT_WIDTH = 628;
     protected static final int INIT_HEIGHT = 628;
+    protected static final Color LIGHT_BLUE = new Color(0xFFBEDDFC);
     
     // upper and lower panels 
     protected Panel upperPane, lowerPane;

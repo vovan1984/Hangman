@@ -6,28 +6,43 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.JButton;
 
-public class HangmanGameWindow extends HangmanWindow
+import hangman.HangmanGame;
+
+public class HangmanGameWindow extends HangmanWindow implements ActionListener
 {
     private static final long serialVersionUID = 1L;
-    private final static Font DEF_FONT = new Font("Serif", Font.PLAIN, 20);
+    private static final Font DEF_FONT = new Font("Serif", Font.PLAIN, 20);
     
-    private String word;
+    // Colors of buttons after miss or match.
+    private static final Color matchColor = HangmanWindow.LIGHT_BLUE;
+    private static final Color missColor = Color.RED;
+    
     private Label hiddenWordLabel;
+    private HangmanGame game;
     private HangmanImageCanvas imageArea;
+    private Map<String, JButton> buttons;
     
     
     public HangmanGameWindow(String title,
            String word)
     {
         super(title);
-        
-        this.word = word.toUpperCase();
 
+        // create a game instance
+        game = new HangmanGuiGame(word);
+        
+        // list of buttons
+        buttons = new HashMap<String, JButton>();
+        
         setUpperPane();
         setLowerPane();
-
     }
 
     /*
@@ -37,7 +52,7 @@ public class HangmanGameWindow extends HangmanWindow
     private void setUpperPane()
     {
         // Setup header panel.  
-        hiddenWordLabel = new Label(word);
+        hiddenWordLabel = new Label(game.getMaskedWord());
         hiddenWordLabel.setFont(DEF_FONT);
         
         upperPane.setLayout(new GridBagLayout());   
@@ -102,6 +117,12 @@ public class HangmanGameWindow extends HangmanWindow
                               GridBagConstraints gbc,
                               int position)
     {
+        // store button to a map of buttons
+        buttons.put(letter.getText(), letter);
+
+        // Add handler for pressed button event
+        letter.addActionListener(this);
+        
         letter.setFont(DEF_FONT);
         letter.setBackground(Color.WHITE);
         //letter.setBorder(BorderFactory.createEmptyBorder());
@@ -121,8 +142,85 @@ public class HangmanGameWindow extends HangmanWindow
                     gbc.weighty = 0.0;
             }
         }
-            
+        
         lowerPane.add(letter, gbc);        
     }
 
+    /**
+     * For every pressed button, check if a corresponding
+     * letter exists in a hidden word.
+     */
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        // Get letter of the pressed button.
+        String letter = e.getActionCommand();
+        
+        // Check if letter exists in a secret word.
+        boolean match = game.checkPlayerGuess(letter.toLowerCase());
+        
+        // Handle match or miss.
+        showResponse(letter, match);
+    }
+
+    /**
+     * Inform player of match/miss (by changing color of the button)
+     * and show the secret word with letters guessed by now.<br>
+     * 
+     * This method also shows graphical stage of the Hangman game.
+     * 
+     * @param input Input substring provided by player.
+     * @param match Result of the substring search in the hidden word:
+     *        <ul>
+     *           <li><b>true</b>  - substring was found in the word.
+     *           <li><b>false</b> - substring was not found.
+     *        </ul>
+     */
+    public void showResponse(String input, boolean match)
+    {   
+        JButton curButton = buttons.get(input);
+            
+        if (match)
+        {
+            // Update masked word presentation.
+            hiddenWordLabel.setText(game.getMaskedWord());
+            
+            // Change button color and background.
+            curButton.setBackground(matchColor);
+            curButton.setForeground(Color.WHITE);
+        }
+        else
+        {
+            // Change button color and background in case of miss.
+            curButton.setForeground(missColor);
+        }
+        
+        // display current presentation of the gallows
+        switch (game.getFailures())
+        {
+            case 0:  break;
+            case 1:  imageArea.setImg("pendu01.jpg");
+                     break;
+            case 2:  imageArea.setImg("pendu02.jpg");
+                     break;
+            case 3:  imageArea.setImg("pendu03.jpg");
+                     break;
+            case 4:  imageArea.setImg("pendu04.jpg");
+                     break;
+            case 5:  imageArea.setImg("pendu05.jpg");
+                     break;
+            case 6:  imageArea.setImg("pendu06.jpg");
+                     break;
+            case 7:  imageArea.setImg("pendu07.jpg");
+                     break;
+            case 8:  imageArea.setImg("pendu08.jpg");
+                     break;
+            case 9:  imageArea.setImg("pendu09.jpg");
+                     break;
+            case 10: imageArea.setImg("pendu10.jpg");
+                     break;
+            default: break;
+        }
+    }
+    
 }

@@ -92,17 +92,17 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         firstName = new JTextField(9);
         firstName.setFont(defFontBold);
         firstName.setText("FIRSTNAME");
-        firstName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0xFFBEDDFC)));
-        firstName.setForeground(new Color(0xFFBEDDFC));
+        firstName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, HangmanWindow.LIGHT_BLUE));
+        firstName.setForeground(HangmanWindow.LIGHT_BLUE);
         
         lastName = new JTextField(9);
         lastName.setFont(defFontBold);
         lastName.setText("LASTNAME");
-        lastName.setForeground(new Color(0xFFBEDDFC));
-        lastName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(0xFFBEDDFC)));
+        lastName.setForeground(HangmanWindow.LIGHT_BLUE);
+        lastName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, HangmanWindow.LIGHT_BLUE));
         JButton newGameButton = new JButton("START!");
         newGameButton.setFont(defFont);
-        newGameButton.setBackground(new Color(0xFFBEDDFC)); // light blue button
+        newGameButton.setBackground(HangmanWindow.LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
         newGameButton.setPreferredSize(new Dimension(200, 40));
         newGameButton.setBorder(BorderFactory.createEmptyBorder());
@@ -166,7 +166,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         table.setShowGrid(false);
         table.setFillsViewportHeight(true);
         table.setOpaque(true);
-        table.setBackground(new Color(0xFFBEDDFC)); // light blue button
+        table.setBackground(HangmanWindow.LIGHT_BLUE); // light blue button
         table.setForeground(Color.WHITE);
         table.setFont(defFont);
         table.setRowHeight(defFont.getSize() + 8);

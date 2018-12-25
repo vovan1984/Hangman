@@ -19,17 +19,17 @@ public class HangmanImageCanvas extends Canvas
     public HangmanImageCanvas(String fileName)
     {
         super();   
-        setImg(RES_DIR + fileName);
+        setImg(fileName);
     }
     
-    public void setImg(String resource)
+    public void setImg(String fileName)
     {
-        try (var imageStream = getClass().getResourceAsStream(resource))
+        try (var imageStream = getClass().getResourceAsStream(RES_DIR + fileName))
         {
             img = ImageIO.read(imageStream);
         } catch (IOException e)
         {
-            System.out.println("Failed to load image from " + resource);
+            System.out.println("Failed to load image from " + fileName);
             e.printStackTrace();
             System.exit(0);
         }
