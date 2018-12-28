@@ -22,7 +22,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import hangman.HangmanDictionary;
-import hangman.HangmanPlayersInfo;
+import hangman.HangmanStats;
 
 /**
  * This class retrieves list of players' scores in
@@ -48,11 +48,11 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
     private JTextField firstName;
     private JTextField lastName;
     private HangmanDictionary dictionary;
-    private HangmanPlayersInfo playersInfo;
+    private HangmanStats playersInfo;
 
     public HangmanLeaderboardWindow(String title,
             HangmanDictionary dictionary,
-            HangmanPlayersInfo playersInfo)
+            HangmanStats playersInfo)
     {
         super(title);
         this.dictionary = dictionary;
@@ -129,7 +129,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
      * @return JTable Properly formatted and populated table to be
      *                added to a scroll panel.
      */
-    private JTable loadStatsToTable(HangmanPlayersInfo playersInfo)
+    private JTable loadStatsToTable(HangmanStats playersInfo)
     {        
         String[] columnNames = {"RANK", "PLAYER", "SCORE", "DATE"};
         String[] emptyLine = {"","", "", ""};

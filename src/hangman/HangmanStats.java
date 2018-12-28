@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @version 1.0
  */
-public class HangmanPlayersInfo
+public class HangmanStats
 {
     // default charset
     private final static Charset def = Charset.forName("ISO-8859-1");
@@ -33,7 +33,7 @@ public class HangmanPlayersInfo
      * Constructor for a default charset. 
      * @param playersFilePath Path to a file with players statistics.
      */
-    public HangmanPlayersInfo(String playersFilePath)
+    public HangmanStats(String playersFilePath)
     {
         this(playersFilePath, def);
     }
@@ -43,7 +43,7 @@ public class HangmanPlayersInfo
      * @param playersFilePath Path to a file with players statistics.
      * @param charset Encoding of a players file
      */
-    public HangmanPlayersInfo(String playersFilePath, Charset charset)
+    public HangmanStats(String playersFilePath, Charset charset)
     {
         this.playersFilePath = playersFilePath; 
         File playersFile = new File(playersFilePath);          

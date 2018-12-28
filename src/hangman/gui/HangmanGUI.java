@@ -1,7 +1,7 @@
 package hangman.gui;
 
 import hangman.HangmanDictionary;
-import hangman.HangmanPlayersInfo;
+import hangman.HangmanStats;
 
 /**
  * This class starts GUI Hangman Game with a given dictionary.
@@ -67,7 +67,7 @@ public class HangmanGUI
             dictionary.shuffle();
             
             // Load info about players who played the game previously.
-            var playersInfo = new HangmanPlayersInfo(playersFile);
+            var playersInfo = new HangmanStats(playersFile);
             
             // Display welcome window to get player details and play the game.
             var welcome = new HangmanWelcomeWindow("Welcome to the Hangman Game!",
