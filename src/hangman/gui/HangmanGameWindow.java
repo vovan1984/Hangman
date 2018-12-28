@@ -26,7 +26,7 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
     private Label hiddenWordLabel;
     private HangmanGame game;
     private HangmanGuiPlayer player;
-    private HangmanImageCanvas imageArea;
+    private HangmanStatePicture imageArea;
     private Map<String, JButton> buttons;
     private HangmanDialog continueDialog; // dialog to show result of the game
     
@@ -72,7 +72,7 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         upperPane.add(hiddenWordLabel, gbc);
         
         // Setup image area.
-        imageArea = new HangmanImageCanvas("pendu00.jpg");
+        imageArea = new HangmanStatePicture("pendu00.jpg");
         gbc.gridx = 0;
         gbc.gridy = 1;
         

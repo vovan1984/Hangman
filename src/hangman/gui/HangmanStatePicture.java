@@ -8,7 +8,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class HangmanImageCanvas extends Canvas
+/**
+ * This class is used to show picture for a current state
+ * of a Hangman Game.<br>
+ * Picture file is passed as a parameter to a constructor or
+ * can be set via set() method.
+ * 
+ * @author Vladimir Igumnov
+ *
+ */
+public class HangmanStatePicture extends Canvas
 {
     private static final long serialVersionUID = 1L;
     
@@ -16,12 +25,15 @@ public class HangmanImageCanvas extends Canvas
     private final static String RES_DIR = "/resources/";
     private Image img;
 
-    public HangmanImageCanvas(String fileName)
+    public HangmanStatePicture(String fileName)
     {
         super();   
         setImg(fileName);
     }
-    
+    /**
+     * Change image on a canvas.
+     * @param fileName File name of the image to set.
+     */
     public void setImg(String fileName)
     {
         try (var imageStream = getClass().getResourceAsStream(RES_DIR + fileName))
