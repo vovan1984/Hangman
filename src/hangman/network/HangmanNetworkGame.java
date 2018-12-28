@@ -40,7 +40,6 @@ public class HangmanNetworkGame extends HangmanGame
 	 * Server shows masked word and asks for letters, 
 	 * while client tries to guess remained characters. 
 	 */
-	@Override
 	public void play()
 	{
 		try

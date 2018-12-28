@@ -1,14 +1,14 @@
 package hangman;
 
 /**
- * Abstract class defining the logic of Hangman game.<br>
+ * This class defines an instance of the Hangman game.<br>
  * Its content doesn't depend on the method of user input (e.g. it
  * doesn't matter if input is provided from terminal, Web or GUI).
  * 
  * @author Vladimir Igumnov
  *
  */
-public abstract class HangmanGame
+public class HangmanGame
 {
 	private final static int MAX_FAILURES = 10; // max number of incorrect guesses
     private final int[] scores = {100, 50, 25, 10, 5, 0, 0, 0, 0, 0}; // scores after each round
@@ -26,13 +26,6 @@ public abstract class HangmanGame
 		maskedWord = new StringBuffer(word);
 		setMaskedWord(); // mask letters with '*' 
 	}
-	
-	/**
-	 * Implementation of play() depends on a type
-	 * of an interaction with a user. <br>
-	 * This method should be defined by descendants.
-	 */
-	abstract public void play();
 
 	/**
      *  Return result of the game in String form.

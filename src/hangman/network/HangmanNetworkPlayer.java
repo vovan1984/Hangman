@@ -3,7 +3,6 @@ package hangman.network;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
-import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 
 /**
@@ -37,7 +36,7 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 	@Override
 	public void playGame(String word)
 	{
-		HangmanGame game = new HangmanNetworkGame(word, this, reader, writer);			
+		var game = new HangmanNetworkGame(word, this, reader, writer);			
 		game.play();
 		
 		// store result into file

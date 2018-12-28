@@ -44,7 +44,6 @@ public class HangmanConsoleGame extends HangmanGame
 	/**
 	 * Implementation of the game for console interface.
 	 */
-	@Override
 	public void play()
 	{
 	    if (gameCompleted)

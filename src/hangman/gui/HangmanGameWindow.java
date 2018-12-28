@@ -40,7 +40,7 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         this.player = player;
         
         // create a game instance
-        game = new HangmanGuiGame(word);
+        game = new HangmanGame(word);
         
         // list of buttons
         buttons = new HashMap<String, JButton>();

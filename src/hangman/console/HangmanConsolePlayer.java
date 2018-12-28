@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.util.LinkedList;
 import java.util.List;
 
-import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 
 /**
@@ -38,7 +37,7 @@ public class HangmanConsolePlayer extends HangmanPlayer
 	@Override
 	public void playGame(String word)
 	{
-		HangmanGame game = new HangmanConsoleGame(word, this, reader);			
+		var game = new HangmanConsoleGame(word, this, reader);			
 		game.play();
 		
 		// store result into file
