@@ -29,14 +29,14 @@ import hangman.HangmanStats;
  */
 public class HangmanWelcomeWindow extends HangmanWindow implements ActionListener
 {
+    private static final long serialVersionUID = 1L;
+    
     private static final String GAME_NAME = "PENDU";
     private static final int DEF_BUTTON_HEIGHT = 50;
     private static final int DEF_BUTTON_WIDTH = 220;
-    private static final Font DEF_BUTTON_FONT = new Font("Serif", Font.PLAIN, 20);
-    private static final long serialVersionUID = 1L;
     
-    // set default font
-    private final Font defFont = new Font("Serif", Font.PLAIN, 80);
+    // set default font for a name of the game
+    private static final Font DEF_TITLE_FONT = new Font("Serif", Font.PLAIN, 80);
     
     private Label nameLabel; 
     private String title;
@@ -57,7 +57,7 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
         JButton newGameButton = new JButton("NEWGAME");
         newGameButton.setBackground(new Color(0xFFBEDDFC)); // light blue button
         newGameButton.setForeground(Color.WHITE);
-        newGameButton.setFont(DEF_BUTTON_FONT);
+        newGameButton.setFont(DEF_FONT);
         Dimension buttonPrefSize = new Dimension(DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT);
         newGameButton.setPreferredSize(buttonPrefSize);
 
@@ -84,7 +84,7 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
         
         // add label with the name of the game
         nameLabel = new Label(GAME_NAME, Label.CENTER);
-        nameLabel.setFont(defFont);
+        nameLabel.setFont(DEF_TITLE_FONT);
         nameLabel.setForeground(Color.WHITE);
         upperPane.add(nameLabel, upAlignment);
 
@@ -104,7 +104,7 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
     {
         Dimension d = getSize(); // get current dimension of the window
         
-        nameLabel.setFont(defFont.deriveFont((float)0.12*Math.min(d.height, d.width)));   
+        nameLabel.setFont(DEF_TITLE_FONT.deriveFont((float)0.12*Math.min(d.height, d.width)));   
     }
 
     /**

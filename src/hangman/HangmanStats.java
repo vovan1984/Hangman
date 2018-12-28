@@ -11,8 +11,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used to load players statistics from an 
- * input file.
+ * This class is used to load players statistics from 
+ * an input file.
  * 
  * @author Vladimir Igumnov
  *

@@ -35,15 +35,14 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
 {
     private static final long serialVersionUID = 1L;
     
-    //Percentage of column widths in the table. It should sum to 100%
-    private static final float[] columnWidthPercentage = 
-                           {15.0f, 45.0f, 15.0f, 25.0f};
-    
     // set default font
-    private final Font defHeaderFont = new Font("Serif", Font.PLAIN, 40);
-    private final Font defFont = new Font("Serif", Font.PLAIN, 20);
-    private final Font defFontBold = new Font("Serif", Font.BOLD, 20);
+    private static final Font DEF_HEADER_FONT = new Font("Serif", Font.PLAIN, 40);
+    private static final Font DEF_FONT_BOLD = new Font("Serif", Font.BOLD, 20);
     
+    //Percentage of column widths in the table. It should sum to 100%
+    private static final float[] columnWidthPercentages = 
+                           {15.0f, 45.0f, 15.0f, 25.0f};
+
     private JTable table;
     private JTextField firstName;
     private JTextField lastName;
@@ -65,7 +64,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         // Setup header panel.
         Panel header = new Panel();    
         Label leaderBoard = new Label("LEADERBOARD", Label.CENTER);
-        leaderBoard.setFont(defHeaderFont);
+        leaderBoard.setFont(DEF_HEADER_FONT);
         header.add(leaderBoard);
         
         // Setup statistics area.
@@ -90,18 +89,18 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         
         // Setup lower panel.
         firstName = new JTextField(9);
-        firstName.setFont(defFontBold);
+        firstName.setFont(DEF_FONT_BOLD);
         firstName.setText("FIRSTNAME");
         firstName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, HangmanWindow.LIGHT_BLUE));
         firstName.setForeground(HangmanWindow.LIGHT_BLUE);
         
         lastName = new JTextField(9);
-        lastName.setFont(defFontBold);
+        lastName.setFont(DEF_FONT_BOLD);
         lastName.setText("LASTNAME");
         lastName.setForeground(HangmanWindow.LIGHT_BLUE);
         lastName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, HangmanWindow.LIGHT_BLUE));
         JButton newGameButton = new JButton("START!");
-        newGameButton.setFont(defFont);
+        newGameButton.setFont(DEF_FONT);
         newGameButton.setBackground(HangmanWindow.LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
         newGameButton.setPreferredSize(new Dimension(200, 40));
@@ -168,8 +167,8 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         table.setOpaque(true);
         table.setBackground(HangmanWindow.LIGHT_BLUE); // light blue button
         table.setForeground(Color.WHITE);
-        table.setFont(defFont);
-        table.setRowHeight(defFont.getSize() + 8);
+        table.setFont(DEF_FONT);
+        table.setRowHeight(DEF_FONT.getSize() + 8);
         table.setTableHeader(null);
      
         return table;
@@ -187,7 +186,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         for (int i = 0; i < cntCols; i++) 
         {
             column = jTableColumnModel.getColumn(i);
-            int pWidth = Math.round(columnWidthPercentage[i] * tW);
+            int pWidth = Math.round(columnWidthPercentages[i] * tW);
             column.setPreferredWidth(pWidth);
         }
     }

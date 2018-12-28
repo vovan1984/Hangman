@@ -1,7 +1,6 @@
 package hangman.gui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -19,10 +18,9 @@ import hangman.HangmanGame;
 public class HangmanGameWindow extends HangmanWindow implements ActionListener
 {
     private static final long serialVersionUID = 1L;
-    private static final Font DEF_FONT = new Font("Serif", Font.PLAIN, 20);
     
     // Colors of buttons after miss or match.
-    private static final Color MATCH_COLOR = HangmanWindow.LIGHT_BLUE;
+    private static final Color MATCH_COLOR = LIGHT_BLUE;
     private static final Color MISS_COLOR = Color.RED;
     
     private Label hiddenWordLabel;
@@ -135,8 +133,6 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         
         letter.setFont(DEF_FONT);
         letter.setBackground(Color.WHITE);
-        //letter.setBorder(BorderFactory.createEmptyBorder());
-        //letter.setPreferredSize(new Dimension(62, 62));
         letter.setMargin(new Insets(0, 0, 0, 0));
         
         if (position > 0) // don't increase for the first letter 

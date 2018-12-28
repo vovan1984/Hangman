@@ -5,6 +5,7 @@ package hangman.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,6 +29,9 @@ public class HangmanWindow extends Frame
     protected static final int INIT_WIDTH = 628;
     protected static final int INIT_HEIGHT = 628;
     protected static final Color LIGHT_BLUE = new Color(0xFFBEDDFC);
+    
+    // default font to be used in a game
+    protected static final Font DEF_FONT = new Font("Serif", Font.PLAIN, 20); 
     
     // upper and lower panels 
     protected Panel upperPane, lowerPane;
@@ -55,7 +59,7 @@ public class HangmanWindow extends Frame
         
         // setup upper part of the window
         upperPane = new Panel();
-        upperPane.setBackground(new Color(0xFFBEDDFC)); // light blue panel
+        upperPane.setBackground(LIGHT_BLUE); // light blue panel
         upperPane.setForeground(Color.WHITE); // white letters
         position.weighty = 0.75; // cell takes 75% of the area height
         position.gridx = 0; // coordinates of the cell
@@ -90,7 +94,7 @@ public class HangmanWindow extends Frame
     }
     
     // place window to the center of the screen
-    public static void centreWindow(Window frame) 
+    protected static void centreWindow(Window frame) 
     {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
