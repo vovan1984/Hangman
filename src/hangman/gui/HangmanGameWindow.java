@@ -133,6 +133,7 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         
         letter.setFont(DEF_FONT);
         letter.setBackground(Color.WHITE);
+        letter.setOpaque(true);
         letter.setMargin(new Insets(0, 0, 0, 0));
         
         if (position > 0) // don't increase for the first letter 
