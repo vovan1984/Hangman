@@ -73,7 +73,8 @@ public class HangmanThread implements Runnable
                     lastName,
                     dictionary,
                     is,
-                    os);
+                    os,
+                    logPrefix);
 			
 			player.play();
 			

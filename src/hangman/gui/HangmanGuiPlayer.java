@@ -24,8 +24,7 @@ public class HangmanGuiPlayer extends HangmanPlayer
     /**
      * Create a new game window for an input word.
      */
-    @Override
-    public void playGame(String word)
+    private void playGame(String word)
     {
         // Open game window for an input word.
         var gameWindow = new HangmanGameWindow(

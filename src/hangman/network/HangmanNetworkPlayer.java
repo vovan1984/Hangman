@@ -3,6 +3,8 @@ package hangman.network;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
@@ -24,25 +26,29 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 	private final BufferedReader reader;  // read to network connection
 	private final BufferedWriter writer;  // write to network connection
 	
+	private final String logPrefix;
+	private final static Logger logger = Logger.getLogger(HangmanNetworkPlayer.class.getName());
+	
 	public HangmanNetworkPlayer(String fileName, 
 			String firstName, 
 			String lastName,
 			HangmanDictionary dictionary,
 			BufferedReader reader,
-			BufferedWriter writer)
+			BufferedWriter writer,
+			String logPrefix)
 	{				
 		super(fileName, firstName, lastName);
 		this.dictionary = dictionary;
 		this.reader = reader;
 		this.writer = writer;
+		this.logPrefix = logPrefix;
 	}
 	
 	/**
 	 * Play the game using provided word.
 	 * @param word Secret word.
 	 */
-	@Override
-	public void playGame(String word)
+	private void playGame(String word)
 	{
 		var game = new HangmanNetworkGame(word, this, reader, writer);			
 		game.play();
@@ -50,21 +56,34 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 		// store result into file
 		saveResult(game); 
 	}
-	
-	public void play() throws IOException
+
+	/**
+     * Play games till user decides to exit.
+     */
+    @Override
+	public void play()
 	{
 	    String exitGame = CONTINUE;
 	    
-        // play games for words from dictionary
-        while (exitGame.equalsIgnoreCase(CONTINUE))
-        {   
-            // play game for the next word from shuffled list
-            playGame(dictionary.getNextWord());
-            
-            writer.write("Do you want to play another game ? (y/n)" + "\r\n");
-            writer.write("--> " + "\r\n");
-            writer.flush();
-            exitGame = reader.readLine();
+	    try
+	    {
+	        // play games for words from a dictionary
+	        while (exitGame.equalsIgnoreCase(CONTINUE))
+	        {   
+	            // play game for the next word from shuffled list
+	            playGame(dictionary.getNextWord());
+
+	            writer.write("Do you want to play another game ? (y/n)" + "\r\n");
+	            writer.write("--> " + "\r\n");
+	            writer.flush();
+	            exitGame = reader.readLine();
+	        }
+	    }
+	    catch (IOException e)
+        {
+            // Just print error message
+            logger.log(Level.WARNING, logPrefix + "IO error!", e);
+            e.printStackTrace();
         }
 	    
 	}

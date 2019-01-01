@@ -36,12 +36,11 @@ abstract public class HangmanPlayer
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-
+	
     /**
-	 * Play the game using provided word.
-	 * @param word Secret word.
-	 */
-	abstract protected void playGame(String word);
+     * Play Hangman games till user decides to exit.
+     */	
+	abstract public void play();
 	
 	/**
 	 * Save result of the game into players file.
