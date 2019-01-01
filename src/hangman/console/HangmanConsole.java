@@ -20,7 +20,7 @@ import hangman.*;
  *        for the next word from dictionary.</li>
  * </ul>
  * @author Vladimir Igumnov
- * @version 1.0
+ * @version 1.1
  */
 public class HangmanConsole
 {
@@ -29,9 +29,6 @@ public class HangmanConsole
 	
 	// default dictionary file (can be overridden by user input)  
 	private static String dictionaryFile = "dictionary.txt";
-	
-	// "n" is to continue the game, "y" is for exit
-	private final static String CONTINUE = "y";
 
 	/**
 	 * @param args Input parameters for running the game in Console:
@@ -41,9 +38,7 @@ public class HangmanConsole
 	 *             </ul>
 	 */
 	public static void main(String[] args)
-	{
-		String exitGame = CONTINUE;
-		
+	{	
 		// check if players and/or dictionary files are provided in input
 		if (args.length > 0)
 		{	
@@ -96,30 +91,15 @@ public class HangmanConsole
 			HangmanConsolePlayer player = new HangmanConsolePlayer(playersFile, 
 					                                               firstName, 
 					                                               lastName, 
+					                                               dictionary,
 					                                               reader);
-			player.showAndAddToConversation("Hi " + player.getFirstName() + ", nice to meet you!");			
-			
-			// play games for words from dictionary
-			while (exitGame.equalsIgnoreCase(CONTINUE))
-			{	
-				// play game for the next word from shuffled list
-				player.playGame(dictionary.getNextWord());
-				
-				System.out.print("Do you want to play another game ? (y/n)\n--> ");
-				exitGame = reader.readLine();
-				player.addToConversation("Do you want to play another game ? (y/n)\n--> " + exitGame);
-			}
+			player.play();		
 		}
 		catch (IllegalArgumentException e)
 		{
 			System.out.println(e.getMessage());
 			return;
-		} catch (IOException e)
-		{
-			System.out.println("IO error!");
-			e.printStackTrace();
-			return;
-		}
+		} 
 		
 		System.out.println("Good Bye!");
 	}

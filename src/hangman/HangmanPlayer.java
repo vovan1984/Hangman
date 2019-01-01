@@ -41,7 +41,7 @@ abstract public class HangmanPlayer
 	 * Play the game using provided word.
 	 * @param word Secret word.
 	 */
-	abstract public void playGame(String word);
+	abstract protected void playGame(String word);
 	
 	/**
 	 * Save result of the game into players file.

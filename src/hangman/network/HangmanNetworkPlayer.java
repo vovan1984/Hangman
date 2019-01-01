@@ -2,7 +2,9 @@ package hangman.network;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 
+import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
 
 /**
@@ -15,16 +17,22 @@ import hangman.HangmanPlayer;
  */
 public class HangmanNetworkPlayer extends HangmanPlayer
 {
+    // "n" is to continue the game, "y" is for exit
+    private final static String CONTINUE = "y";
+    
+    private HangmanDictionary dictionary;
 	private final BufferedReader reader;  // read to network connection
 	private final BufferedWriter writer;  // write to network connection
 	
 	public HangmanNetworkPlayer(String fileName, 
 			String firstName, 
 			String lastName,
+			HangmanDictionary dictionary,
 			BufferedReader reader,
 			BufferedWriter writer)
 	{				
 		super(fileName, firstName, lastName);
+		this.dictionary = dictionary;
 		this.reader = reader;
 		this.writer = writer;
 	}
@@ -41,6 +49,24 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 		
 		// store result into file
 		saveResult(game); 
+	}
+	
+	public void play() throws IOException
+	{
+	    String exitGame = CONTINUE;
+	    
+        // play games for words from dictionary
+        while (exitGame.equalsIgnoreCase(CONTINUE))
+        {   
+            // play game for the next word from shuffled list
+            playGame(dictionary.getNextWord());
+            
+            writer.write("Do you want to play another game ? (y/n)" + "\r\n");
+            writer.write("--> " + "\r\n");
+            writer.flush();
+            exitGame = reader.readLine();
+        }
+	    
 	}
 	
 }

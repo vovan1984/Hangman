@@ -1,9 +1,11 @@
 package hangman.console;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
 
 /**
@@ -11,22 +13,29 @@ import hangman.HangmanPlayer;
  * Game is played via console.
  * 
  * @author Vladimir Igumnov
- * @version 1.0
+ * @version 1.1
  *
  */
 public class HangmanConsolePlayer extends HangmanPlayer
 {
+    // "n" is to continue the game, "y" is for exit
+    private final static String CONTINUE = "y"; 
+    
 	private final BufferedReader reader;
 		   
+	private HangmanDictionary dictionary;
     private List<String> conversation; // conversation with a player
 	
 	public HangmanConsolePlayer(String fileName, 
 			String firstName, 
 			String lastName,
+			HangmanDictionary dictionary,
 			BufferedReader reader)
 	{				
 		super(fileName, firstName, lastName);
 		this.reader = reader;
+		this.dictionary = dictionary;
+		
 	    conversation = new LinkedList<String>();
 	}
 	
@@ -42,6 +51,37 @@ public class HangmanConsolePlayer extends HangmanPlayer
 		
 		// store result into file
 		saveResult(game); 
+	}
+	
+	/**
+	 * Play Hangman games for words in Dictionary till user
+	 * decides to leave.
+	 */
+	public void play()
+	{
+	    String exitGame = CONTINUE;
+	    
+	    showAndAddToConversation("Hi " + getFirstName() + ", nice to meet you!");    
+	       
+        // play games for words from dictionary
+	    try
+	    {
+	        while (exitGame.equalsIgnoreCase(CONTINUE))
+	        {   
+	            // play game for the next word from shuffled list
+	            playGame(dictionary.getNextWord());
+
+	            System.out.print("Do you want to play another game ? (y/n)\n--> ");
+	            exitGame = reader.readLine();
+	            addToConversation("Do you want to play another game ? (y/n)\n--> " + exitGame);
+	        }
+	    }
+	    catch (IOException e)
+        {
+            System.out.println("IO error!");
+            e.printStackTrace();
+            return;
+        }
 	}
 	
 	/**

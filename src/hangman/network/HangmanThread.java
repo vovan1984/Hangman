@@ -11,7 +11,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import hangman.HangmanDictionary;
-import hangman.HangmanPlayer;
 
 /**
  * Main flow of the server to client communication 
@@ -21,10 +20,7 @@ import hangman.HangmanPlayer;
  * @version 1.0.
  */
 public class HangmanThread implements Runnable
-{
-	// "n" is to continue the game, "y" is for exit
-	private final static String CONTINUE = "y";
-	
+{	
 	private final Socket client;
 	private final SocketAddress clientAddress;
 	private final String logPrefix;
@@ -57,8 +53,6 @@ public class HangmanThread implements Runnable
 	@Override
 	public void run()
 	{
-		String exitGame = CONTINUE;
-		
 		// process the connection
 		try
 		{
@@ -74,23 +68,14 @@ public class HangmanThread implements Runnable
 			String firstName = is.readLine();
 			String lastName = is.readLine();
 			
-			HangmanPlayer player = new HangmanNetworkPlayer(playersFile, 
+			var player = new HangmanNetworkPlayer(playersFile, 
                     firstName, 
-                    lastName, 
+                    lastName,
+                    dictionary,
                     is,
                     os);
 			
-			// play games for words from dictionary
-			while (exitGame.equalsIgnoreCase(CONTINUE))
-			{	
-				// play game for the next word from shuffled list
-				player.playGame(dictionary.getNextWord());
-				
-				os.write("Do you want to play another game ? (y/n)" + "\r\n");
-				os.write("--> " + "\r\n");
-				os.flush();
-				exitGame = is.readLine();
-			}
+			player.play();
 			
 			os.write("Good Bye!" + "\r\n");
 			os.flush();
