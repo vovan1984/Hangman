@@ -1,9 +1,13 @@
 package hangman;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.security.SecureRandom;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -24,7 +28,11 @@ public class HangmanDictionary
 	private int currentWord; // index of next word to be dealt 
 	
 	// default charset
-	private final static Charset def = Charset.forName("ISO-8859-1");
+	private final static Charset DEF_ENC = Charset.forName("ISO-8859-1");
+	
+	// default dictionary
+	private final static String DEF_DICTIONARY = "/resources/dictionary.txt";
+    
 	//  random number generator
 	private final static SecureRandom randomNumber = new SecureRandom();
 	
@@ -34,7 +42,7 @@ public class HangmanDictionary
 	 */
 	public HangmanDictionary(String dictionaryPath)
 	{
-		this(dictionaryPath, def);
+		this(dictionaryPath, DEF_ENC);
 	}
 	
 	/**
@@ -44,28 +52,61 @@ public class HangmanDictionary
 	 */
 	public HangmanDictionary(String dictionaryPath, Charset charset)
 	{
+	    BufferedReader dictionaryStream = null;
 		File dictionary = new File(dictionaryPath);
-		
-		// check if dictionary exists and is a regular file.
-		if (!dictionary.isFile())
-			throw new IllegalArgumentException("Dictionary file was not found! " +
-					"Please provide it with -d option or place to local folder.");
-		
-		currentWord = 0; // first word dealt will be words[0];
 		
 		try
 		{
-			List<String> lines = Files.readAllLines(dictionary.toPath(), charset);			
-			words = lines.toArray(new String[lines.size()]);
-			
-			if (words.length <= 0)
-				throw new IllegalArgumentException("Dictionary is empty!" +
-			                        "Please fix this before starting the game");
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		    // check if dictionary exists and is a regular file.
+		    if (!dictionary.isFile())
+		    {
+		        // dictionary file doesn't exist, so look for default one on the CLASSPATH
+		        dictionaryStream = new BufferedReader(
+		                new InputStreamReader(getClass().getResourceAsStream(DEF_DICTIONARY), charset));
+		    }
+		    else
+		    {
+		        dictionaryStream = new BufferedReader(
+		                new InputStreamReader(new FileInputStream(dictionary), charset));
+		    }
+		    
+		    currentWord = 0; // first word dealt will be words[0];
+		    
+	        // read file content into list of strings
+		    String line;
+            List<String> lines = new LinkedList<>(); 
+            while ( (line = dictionaryStream.readLine()) != null)
+                lines.add(line);
+            
+            words = lines.toArray(new String[lines.size()]);
+            
+            if (words.length <= 0)
+                throw new IllegalArgumentException("Dictionary is empty!" +
+                                    "Please fix this before starting the game");
 		}
+		catch (NullPointerException | FileNotFoundException e)
+		{
+		    throw new IllegalArgumentException("Dictionary file was not found! " +
+		            "Please provide it with -d option or place to a local folder.");
+		} catch (IOException e)
+        {
+            System.out.println("Error while reading content of a dictionary file!");
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (dictionaryStream != null)
+                try
+                {
+                    dictionaryStream.close();
+                } 
+                catch (IOException e)
+                {
+                    System.out.println("Unable to close dictionary file!");
+                    e.printStackTrace();
+                }
+        }		
+
 	} 
 	
 	/**
