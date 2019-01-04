@@ -57,6 +57,7 @@
 			</fileset>
 			<fileset dir="${src.dir}">
 				<include name="resources/*jpg"/>
+				<include name="resources/dictionary*"/>
 			</fileset>
         </jar>
     	
