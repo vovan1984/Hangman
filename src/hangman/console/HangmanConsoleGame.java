@@ -14,6 +14,9 @@ import java.util.Arrays;
  */
 public class HangmanConsoleGame
 {
+    // Directory of resource files in the CLASSPATH.
+    private final static String RES_DIR = "/resources/";
+    
 	private final static int MAX_ROUNDS = 10;
 	
 	private String word; // input word in a lower case
@@ -158,25 +161,25 @@ public class HangmanConsoleGame
         switch (getRounds())
         {
             case 0: break;
-            case 1: printFile("/stage1.txt");
+            case 1: printFile("stage1.txt");
                     break;
-            case 2: printFile("/stage2.txt");
+            case 2: printFile("stage2.txt");
                     break;
-            case 3: printFile("/stage3.txt");
+            case 3: printFile("stage3.txt");
                     break;
-            case 4: printFile("/stage4.txt");
+            case 4: printFile("stage4.txt");
                     break;
-            case 5: printFile("/stage5.txt");
+            case 5: printFile("stage5.txt");
                     break;
-            case 6: printFile("/stage6.txt");
+            case 6: printFile("stage6.txt");
                     break;
-            case 7: printFile("/stage7.txt");
+            case 7: printFile("stage7.txt");
                     break;
-            case 8: printFile("/stage8.txt");
+            case 8: printFile("stage8.txt");
                     break;
-            case 9: printFile("/stage9.txt");
+            case 9: printFile("stage9.txt");
                     break;
-            case 10: printFile("/stage10.txt");
+            case 10: printFile("stage10.txt");
                     break;
             default: break;
         }
@@ -192,7 +195,7 @@ public class HangmanConsoleGame
         // default charset of resource files
         Charset def = Charset.forName("ISO-8859-1");
         
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(fileName), def)))
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(RES_DIR + fileName), def)))
         {
             String line;
             while ( (line = br.readLine()) != null)

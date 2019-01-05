@@ -4,3 +4,5 @@
 [Sat Dec 08 16:47:20 EST 2018] Vladimir I: 0 points in 10 rounds.
 [Sun Dec 09 00:11:12 EST 2018] Oxana I: 0 points in 10 rounds.
 [Sun Dec 09 00:12:52 EST 2018] Oxana I: 0 points in 9 rounds.
+[Fri Dec 28 13:05:06 EST 2018] Vladimir I: 0 points in 10 rounds.
+[Fri Dec 28 13:10:15 EST 2018] FIRSTNAME LASTNAME: 0 points in 10 rounds.
