@@ -35,7 +35,7 @@ public class HangmanDictionary
 	}
 	
 	// Constructor for input charset
-	HangmanDictionary(String dictionaryPath, Charset charset)
+	public HangmanDictionary(String dictionaryPath, Charset charset)
 	{
 		File dictionary = new File(dictionaryPath);
 		
@@ -64,7 +64,7 @@ public class HangmanDictionary
 	// This method shuffles words in random order
 	public void shuffle()
 	{
-		// next call to getNextWord should start with words[0] again
+		// next call to dealCard should start with deck[0] again
 		currentWord = 0;
 		
 		for (int first = 0; first < words.length; first++)
