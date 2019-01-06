@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="full">
-
+    <property name="root.dir"      value="./"/>
     <property name="doc.dir"       value="doc"/> 
     <property name="src.dir"       value="src"/>
     <property name="classes.dir"   value="bin"/>
@@ -11,6 +11,19 @@
         <delete dir="${doc.dir}"/>
     </target>
 
+	<!-- Full cleanup, incluing removal of eclipse settings -->
+    <target name="fullclean">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${doc.dir}"/>
+    	<delete dir="${root.dir}/.settings"/>
+    	<delete>
+	        <fileset dir="${root.dir}">
+	            <include name=".project"/>
+	        	<include name=".classpath"/>
+	        </fileset>
+        </delete>
+    </target>
+	
     <target name="compile">
         <mkdir dir="${classes.dir}"/>
         <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}"/>
