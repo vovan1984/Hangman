@@ -3,19 +3,19 @@
     <property name="root.dir"      value="./"/>
     <property name="doc.dir"       value="doc"/> 
     <property name="src.dir"       value="src"/>
-    <property name="classes.dir"   value="bin"/>
-    <property name="jar.dir"       value="${classes.dir}/jar"/>
-
+	<property name="bin.dir"       value="bin"/>
+    <property name="classes.dir"   value="${bin.dir}/ant"/>
+    <property name="jar.dir"       value="${bin.dir}/jar"/>
+	
     <target name="clean">
         <delete dir="${classes.dir}"/>
         <delete dir="${doc.dir}"/>
+    	<delete dir="${jar.dir}"/>
     </target>
 
 	<!-- Full cleanup, including removal of eclipse settings 
-	    (to be used for switching between git branches) -->
-    <target name="fullclean">
-        <delete dir="${classes.dir}"/>
-        <delete dir="${doc.dir}"/>
+	    (to be used before switching between git branches) -->
+    <target name="fullclean" depends="clean">
     	<delete dir="${root.dir}/.settings"/>
     	<delete>
 	        <fileset dir="${root.dir}">
