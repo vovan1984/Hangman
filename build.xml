@@ -16,7 +16,8 @@
 
 	<!-- Full cleanup, including removal of eclipse settings 
 	    (to be used before switching between git branches) -->
-    <target name="fullclean">
+    <target name="fullclean" depends="clean">
+	<delete dir="${bin.dir}"/>
     	<delete dir="${root.dir}/.settings"/>
     	<delete>
 	        <fileset dir="${root.dir}">
