@@ -11,7 +11,8 @@
         <delete dir="${doc.dir}"/>
     </target>
 
-	<!-- Full cleanup, incluing removal of eclipse settings -->
+	<!-- Full cleanup, including removal of eclipse settings 
+	    (to be used for switching between git branches) -->
     <target name="fullclean">
         <delete dir="${classes.dir}"/>
         <delete dir="${doc.dir}"/>
