@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="full">
+    <property name="root.dir"      value="./"/>
+    <property name="doc.dir"       value="doc"/> 
+    <property name="src.dir"       value="src"/>
+    <property name="classes.dir"   value="bin"/>
+    <property name="jar.dir"       value="${classes.dir}/jar"/>
+
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${doc.dir}"/>
+    </target>
+
+	<!-- Full cleanup, including removal of eclipse settings 
+	    (to be used for switching between git branches) -->
+    <target name="fullclean">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${doc.dir}"/>
+    	<delete dir="${root.dir}/.settings"/>
+    	<delete>
+	        <fileset dir="${root.dir}">
+	            <include name=".project"/>
+	        	<include name=".classpath"/>
+	        </fileset>
+        </delete>
+    </target>
+	
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac includeantruntime="false" srcdir="${src.dir}" destdir="${classes.dir}"/>
+    </target>
+
+    <!-- Generation of jars -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+    	  	
+		<jar destfile="${jar.dir}/HangmanConsole.jar">
+            <manifest>
+                <attribute name="Main-Class" value="hangman.console.HangmanConsole"/>
+            </manifest>
+			<fileset dir="${classes.dir}">
+				<include name="hangman/*class"/>
+				<include name="hangman/console/*class"/>
+			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="resources/*"/>
+			</fileset>
+        </jar>
+
+		<jar destfile="${jar.dir}/HangmanGUI.jar">
+            <manifest>
+                <attribute name="Main-Class" value="hangman.gui.HangmanGUI"/>
+            </manifest>
+			<fileset dir="${classes.dir}">
+				<include name="hangman/*class"/>
+				<include name="hangman/gui/*class"/>
+			</fileset>
+			<fileset dir="${src.dir}">
+				<include name="resources/*jpg"/>
+				<include name="resources/dictionary*"/>
+			</fileset>
+        </jar>
+    </target>
+	
+	<target name="javadoc">
+	    <javadoc sourcepath="${src.dir}" 
+                 destdir="${doc.dir}"
+                 author="true"
+                 version="true"
+				 encoding="UTF-8"
+				 charset="UTF-8"
+				 docencoding="UTF-8"/>
+	</target>
+	 
+	<!-- Full clean build (including jars and javadoc) -->
+	<target name="full" depends="clean,jar,javadoc"/>
+</project>
