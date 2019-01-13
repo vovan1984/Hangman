@@ -6,14 +6,12 @@ package hangman.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.Window;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
 
 /**
  * Basic window for a Hangman Game. It contains upper (light 
@@ -22,7 +20,7 @@ import java.awt.event.WindowEvent;
  * @author Vladimir Igumnov
  *
  */
-public class HangmanWindow extends Frame 
+public class HangmanWindow extends JFrame 
 {
     private static final long serialVersionUID = 1L;
     
@@ -53,26 +51,26 @@ public class HangmanWindow extends Frame
         
         // grid layout
         setLayout(new GridBagLayout());
-        GridBagConstraints position = new GridBagConstraints();
-        position.weightx = 1.0; // occupy entire area width
-        position.fill = GridBagConstraints.BOTH; // fill entire cell
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.weightx = 1.0; // occupy entire width
+        gbc.fill = GridBagConstraints.BOTH; // fill entire cell
         
         // setup upper part of the window
         upperPane = new Panel();
         upperPane.setBackground(LIGHT_BLUE); // light blue panel
         upperPane.setForeground(Color.WHITE); // white letters
-        position.weighty = 0.75; // cell takes 75% of the area height
-        position.gridx = 0; // coordinates of the cell
-        position.gridy = 0;
-        add(upperPane, position);
+        gbc.weighty = 0.75; // cell takes 75% of the area height
+        gbc.gridx = 0; // coordinates of the cell
+        gbc.gridy = 0;
+        add(upperPane, gbc);
         
         // setup lower part of the window
         lowerPane = new Panel();
         lowerPane.setBackground(Color.WHITE); // white panel
-        position.weighty = 0.25; // cell takes 25% of the area height
-        position.gridx = 0; // coordinates of the cell
-        position.gridy = 1;
-        add(lowerPane, position);
+        gbc.weighty = 0.25; // cell takes 25% of the area height
+        gbc.gridx = 0; // coordinates of the cell
+        gbc.gridy = 1;
+        add(lowerPane, gbc);
         
         // set initial window size
         setSize(INIT_WIDTH, INIT_HEIGHT);
@@ -82,15 +80,7 @@ public class HangmanWindow extends Frame
         // place window to the center of the screen
         centreWindow(this);
         
-        // handler for close event
-        addWindowListener(new WindowAdapter()
-        {
-            @Override
-            public void windowClosing (WindowEvent e)
-            {
-                System.exit(0);
-            }
-        });
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     // place window to the center of the screen

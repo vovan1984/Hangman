@@ -12,10 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.border.Border;
-
 import hangman.HangmanDictionary;
 import hangman.HangmanStats;
 
@@ -31,7 +28,7 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
 {
     private static final long serialVersionUID = 1L;
     
-    private static final String GAME_NAME = "PENDU";
+    private static final String GAME_NAME = "HANGMAN";
     private static final int DEF_BUTTON_HEIGHT = 50;
     private static final int DEF_BUTTON_WIDTH = 220;
     
@@ -55,20 +52,18 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
         
         // add button
         JButton newGameButton = new JButton("NEWGAME");
+        newGameButton.setFont(DEF_FONT);
         newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
-        newGameButton.setFont(DEF_FONT);
         newGameButton.setOpaque(true);
-        Dimension buttonPrefSize = new Dimension(DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT);
-        newGameButton.setPreferredSize(buttonPrefSize);
+        newGameButton.setBorderPainted(false);
+        newGameButton.setFocusPainted(false);
+        newGameButton.setPreferredSize(new Dimension(DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT));
 
         // place button to the center of a lower panel
         lowerPane.setLayout(new GridBagLayout());
         lowAlignment = new GridBagConstraints();
-        lowAlignment.anchor = GridBagConstraints.CENTER;  
-        
-        Border emptyBorder = BorderFactory.createEmptyBorder();
-        newGameButton.setBorder(emptyBorder); // remove border from the button
+        lowAlignment.anchor = GridBagConstraints.CENTER;      
         
         newGameButton.addActionListener(this); // handler for button pressed event
 
@@ -98,6 +93,9 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
                 repaint(); // repaint the window if it was resized
             }
         });  
+        
+        // display the window
+        setVisible(true);
     }
     
     @Override

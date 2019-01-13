@@ -48,3 +48,4 @@
 [Thu Jan 03 00:25:38 EST 2019] FIRSTNAME LASTNAME: 50 points in 2 rounds.
 [Thu Jan 03 00:25:58 EST 2019] FIRSTNAME LASTNAME: 50 points in 2 rounds.
 [Thu Jan 03 00:26:52 EST 2019] FIRSTNAME LASTNAME: 50 points in 2 rounds.
+[Sat Jan 12 18:37:01 EST 2019] FIRSTNAME LASTNAME: 10 points in 4 rounds.

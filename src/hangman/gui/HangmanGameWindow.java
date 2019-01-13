@@ -84,26 +84,17 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
     private void setLowerPane()
     {
         lowerPane.setLayout(new GridBagLayout());
+        
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1;        
-        gbc.weighty = 1;
+        gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.PAGE_END;
-        
-        // space label
-        gbc.gridwidth = 10;
-        gbc.fill = GridBagConstraints.BOTH;
-        Label label = new Label();
-        
-        label.setBackground(new Color(0xFFBEDDFC));
-        //lowerPane.add(label, gbc);
-        
         gbc.fill = GridBagConstraints.NONE;
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
-        gbc.weighty = 0;
         gbc.ipadx = 10;
         gbc.insets = new Insets(10, 5, 5, 0);  //top padding
         
@@ -134,6 +125,7 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         letter.setFont(DEF_FONT);
         letter.setBackground(Color.WHITE);
         letter.setOpaque(true);
+        letter.setFocusPainted(false);
         letter.setMargin(new Insets(0, 0, 0, 0));
         
         if (position > 0) // don't increase for the first letter 

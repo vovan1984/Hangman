@@ -1,5 +1,7 @@
 package hangman.gui;
 
+import javax.swing.SwingUtilities;
+
 import hangman.HangmanDictionary;
 import hangman.HangmanStats;
 
@@ -69,11 +71,10 @@ public class HangmanGUI
             // Load info about players who played the game previously.
             var playersInfo = new HangmanStats(playersFile);
             
-            // Display welcome window to get player details and play the game.
-            var welcome = new HangmanWelcomeWindow("Welcome to the Hangman Game!",
-                                                   dictionary,
-                                                   playersInfo);
-            welcome.setVisible(true);
+            // Display welcome window
+            SwingUtilities.invokeLater( () -> new HangmanWelcomeWindow("Welcome to the Hangman Game!",
+                                                                        dictionary,
+                                                                        playersInfo));
         }
         catch (IllegalArgumentException e)
         {

@@ -91,21 +91,22 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         firstName = new JTextField(9);
         firstName.setFont(DEF_FONT_BOLD);
         firstName.setText("FIRSTNAME");
-        firstName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, HangmanWindow.LIGHT_BLUE));
-        firstName.setForeground(HangmanWindow.LIGHT_BLUE);
+        firstName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, LIGHT_BLUE));
+        firstName.setForeground(LIGHT_BLUE);
         
         lastName = new JTextField(9);
         lastName.setFont(DEF_FONT_BOLD);
         lastName.setText("LASTNAME");
-        lastName.setForeground(HangmanWindow.LIGHT_BLUE);
-        lastName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, HangmanWindow.LIGHT_BLUE));
+        lastName.setForeground(LIGHT_BLUE);
+        lastName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, LIGHT_BLUE));
         JButton newGameButton = new JButton("START!");
         newGameButton.setFont(DEF_FONT);
-        newGameButton.setBackground(HangmanWindow.LIGHT_BLUE); // light blue button
+        newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
         newGameButton.setOpaque(true);
+        newGameButton.setBorderPainted(false);
+        newGameButton.setFocusPainted(false);
         newGameButton.setPreferredSize(new Dimension(200, 40));
-        newGameButton.setBorder(BorderFactory.createEmptyBorder());
         
         lowerPane.setLayout(new GridBagLayout());
         GridBagConstraints lowAlignment = new GridBagConstraints();
@@ -166,7 +167,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         table.setShowGrid(false);
         table.setFillsViewportHeight(true);
         table.setOpaque(true);
-        table.setBackground(HangmanWindow.LIGHT_BLUE); // light blue button
+        table.setBackground(HangmanWindow.LIGHT_BLUE); 
         table.setForeground(Color.WHITE);
         table.setFont(DEF_FONT);
         table.setRowHeight(DEF_FONT.getSize() + 8);
