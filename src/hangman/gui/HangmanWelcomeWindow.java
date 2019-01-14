@@ -51,7 +51,8 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
         this.playersInfo = playersInfo;
         
         // add button
-        JButton newGameButton = new JButton("NEWGAME");
+        //JButton newGameButton = new JButton("NEWGAME");
+        JButton newGameButton = new HangmanRoundedButton("NEWGAME");
         newGameButton.setFont(DEF_FONT);
         newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
@@ -101,6 +102,7 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
     @Override
     public void paint(Graphics g)
     {
+        super.paint(g);
         Dimension d = getSize(); // get current dimension of the window
         
         nameLabel.setFont(DEF_TITLE_FONT.deriveFont((float)0.12*Math.min(d.height, d.width)));   

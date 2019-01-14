@@ -8,10 +8,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.Window;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Basic window for a Hangman Game. It contains upper (light 
@@ -32,7 +32,7 @@ public class HangmanWindow extends JFrame
     protected static final Font DEF_FONT = new Font("Serif", Font.PLAIN, 20); 
     
     // upper and lower panels 
-    protected Panel upperPane, lowerPane;
+    protected JPanel upperPane, lowerPane;
     
 
     /**
@@ -56,7 +56,7 @@ public class HangmanWindow extends JFrame
         gbc.fill = GridBagConstraints.BOTH; // fill entire cell
         
         // setup upper part of the window
-        upperPane = new Panel();
+        upperPane = new JPanel();
         upperPane.setBackground(LIGHT_BLUE); // light blue panel
         upperPane.setForeground(Color.WHITE); // white letters
         gbc.weighty = 0.75; // cell takes 75% of the area height
@@ -65,7 +65,7 @@ public class HangmanWindow extends JFrame
         add(upperPane, gbc);
         
         // setup lower part of the window
-        lowerPane = new Panel();
+        lowerPane = new JPanel();
         lowerPane.setBackground(Color.WHITE); // white panel
         gbc.weighty = 0.25; // cell takes 25% of the area height
         gbc.gridx = 0; // coordinates of the cell
