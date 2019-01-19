@@ -99,13 +99,12 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         lastName.setText("LASTNAME");
         lastName.setForeground(LIGHT_BLUE);
         lastName.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, LIGHT_BLUE));
+        
         JButton newGameButton = new JButton("START!");
         newGameButton.setFont(DEF_FONT);
         newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
-        newGameButton.setOpaque(true);
-        newGameButton.setBorderPainted(false);
-        newGameButton.setFocusPainted(false);
+        newGameButton.setUI(new HangmanRoundedButtonUI());
         newGameButton.setPreferredSize(new Dimension(200, 40));
         
         lowerPane.setLayout(new GridBagLayout());

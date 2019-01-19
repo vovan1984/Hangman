@@ -1,6 +1,7 @@
 package hangman.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -124,9 +125,11 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         
         letter.setFont(DEF_FONT);
         letter.setBackground(Color.WHITE);
+       // letter.setUI(new HangmanRoundedButtonUI());
         letter.setOpaque(true);
         letter.setFocusPainted(false);
         letter.setMargin(new Insets(0, 0, 0, 0));
+        letter.setPreferredSize(new Dimension(26, 30));
         
         if (position > 0) // don't increase for the first letter 
         {

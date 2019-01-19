@@ -51,14 +51,12 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
         this.playersInfo = playersInfo;
         
         // add button
-        //JButton newGameButton = new JButton("NEWGAME");
-        JButton newGameButton = new HangmanRoundedButton("NEWGAME");
+        JButton newGameButton = new JButton("NEWGAME");
+        //JButton newGameButton = new HangmanRoundedButton("NEWGAME");
+        newGameButton.setUI(new HangmanRoundedButtonUI());
         newGameButton.setFont(DEF_FONT);
         newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
-        newGameButton.setOpaque(true);
-        newGameButton.setBorderPainted(false);
-        newGameButton.setFocusPainted(false);
         newGameButton.setPreferredSize(new Dimension(DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT));
 
         // place button to the center of a lower panel
