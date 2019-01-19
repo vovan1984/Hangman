@@ -1,6 +1,5 @@
 package hangman.gui;
 
-import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
@@ -25,7 +24,6 @@ public class HangmanDialog extends Dialog
     private static final long serialVersionUID = 1L;
     private final static int DIALOG_WIDTH = 400;
     private final static int DIALOG_HEIGHT = 200;
-    private static final Color LIGHT_BLUE = new Color(0xFFBEDDFC);
     
     private Label result;
 
@@ -42,7 +40,7 @@ public class HangmanDialog extends Dialog
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         setSize(DIALOG_WIDTH, DIALOG_HEIGHT);
-        setBackground(LIGHT_BLUE);
+        setBackground(HangmanWindow.LIGHT_BLUE);
         
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -52,7 +50,7 @@ public class HangmanDialog extends Dialog
         gbc.ipadx = 400;
         gbc.insets = new Insets(10,10,20,10);
         result = new Label(message, Label.CENTER);
-        result.setBackground(LIGHT_BLUE);
+        result.setBackground(HangmanWindow.LIGHT_BLUE);
         add(result, gbc);
         
         gbc.gridx = 0;
