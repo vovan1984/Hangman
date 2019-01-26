@@ -52,3 +52,13 @@
 [Sat Jan 19 14:34:32 EST 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
 [Tue Jan 22 22:26:05 EST 2019] FIRSTNAME LASTNAME: 50 points in 2 rounds.
 [Sat Jan 26 08:23:43 EST 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
+[Sat Jan 26 10:57:05 EST 2019] FIRSTNAME LASTNAME: 50 points in 2 rounds.
+[Sat Jan 26 11:24:42 EST 2019] FIRSTNAME LASTNAME: 25 points in 3 rounds.
+[Sat Jan 26 11:32:08 EST 2019] FIRSTNAME LASTNAME: 25 points in 3 rounds.
+[Sat Jan 26 11:32:24 EST 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
+[Sat Jan 26 11:40:19 EST 2019] FIRSTNAME LASTNAME: 0 points in 7 rounds.
+[Sat Jan 26 11:40:43 EST 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
+[Sat Jan 26 11:46:14 EST 2019] FIRSTNAME LASTNAME: 5 points in 5 rounds.
+[Sat Jan 26 11:46:52 EST 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
+[Sat Jan 26 11:47:00 EST 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
+[Sat Jan 26 11:53:12 EST 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.

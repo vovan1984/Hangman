@@ -12,7 +12,6 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 /**
  * Basic window for a Hangman Game. It contains upper (light 
@@ -67,7 +66,6 @@ public class HangmanWindow extends JFrame
         
         // setup lower part of the window
         lowerPane = new JPanel();
-        lowerPane.setBorder(new EmptyBorder(0, 0, 5, 0));
         lowerPane.setBackground(Color.WHITE); // white panel
         gbc.weighty = 0.25; // cell takes 25% of the area height
         gbc.gridx = 0; // coordinates of the cell

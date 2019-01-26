@@ -7,6 +7,8 @@ import java.awt.Insets;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +49,9 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         setUpperPane();
         setLowerPane();
         
+        // Window should be able to get keyboard focus to respond to pressed buttons.
+        setFocusable(true);
+        addKeyListener(new HangmanKeyAdapter());    
     }
 
     /*
@@ -86,10 +91,9 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         gbc.gridy = 0;     // column index of the first button
         gbc.weightx = 1;   // distribute horizontal space evenly     
         gbc.weighty = 1;   // distribute vertical space evenly
-        gbc.anchor = GridBagConstraints.PAGE_END;
         gbc.ipadx = 10;
         
-        int position = 0;
+        int position = 0; // order of the letter
    
         for (char c = 'A'; c <= 'Z'; c++)
         {
@@ -117,6 +121,7 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         letter.setBackground(Color.WHITE);
         letter.setOpaque(true);
         letter.setFocusPainted(false);
+        // space between label and the button's border
         letter.setMargin(new Insets(0, 0, 0, 0));
         
         if (position > 0) // don't increase for the first letter 
@@ -144,11 +149,26 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         // Get letter of the pressed button.
         String letter = e.getActionCommand();
         
+        // Check if clicked letter exists in a word.
+        checkLetter(letter);
+        
+        // Return keyboard input to the window.
+        requestFocusInWindow();
+    }
+    
+    /**
+     * Check if letter exists in a secret word,
+     * and show response to a player.
+     * 
+     * @param letter Letter clicked or typed by the player.
+     */
+    private void checkLetter(String letter)
+    {
         // Check if letter exists in a secret word.
         boolean match = game.checkPlayerGuess(letter);
         
         // Handle match or miss.
-        showResponse(letter, match);
+        showResponse(letter, match);       
     }
 
     /**
@@ -168,21 +188,28 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
     {   
         JButton curButton = buttons.get(input);
             
-        if (match)
+        /* 
+         * Change button color if typed/clicked button is currently 
+         * shown on the screen.
+         */
+        if (curButton != null)
         {
-            // Update masked word presentation.
-            hiddenWordLabel.setText(game.getMaskedWord());
-            
-            // Change button color and background.
-            curButton.setBackground(MATCH_COLOR);
-            curButton.setForeground(Color.WHITE);
-            curButton.setBorderPainted(false);
-        }
-        else
-        {
-            // Change button color and background in case of miss.
-            curButton.setForeground(MISS_COLOR);
-            curButton.setBorder(new LineBorder(MISS_COLOR));
+            if (match)
+            {
+                // Update masked word presentation.
+                hiddenWordLabel.setText(game.getMaskedWord());
+
+                // Change button color and background.
+                curButton.setBackground(MATCH_COLOR);
+                curButton.setForeground(Color.WHITE);
+                curButton.setBorderPainted(false);
+            }
+            else
+            {
+                // Change button color and background in case of miss.
+                curButton.setForeground(MISS_COLOR);
+                curButton.setBorder(new LineBorder(MISS_COLOR));
+            }
         }
         
         // display current presentation of the gallows
@@ -229,9 +256,26 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
                 dispose();
             }
             else
-                System.exit(0);
+                System.exit(0); // user doesn't want to continue
 
         }
     }
-    
+
+    /**
+     * Inner class for handling keyboard events.
+     */
+    private class HangmanKeyAdapter extends KeyAdapter
+    {
+        /**
+         * Check if typed letter exists in a hidden word.
+         */
+        @Override
+        public void keyTyped(KeyEvent e)
+        {
+            /* Verify typed character. We convert it to upper case
+             * because buttons are initialized with upper case letters.
+             */       
+            checkLetter((e.getKeyChar() + "").toUpperCase());        
+        }
+    }
 }
