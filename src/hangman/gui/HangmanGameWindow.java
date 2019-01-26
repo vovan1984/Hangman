@@ -1,7 +1,6 @@
 package hangman.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import hangman.HangmanGame;
@@ -29,8 +29,6 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
     private HangmanGuiPlayer player;
     private HangmanStatePicture imageArea;
     private Map<String, JButton> buttons;
-    private HangmanDialog continueDialog; // dialog to show result of the game
-    
     
     public HangmanGameWindow(String title,
                              String word,
@@ -49,9 +47,6 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         setUpperPane();
         setLowerPane();
         
-        // modal dialog to display result of the game
-        continueDialog = new HangmanDialog(this, "Thanks for your game!",
-                true);
     }
 
     /*
@@ -87,17 +82,12 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         lowerPane.setLayout(new GridBagLayout());
         
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.weightx = 1;        
-        gbc.weighty = 0;
+        gbc.gridx = 0;     // row index of the first button
+        gbc.gridy = 0;     // column index of the first button
+        gbc.weightx = 1;   // distribute horizontal space evenly     
+        gbc.weighty = 1;   // distribute vertical space evenly
         gbc.anchor = GridBagConstraints.PAGE_END;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.gridwidth = 1;
         gbc.ipadx = 10;
-        gbc.insets = new Insets(10, 5, 5, 0);  //top padding
         
         int position = 0;
    
@@ -125,11 +115,9 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         
         letter.setFont(DEF_FONT);
         letter.setBackground(Color.WHITE);
-       // letter.setUI(new HangmanRoundedButtonUI());
         letter.setOpaque(true);
         letter.setFocusPainted(false);
         letter.setMargin(new Insets(0, 0, 0, 0));
-        letter.setPreferredSize(new Dimension(26, 30));
         
         if (position > 0) // don't increase for the first letter 
         {
@@ -140,8 +128,6 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
             {
                 gbc.gridy++; 
                 gbc.gridx = 0;
-                if (position >= 10)
-                    gbc.weighty = 0.0;
             }
         }
         
@@ -230,12 +216,21 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         if (!game.canContinueGame())
         {
             player.saveResult(game);
-            continueDialog.setMessage(game.toString());
-            continueDialog.setVisible(true);
+
+            int dialogResult = JOptionPane.showConfirmDialog (this, 
+                    game.toString() + "\n" + "Do you want to continue?",
+                    "Thanks for your game!",
+                    JOptionPane.YES_NO_OPTION);
             
-            // start another game and dispose this window.
-            player.play();
-            dispose();
+            if(dialogResult == JOptionPane.YES_OPTION)
+            {
+                // start another game and dispose this window.
+                player.play();
+                dispose();
+            }
+            else
+                System.exit(0);
+
         }
     }
     

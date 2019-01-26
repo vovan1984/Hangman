@@ -104,7 +104,8 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         newGameButton.setFont(DEF_FONT);
         newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
-        newGameButton.setUI(new HangmanRoundedButtonUI());
+        newGameButton.setFocusPainted(false);
+        newGameButton.setBorderPainted(false);
         newGameButton.setPreferredSize(new Dimension(200, 40));
         
         lowerPane.setLayout(new GridBagLayout());

@@ -52,8 +52,9 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
         
         // add button
         JButton newGameButton = new JButton("NEWGAME");
-        //JButton newGameButton = new HangmanRoundedButton("NEWGAME");
-        newGameButton.setUI(new HangmanRoundedButtonUI());
+        newGameButton.setFocusPainted(false);
+        newGameButton.setBorderPainted(false);
+
         newGameButton.setFont(DEF_FONT);
         newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
