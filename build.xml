@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project default="full">
     <property name="root.dir"      value="./"/>
-    <property name="doc.dir"       value="doc"/> 
     <property name="src.dir"       value="src"/>
-	<property name="bin.dir"       value="bin"/>
+	<property name="bin.dir"       value="target"/>
+    <property name="doc.dir"       value="${bin.dir}/doc"/> 
     <property name="classes.dir"   value="${bin.dir}/tmp"/>
     <property name="jar.dir"       value="${bin.dir}/jar"/>
 
 	<!-- Clean up deliverables -->
     <target name="clean">
-    	<delete dir="${classes.dir}"/>
-        <delete dir="${doc.dir}"/>
-    	<delete dir="${jar.dir}"/>
+    	<delete dir="${bin.dir}"/>
     </target>
 
 	<!-- Full cleanup, including removal of eclipse settings 
 	    (to be used for switching between git branches) -->
     <target name="fullclean" depends="clean">
-	<delete dir="${bin.dir}"/>
     	<delete dir="${root.dir}/.settings"/>
     	<delete>
 	        <fileset dir="${root.dir}">
@@ -58,8 +55,9 @@
 				<include name="hangman/*class"/>
 				<include name="hangman/console/*class"/>
 			</fileset>
-			<fileset dir="${src.dir}">
-				<include name="resources/*"/>
+			<fileset dir="${src.dir}/main/resources">
+				<include name="console-resources/*"/>
+				<include name="dictionary*"/>
 			</fileset>
         </jar>
 
@@ -71,9 +69,9 @@
 				<include name="hangman/*class"/>
 				<include name="hangman/gui/*class"/>
 			</fileset>
-			<fileset dir="${src.dir}">
-				<include name="resources/*jpg"/>
-				<include name="resources/dictionary*"/>
+			<fileset dir="${src.dir}/main/resources">
+				<include name="gui-resources/*jpg"/>
+				<include name="dictionary*"/>
 			</fileset>
         </jar>
     	
@@ -90,7 +88,7 @@
     </target>
 	
 	<target name="javadoc">
-	    <javadoc sourcepath="${src.dir}" 
+	    <javadoc sourcepath="${src.dir}/main/java" 
                  destdir="${doc.dir}"
                  author="true"
                  version="true"
