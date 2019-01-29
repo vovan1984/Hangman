@@ -5,3 +5,4 @@ doc/
 .classpath
 nbproject
 manifest.mf
+/target/

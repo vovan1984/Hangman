@@ -18,7 +18,7 @@ public class HangmanConsoleGame extends HangmanGame
     private final static Charset DEF_ENC = Charset.forName("ISO-8859-1");
     
     // Directory of resource files in the CLASSPATH.
-    private final static String RES_DIR = "/resources/";
+    private final static String RES_DIR = "/";
     
 	private final HangmanConsolePlayer player;  // player of the game	
 	private final BufferedReader reader;        // reader from console

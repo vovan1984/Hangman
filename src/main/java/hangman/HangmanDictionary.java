@@ -31,7 +31,7 @@ public class HangmanDictionary
 	private final static Charset DEF_ENC = Charset.forName("ISO-8859-1");
 	
 	// default dictionary
-	private final static String DEF_DICTIONARY = "/resources/dictionary.txt";
+	private final static String DEF_DICTIONARY = "/dictionary.txt";
     
 	//  random number generator
 	private final static SecureRandom randomNumber = new SecureRandom();
