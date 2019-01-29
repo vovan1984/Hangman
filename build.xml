@@ -7,14 +7,15 @@
     <property name="classes.dir"   value="${bin.dir}/tmp"/>
     <property name="jar.dir"       value="${bin.dir}/jar"/>
 
-	<!-- Clean up deliverables -->
+	<!-- Clean up intermediate artifacts (tmp folder) -->
     <target name="clean">
-    	<delete dir="${bin.dir}"/>
+    	<delete dir="${classes.dir}"/>
     </target>
 
 	<!-- Full cleanup, including removal of eclipse settings 
 	    (to be used for switching between git branches) -->
     <target name="fullclean" depends="clean">
+    	<delete dir="${bin.dir}"/>
     	<delete dir="${root.dir}/.settings"/>
     	<delete>
 	        <fileset dir="${root.dir}">
