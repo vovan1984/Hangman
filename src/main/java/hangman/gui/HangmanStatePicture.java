@@ -22,7 +22,7 @@ public class HangmanStatePicture extends Canvas
     private static final long serialVersionUID = 1L;
     
     // Directory of resource files in the CLASSPATH.
-    private final static String RES_DIR = "/";
+    private final static String RES_DIR = "/gui-resources/";
     private Image img;
 
     public HangmanStatePicture(String fileName)
