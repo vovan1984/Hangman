@@ -3,6 +3,7 @@ package hangman;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class HangmanDictionaryTest
@@ -12,10 +13,12 @@ class HangmanDictionaryTest
      * from resources included to the project.
      */
     @Test
-    @Disabled
+    @DisplayName("Load a default dictionary")
     void testDefaultDictionaryCreation()
     {
-        fail("Not yet implemented");
+        // load default test dictionary which has only one word.
+        HangmanDictionary hd = new HangmanDictionary();
+        assertEquals("Default", hd.getNextWord(), "Error in loading default dictionary.");
     }
 
     /**
@@ -23,8 +26,22 @@ class HangmanDictionaryTest
      * by a user.
      */
     @Test
+    @DisplayName("Load a dictionary from an input file")
     void testDictionaryCreationFromFile()
     {
-        fail("Not yet implemented");
+        // load non-default test dictionary which has only one word.        
+        HangmanDictionary hd = new HangmanDictionary("src/test/resources/nonDefaultDictionary.txt");
+        assertEquals("Non-default", hd.getNextWord(), "Error in loading default dictionary.");
+    }
+    
+    /**
+     * Validate shuffling of words from a dictionary.
+     */
+    @Test
+    @DisplayName("Shuffle dictionary of 3 words")
+    @Disabled
+    void testShuffle()
+    {
+         fail("not yet implemented");
     }
 }

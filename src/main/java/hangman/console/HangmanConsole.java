@@ -27,9 +27,9 @@ public class HangmanConsole
 	// file with names and scores of players
 	private static String playersFile = "player.txt";
 	
-	// default dictionary file (can be overridden by user input)  
-	private static String dictionaryFile = "dictionary.txt";
-
+    // name of a dictionary file. If it remains null, then default dictionary will be used.
+    private static String dictionaryFile = null;
+	
 	/**
 	 * @param args Input parameters for running the game in Console:
 	 *             <ul>
@@ -38,37 +38,21 @@ public class HangmanConsole
 	 *             </ul>
 	 */
 	public static void main(String[] args)
-	{	
-		// check if players and/or dictionary files are provided in input
-		if (args.length > 0)
-		{	
-			for (int i = 0; i < args.length; i++)
-			{
-				if (args[i].equals("-d") && i < args.length-1)
-				{
-					i++;
-					dictionaryFile = args[i];
-				}
-				else if (args[i].equals("-p") && i < args.length-1 )
-				{
-					i++;
-					playersFile = args[i];					
-				}
-				else
-				{
-					System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
-					return;				
-				}
-			}
-		} // end of args.length > 0
+	{	    
+		processArguments(args);
 		
-		// To read data from terminal
-		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-		try
+		// Read data from terminal.
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)))
 		{
 			// Load and randomly shuffle words in dictionary file
-			HangmanDictionary dictionary = new HangmanDictionary(dictionaryFile);
+			HangmanDictionary dictionary;
+			
+			// if dictionary file is not provided, then load a default one.
+			if (dictionaryFile != null)
+			    dictionary = new HangmanDictionary(dictionaryFile);
+			else
+			    dictionary = new HangmanDictionary();
+			
 			dictionary.shuffle(); 
 			
 			System.out.println("Hi! Welcome to my hangman Game!");
@@ -95,12 +79,46 @@ public class HangmanConsole
 					                                               reader);
 			player.play();		
 		}
-		catch (IllegalArgumentException e)
+		catch (IllegalStateException | IllegalArgumentException e)
 		{
 			System.out.println(e.getMessage());
 			return;
-		} 
+		} catch (IOException e)
+        {
+            System.out.println("Error closing input stream!");
+            e.printStackTrace();
+        } 
 		
 		System.out.println("Good Bye!");
 	}
+
+    /**
+     * Process input parameters of the program.
+     * @param args Arguments to parse.
+     */
+    private static void processArguments(String[] args)
+    {
+        // check if players and/or dictionary files are provided in input
+		if (args.length > 0)
+		{	
+			for (int i = 0; i < args.length; i++)
+			{
+				if (args[i].equals("-d") && i < args.length-1)
+				{
+					i++;
+					dictionaryFile = args[i];
+				}
+				else if (args[i].equals("-p") && i < args.length-1 )
+				{
+					i++;
+					playersFile = args[i];					
+				}
+				else
+				{
+					System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
+					System.exit(0);;				
+				}
+			}
+		} // end of args.length > 0
+    }
 }

@@ -27,8 +27,8 @@ public class HangmanGUI
     // file with names and scores of players
     private static String playersFile = "player.txt";
     
-    // default dictionary file (can be overridden by user input)  
-    private static String dictionaryFile = "dictionary.txt";
+    // name of a dictionary file. If it remains null, then default dictionary will be used.  
+    private static String dictionaryFile = null;
     
     /**
      * @param args Input parameters for running the game in Console:
@@ -56,7 +56,7 @@ public class HangmanGUI
                 }
                 else
                 {
-                    System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
+                    System.out.println("Usage: java -jar HangmanGUI.jar [-d dictionary_file] [-p players_file]");
                     return;             
                 }
             }
@@ -65,7 +65,13 @@ public class HangmanGUI
         try
         {
             // Load and randomly shuffle words in dictionary file.
-            var dictionary = new HangmanDictionary(dictionaryFile);
+            HangmanDictionary dictionary;
+            
+            // if dictionary file is not provided, then load a default one.
+            if (dictionaryFile != null)
+                dictionary = new HangmanDictionary(dictionaryFile);
+            else
+                dictionary = new HangmanDictionary();
             dictionary.shuffle();
             
             // Load info about players who played the game previously.
