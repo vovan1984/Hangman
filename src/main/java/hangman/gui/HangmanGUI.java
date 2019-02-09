@@ -1,6 +1,8 @@
 package hangman.gui;
 
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import hangman.HangmanDictionary;
 import hangman.HangmanStats;
@@ -77,6 +79,9 @@ public class HangmanGUI
             // Load info about players who played the game previously.
             var playersInfo = new HangmanStats(playersFile);
             
+            // Set same look and feel to be used on all systems (Windows, Mac, etc.)
+    	    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+            
             // Display welcome window
             SwingUtilities.invokeLater( () -> new HangmanWelcomeWindow("Welcome to the Hangman Game!",
                                                                         dictionary,
@@ -85,8 +90,12 @@ public class HangmanGUI
         catch (IllegalArgumentException e)
         {
             System.out.println(e.getMessage());
-            return;
         } 
+        catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e)
+        {
+        	System.out.println("Can't set unified user interface on " + System.getProperty("os.name"));
+        	System.out.println(e.getMessage());
+        }
     }
 
 }
