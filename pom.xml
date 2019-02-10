@@ -59,6 +59,7 @@
 						<include>gui-resources/*</include>
 					</includes>
 					<finalName>Hangman</finalName>
+					<classifier>GUI</classifier>
 				</configuration>
 
 				<!-- Extra jars -->
