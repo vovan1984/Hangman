@@ -2,7 +2,7 @@ package hangman;
 
 /**
  * This class defines an instance of the Hangman game.<br>
- * Its content doesn't depend on the method of user input (e.g. it
+ * Its content doesn't depend on an method of a user input (e.g. it
  * doesn't matter if input is provided from terminal, Web or GUI).
  * 
  * @author Vladimir Igumnov

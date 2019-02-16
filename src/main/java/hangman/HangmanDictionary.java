@@ -37,7 +37,7 @@ public class HangmanDictionary
 
 	
 	/**
-     * Default constructor for loading data from default dictionary.
+     * Default constructor for loading data from a default dictionary.
      * The file containing that dictionary should be located on the CLASSPATH.
      */
     public HangmanDictionary()
