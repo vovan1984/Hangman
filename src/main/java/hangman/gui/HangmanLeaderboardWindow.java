@@ -221,7 +221,7 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         ((DefaultTableCellRenderer)jth.getDefaultRenderer())
         .setHorizontalAlignment(JLabel.LEFT);
         
-        /*table.setTableHeader(null);*/
+        table.setFocusable(false);
        
         // Add table to a ScrollPane
         JScrollPane stats = new JScrollPane(table);
