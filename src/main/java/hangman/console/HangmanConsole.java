@@ -116,7 +116,7 @@ public class HangmanConsole
 				else
 				{
 					System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
-					System.exit(0);;				
+					System.exit(0);				
 				}
 			}
 		} // end of args.length > 0

@@ -59,6 +59,9 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
         newGameButton.setBackground(LIGHT_BLUE); // light blue button
         newGameButton.setForeground(Color.WHITE);
         newGameButton.setPreferredSize(new Dimension(DEF_BUTTON_WIDTH, DEF_BUTTON_HEIGHT));
+        
+        setFocusable(true); // has to be focusable to receive key events
+        getRootPane().setDefaultButton(newGameButton);
 
         // place button to the center of a lower panel
         lowerPane.setLayout(new GridBagLayout());

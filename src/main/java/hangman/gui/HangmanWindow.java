@@ -26,7 +26,7 @@ public class HangmanWindow extends JFrame
     
     protected static final int INIT_WIDTH = 628;
     protected static final int INIT_HEIGHT = 628;
-    protected static final Color LIGHT_BLUE = new Color(0xFFBEDDFC);
+    protected static final Color LIGHT_BLUE = new Color(0xFFA2D0F8);//new Color(0xFFBEDDFC);
     
     // default font to be used in a game
     protected static final Font DEF_FONT = new Font("Serif", Font.PLAIN, 20); 
