@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import hangman.HangmanDictionary;
-import hangman.HangmanStats;
+import hangman.utils.HangmanFileStats;
 
 /**
  * 
@@ -34,12 +34,12 @@ public class HangmanWelcomeWindow extends HangmanWindow implements ActionListene
     private JLabel nameLabel; 
     private String title;
     private HangmanDictionary dictionary;
-    private HangmanStats playersInfo;
+    private HangmanFileStats playersInfo;
     private GridBagConstraints upAlignment, lowAlignment;
     
     public HangmanWelcomeWindow(String title,
                                HangmanDictionary dictionary,
-                               HangmanStats playersInfo)
+                               HangmanFileStats playersInfo)
     {
         super(title);
         this.title = title;

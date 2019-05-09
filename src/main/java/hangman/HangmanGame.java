@@ -63,7 +63,7 @@ public class HangmanGame
      * Number of rounds played in the game.
      * @return Number of played rounds.
      */
-    protected int getRounds()
+    public int getRounds()
     {
         /* 
          * If user guessed with 0 failures, then only 1 round was played, 

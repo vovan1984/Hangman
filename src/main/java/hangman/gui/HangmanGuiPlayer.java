@@ -2,6 +2,7 @@ package hangman.gui;
 
 import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
+import hangman.HangmanStats;
 
 /**
  * This class implements a player who can play a game for
@@ -14,10 +15,12 @@ public class HangmanGuiPlayer extends HangmanPlayer
 {
     private HangmanDictionary dictionary;
 
-    public HangmanGuiPlayer(String fileName, String firstName, String lastName,
+    public HangmanGuiPlayer(HangmanStats storage, 
+                            String firstName, 
+                            String lastName,
                             HangmanDictionary dictionary)
     {
-        super(fileName, firstName, lastName);
+        super(storage, firstName, lastName);
         this.dictionary = dictionary;
     }
 

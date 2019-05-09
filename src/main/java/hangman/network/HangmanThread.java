@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import hangman.HangmanDictionary;
+import hangman.utils.HangmanFileStats;
 
 /**
  * Main flow of the server to client communication 
@@ -68,7 +69,8 @@ public class HangmanThread implements Runnable
 			String firstName = is.readLine();
 			String lastName = is.readLine();
 			
-			var player = new HangmanNetworkPlayer(playersFile, 
+			var player = new HangmanNetworkPlayer(
+			        new HangmanFileStats(playersFile), 
                     firstName, 
                     lastName,
                     dictionary,

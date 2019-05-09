@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
+import hangman.HangmanStats;
 
 /**
  * This class represents player for a Hangman game.<br>
@@ -29,7 +30,7 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 	private final String logPrefix;
 	private final static Logger logger = Logger.getLogger(HangmanNetworkPlayer.class.getName());
 	
-	public HangmanNetworkPlayer(String fileName, 
+	public HangmanNetworkPlayer(HangmanStats storage, 
 			String firstName, 
 			String lastName,
 			HangmanDictionary dictionary,
@@ -37,7 +38,7 @@ public class HangmanNetworkPlayer extends HangmanPlayer
 			BufferedWriter writer,
 			String logPrefix)
 	{				
-		super(fileName, firstName, lastName);
+		super(storage, firstName, lastName);
 		this.dictionary = dictionary;
 		this.reader = reader;
 		this.writer = writer;

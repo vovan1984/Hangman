@@ -7,6 +7,7 @@ import java.util.List;
 
 import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
+import hangman.HangmanStats;
 
 /**
  * This class represents player for Hangman game.
@@ -26,13 +27,13 @@ public class HangmanConsolePlayer extends HangmanPlayer
 	private HangmanDictionary dictionary;
     private List<String> conversation; // conversation with a player
 	
-	public HangmanConsolePlayer(String fileName, 
+	public HangmanConsolePlayer(HangmanStats storage, 
 			String firstName, 
 			String lastName,
 			HangmanDictionary dictionary,
 			BufferedReader reader)
 	{				
-		super(fileName, firstName, lastName);
+		super(storage, firstName, lastName);
 		this.reader = reader;
 		this.dictionary = dictionary;
 		

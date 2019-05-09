@@ -5,7 +5,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import hangman.HangmanDictionary;
-import hangman.HangmanStats;
+import hangman.utils.HangmanFileStats;
 
 /**
  * This class starts GUI Hangman Game with a given dictionary.
@@ -27,7 +27,7 @@ import hangman.HangmanStats;
 public class HangmanGUI 
 { 
     // file with names and scores of players
-    private static String playersFile = "player.txt";
+    private static String playersFile = "src/main/webapp/WEB-INF/player.txt";
     
     // name of a dictionary file. If it remains null, then default dictionary will be used.  
     private static String dictionaryFile = null;
@@ -77,7 +77,7 @@ public class HangmanGUI
             dictionary.shuffle();
             
             // Load info about players who played the game previously.
-            var playersInfo = new HangmanStats(playersFile);
+            var playersInfo = new HangmanFileStats(playersFile);
             
             // Set same look and feel to be used on all systems (Windows, Mac, etc.)
     	    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");

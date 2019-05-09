@@ -15,6 +15,7 @@ import javax.swing.table.*;
 
 import hangman.HangmanDictionary;
 import hangman.HangmanStats;
+import hangman.utils.HangmanFileStats;
 
 /**
  * This class retrieves list of players' scores in
@@ -137,18 +138,17 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
          */
         public HangmanStatsTableModel(HangmanStats playersInfo)
         {
-            String[] scores = null, names = null, dates = null;
+            String[][] records = null;
 
             int numOfGames = 0;
 
             // load players info
-            if (playersInfo != null && playersInfo.getScores() != null)
+            if (playersInfo != null)
             {
-                scores = playersInfo.getScores();
-                names = playersInfo.getNames();
-                dates = playersInfo.getDates();
-
-                numOfGames = scores.length;
+                records = playersInfo.getResults();
+                
+                if (records != null)
+                    numOfGames = records.length;
             }
 
             // 1 row for each played game.
@@ -159,9 +159,9 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
             {
                 data[i] = new String[4];
                 data[i][0] = (i+1) + "."; // rank
-                data[i][1] = names[i].toUpperCase();
-                data[i][2] = scores[i];
-                data[i][3] = dates[i]; // date of the game
+                data[i][1] = records[i][HangmanFileStats.NAME_IDX].toUpperCase();
+                data[i][2] = records[i][HangmanFileStats.SCORE_IDX];
+                data[i][3] = records[i][HangmanFileStats.DATE_IDX]; // date of the game
             }    
         }
 
@@ -277,7 +277,8 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         this.setVisible(false);
 
         // Create a player with name taken from text fields.
-        HangmanGuiPlayer player = new HangmanGuiPlayer(playersInfo.getPlayersFilePath(), 
+        HangmanGuiPlayer player = new HangmanGuiPlayer(
+                playersInfo, 
                 firstName.getText(), 
                 lastName.getText(),
                 dictionary);

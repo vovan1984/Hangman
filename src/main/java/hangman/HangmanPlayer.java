@@ -1,11 +1,5 @@
 package hangman;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.Date;
-
 /**
  * Abstract class representing player for a Hangman game.
  * Game is played differently depending on the interface,
@@ -20,7 +14,7 @@ abstract public class HangmanPlayer
 	private String firstName,
 	               lastName;
 
-	private File playersFile; // file with all player names
+	private HangmanStats playersFile; // file with all player names
 
 	/**
 	 * Constructor for the player of a Hangman game.
@@ -28,11 +22,11 @@ abstract public class HangmanPlayer
 	 * @param firstName First name of the player.
 	 * @param lastName Last name of the player.
 	 */
-	public HangmanPlayer(String fileName, 
+	public HangmanPlayer(HangmanStats playersFile, 
 			             String firstName, 
 			             String lastName)
 	{				
-		playersFile = new File(fileName);
+		this.playersFile = playersFile;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -48,21 +42,7 @@ abstract public class HangmanPlayer
 	 */
 	public void saveResult(HangmanGame game)
 	{	
-		try (
-				// create file if it doesn't exist, or append to it if exists.
-				PrintStream writer 
-				= new PrintStream(new FileOutputStream(playersFile, playersFile.isFile()));
-				)
-		{	
-			String postfix = game.getRounds() > 1 ? " rounds." : " round.";
-			writer.println("[" + new Date() + "] " + 
-					firstName + " " + lastName + ": " 
-					+ game.getScore() + " points in " + game.getRounds() + postfix);
-		} catch (IOException e)
-		{
-			System.out.println("Failed to store result of the game!");
-			e.printStackTrace();
-		} 
+		playersFile.saveResult(this, game);
 	}
 
 	/**

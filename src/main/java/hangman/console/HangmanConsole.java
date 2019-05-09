@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import hangman.*;
+import hangman.utils.HangmanFileStats;
 
 /**
  * This class starts Console Hangman Game with a given dictionary.
@@ -72,11 +73,12 @@ public class HangmanConsole
 				lastName = "Doe";
 			}
 
-			HangmanConsolePlayer player = new HangmanConsolePlayer(playersFile, 
-					                                               firstName, 
-					                                               lastName, 
-					                                               dictionary,
-					                                               reader);
+			HangmanConsolePlayer player = new HangmanConsolePlayer(
+			        new HangmanFileStats(playersFile), 
+					firstName, 
+					lastName, 
+					dictionary,
+					reader);
 			player.play();		
 		}
 		catch (IllegalStateException | IllegalArgumentException e)
