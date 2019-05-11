@@ -29,5 +29,11 @@
                 }
         %>
     </table>
+    
+    <form action="HangmanGame.jsp" method="post">
+        First name: <input type="text" placeholder="FIRSTNAME" name="FirstName">
+        Last name: <input type="text" placeholder="LASTNAME" name="LastName"><br/>
+        <input type="submit" value="START!">
+    </form>
 </body>
 </html>

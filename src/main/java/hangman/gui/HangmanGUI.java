@@ -5,6 +5,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import hangman.HangmanDictionary;
+import hangman.utils.HangmanFileDictionary;
 import hangman.utils.HangmanFileStats;
 
 /**
@@ -71,10 +72,9 @@ public class HangmanGUI
             
             // if dictionary file is not provided, then load a default one.
             if (dictionaryFile != null)
-                dictionary = new HangmanDictionary(dictionaryFile);
+                dictionary = new HangmanFileDictionary(dictionaryFile);
             else
-                dictionary = new HangmanDictionary();
-            dictionary.shuffle();
+                dictionary = new HangmanFileDictionary();
             
             // Load info about players who played the game previously.
             var playersInfo = new HangmanFileStats(playersFile);

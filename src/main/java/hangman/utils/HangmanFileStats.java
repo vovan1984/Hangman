@@ -26,6 +26,9 @@ import hangman.HangmanStats;
  */
 public class HangmanFileStats implements HangmanStats
 {
+    // Default file with names and scores of players
+    private final static String defPlayersFile = "player.txt";
+    
     // default charset
     private final static Charset def = Charset.forName("ISO-8859-1");
     
@@ -53,9 +56,17 @@ public class HangmanFileStats implements HangmanStats
     public HangmanFileStats(String playersFilePath, Charset charset)
     { 
         this.charset = charset;
-        this.playersFile = new File(playersFilePath);          
+        this.playersFile = new File(playersFilePath);
+        
+        /*
+         *  Use default file name if provided one can't be written to
+         *  or created (say, because directory path doesn't exist).
+         */
+        if (!playersFile.canWrite())
+        {
+            this.playersFile = new File(defPlayersFile);
+        }
     }
-
    
     /* 
      *  Compare strings by score.
@@ -121,43 +132,44 @@ public class HangmanFileStats implements HangmanStats
     {
         String[][] data = null; // array of {name, score, date} sets
         
-        try
-        {
-            List<String> lines = Files.readAllLines(playersFile.toPath(), charset);          
-            
-            if (lines.size() <= 0)
-                return null;
-            
-            // Sort lines by score descending and then by date ascending
-            lines.sort(new CompScore().reversed().thenComparing(new CompDate()));
-            
-            String[] stats = lines.toArray(new String[lines.size()]);
-            data = new String[lines.size()][3]; // array of {name, score, date} sets
-
-            for (int i=0; i < stats.length; i++)
+        if (playersFile.isFile())
+            try
             {
-                int start, end;
-                
-                // get name
-                start = stats[i].trim().lastIndexOf("] ") + 2;
-                end = stats[i].trim().lastIndexOf(": ");
-                data[i][NAME_IDX] = stats[i].substring(start, end);
-                
-                // get score
-                start = stats[i].trim().lastIndexOf(": ") + 2;
-                end = stats[i].trim().lastIndexOf(" points");
-                data[i][SCORE_IDX] = Integer.parseInt(stats[i].substring(start, end)) + "";
-                
-                // get date
-                start = stats[i].trim().lastIndexOf("[") + 5;
-                end = stats[i].trim().lastIndexOf("] ");
-                data[i][DATE_IDX] = stats[i].substring(start, start + 7) + stats[i].substring(start + 20, end);
+                List<String> lines = Files.readAllLines(playersFile.toPath(), charset);          
+
+                if (lines.size() <= 0)
+                    return null;
+
+                // Sort lines by score descending and then by date ascending
+                lines.sort(new CompScore().reversed().thenComparing(new CompDate()));
+
+                String[] stats = lines.toArray(new String[lines.size()]);
+                data = new String[lines.size()][3]; // array of {name, score, date} sets
+
+                for (int i=0; i < stats.length; i++)
+                {
+                    int start, end;
+
+                    // get name
+                    start = stats[i].trim().lastIndexOf("] ") + 2;
+                    end = stats[i].trim().lastIndexOf(": ");
+                    data[i][NAME_IDX] = stats[i].substring(start, end);
+
+                    // get score
+                    start = stats[i].trim().lastIndexOf(": ") + 2;
+                    end = stats[i].trim().lastIndexOf(" points");
+                    data[i][SCORE_IDX] = Integer.parseInt(stats[i].substring(start, end)) + "";
+
+                    // get date
+                    start = stats[i].trim().lastIndexOf("[") + 5;
+                    end = stats[i].trim().lastIndexOf("] ");
+                    data[i][DATE_IDX] = stats[i].substring(start, start + 7) + stats[i].substring(start + 20, end);
+                }
+            } 
+            catch (IOException e)
+            {
+                e.printStackTrace();
             }
-        } 
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
         
         return data; 
     }

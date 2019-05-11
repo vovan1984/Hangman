@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import hangman.HangmanDictionary;
+import hangman.utils.HangmanFileDictionary;
 import hangman.utils.HangmanFileStats;
 
 /**
@@ -58,8 +59,7 @@ public class HangmanThread implements Runnable
 		try
 		{
 			// Load and randomly shuffle words in dictionary file
-			HangmanDictionary dictionary = new HangmanDictionary(dictionaryFile);
-			dictionary.shuffle(); 
+			HangmanDictionary dictionary = new HangmanFileDictionary(dictionaryFile);
 			
 			// open streams for reading and writing from network
 			var is = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));

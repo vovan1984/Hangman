@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import hangman.*;
+import hangman.utils.HangmanFileDictionary;
 import hangman.utils.HangmanFileStats;
 
 /**
@@ -26,7 +27,7 @@ import hangman.utils.HangmanFileStats;
 public class HangmanConsole
 {
 	// file with names and scores of players
-	private static String playersFile = "player.txt";
+	private static String playersFile = "src/main/webapp/WEB-INF/player.txt";
 	
     // name of a dictionary file. If it remains null, then default dictionary will be used.
     private static String dictionaryFile = null;
@@ -50,11 +51,9 @@ public class HangmanConsole
 			
 			// if dictionary file is not provided, then load a default one.
 			if (dictionaryFile != null)
-			    dictionary = new HangmanDictionary(dictionaryFile);
+			    dictionary = new HangmanFileDictionary(dictionaryFile);
 			else
-			    dictionary = new HangmanDictionary();
-			
-			dictionary.shuffle(); 
+			    dictionary = new HangmanFileDictionary();
 			
 			System.out.println("Hi! Welcome to my hangman Game!");
 			

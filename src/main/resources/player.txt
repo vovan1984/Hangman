@@ -1,3 +1,5 @@
 [Wed May 08 22:44:05 EDT 2019] Vladimir I: 100 points in 1 round.
 [Wed May 08 22:44:20 EDT 2019] Vladimir I: 10 points in 4 rounds.
 [Thu May 09 08:45:30 EDT 2019] FIRSTNAME LASTNAME: 0 points in 6 rounds.
+[Fri May 10 16:36:39 EDT 2019] FIRSTNAME LASTNAME: 100 points in 1 round.
+[Fri May 10 16:36:44 EDT 2019] FIRSTNAME LASTNAME: 100 points in 1 round.

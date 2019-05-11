@@ -1,47 +1,108 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.igumnoff</groupId>
-  <artifactId>Hangman</artifactId>
-  <version>1.0</version>  
-  
-  <packaging>war</packaging>
-  <name>Hangman Maven Webapp</name>
-  <url>http://maven.apache.org</url>
-  
-  <properties>
-      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-      <maven.compiler.target>11</maven.compiler.target>
-      <maven.compiler.source>11</maven.compiler.source>
-      <junit.jupiter.version>5.4.2</junit.jupiter.version>
-      <surefire.version>2.22.0</surefire.version>
-      <servlet.api.version>4.0.0</servlet.api.version>
-  </properties>
-  
-  <dependencies>
-      <!-- We need to add Servlet API dependency: javax.servlet-api -->
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>${servlet.api.version}</version>
-      </dependency> 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-      <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter</artifactId>
-          <version>${junit.jupiter.version}</version>
-          <scope>test</scope>
-      </dependency>
-  </dependencies>
-  
-  <build>
-    <plugins>
-        <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${surefire.version}</version>
-        </plugin> 
-    </plugins>
-    <finalName>Hangman</finalName>
-  </build>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.igumnoff</groupId>
+	<artifactId>Hangman</artifactId>
+	<version>1.0</version>
+
+	<packaging>war</packaging>
+	<name>Hangman Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+		<junit.jupiter.version>5.4.2</junit.jupiter.version>
+		<surefire.version>2.22.0</surefire.version>
+		<servlet.api.version>4.0.0</servlet.api.version>
+		<maven.jar.version>3.1.1</maven.jar.version>
+	</properties>
+
+	<dependencies>
+		<!-- We need to add Servlet API dependency: javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.api.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Build separate jars for console and GUI program -->
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven.jar.version}</version>
+
+				<!-- Extra jars -->
+				<executions>
+					<!-- Jar for console version -->
+					<execution>
+						<id>console</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>hangman.console.HangmanConsole</mainClass>
+								</manifest>
+							</archive>
+							<includes>
+								<include>hangman/*.class</include>
+								<include>hangman/console/*.class</include>
+								<include>hangman/utils/*.class</include>
+								<include>dictionary.txt</include>
+								<include>console-resources/*</include>
+							</includes>
+							<finalName>Hangman</finalName>
+							<classifier>Console</classifier>
+						</configuration>
+					</execution>
+
+                    <!-- Jar for GUI version -->
+                    <execution>
+                        <id>GUI</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>hangman.gui.HangmanGUI</mainClass>
+                                </manifest>
+                            </archive>
+                            <includes>
+                                <include>hangman/*.class</include>
+                                <include>hangman/gui/*.class</include>
+                                <include>hangman/utils/*.class</include>
+                                <include>dictionary.txt</include>
+                                <include>gui-resources/*</include>
+                            </includes>
+                            <finalName>Hangman</finalName>
+                            <classifier>GUI</classifier>
+                        </configuration>
+                    </execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.version}</version>
+			</plugin>
+		</plugins>
+		<finalName>Hangman</finalName>
+	</build>
 </project>
