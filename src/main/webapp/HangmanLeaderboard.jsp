@@ -4,10 +4,10 @@
 <html>
     <head>
         <meta charset="ISO-8859-1">
-        <title>Leaderboard</title>
+        <title>Hangman Leaderboard</title>
     </head>
 <body>
-    <header>Leaderboard</header>
+    <header>Leaderboard for a Hangman Game</header>
     <table>
         <tr>
             <th>Rank</th>
