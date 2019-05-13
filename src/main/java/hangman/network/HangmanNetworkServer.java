@@ -53,7 +53,7 @@ public class HangmanNetworkServer
 				}
 				else
 				{
-					System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
+					System.out.println("Usage: java -jar HangmanNetworkServer.jar [-d dictionary_file] [-p players_file]");
 					return;				
 				}
 			}

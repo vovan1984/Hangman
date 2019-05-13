@@ -2,7 +2,7 @@ package hangman;
 
 /**
  * Interface for saving and loading players' 
- * statistics from a file.
+ * statistics.
  * 
  * @author Vladimir Igumnov
  *

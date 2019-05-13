@@ -14,6 +14,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 import hangman.HangmanDictionary;
+import hangman.HangmanPlayer;
 import hangman.HangmanStats;
 import hangman.utils.HangmanFileStats;
 
@@ -277,11 +278,11 @@ public class HangmanLeaderboardWindow extends HangmanWindow implements ActionLis
         this.setVisible(false);
 
         // Create a player with name taken from text fields.
-        HangmanGuiPlayer player = new HangmanGuiPlayer(
+        HangmanPlayer player = new HangmanGuiPlayer(
                 playersInfo, 
+                dictionary,
                 firstName.getText(), 
-                lastName.getText(),
-                dictionary);
+                lastName.getText());
 
         // Play the game.
         player.play();

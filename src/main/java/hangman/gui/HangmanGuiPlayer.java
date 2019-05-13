@@ -11,17 +11,23 @@ import hangman.HangmanStats;
  * @author Vladimir Igumnov
  *
  */
-public class HangmanGuiPlayer extends HangmanPlayer
-{
-    private HangmanDictionary dictionary;
+public class HangmanGuiPlayer implements HangmanPlayer
+{  
+    // location to store and retrieve games state
+    private final HangmanStats storage; 
+    private final HangmanDictionary dictionary;
+    
+    private String firstName, lastName;
 
     public HangmanGuiPlayer(HangmanStats storage, 
+                            HangmanDictionary dictionary,
                             String firstName, 
-                            String lastName,
-                            HangmanDictionary dictionary)
+                            String lastName)
     {
-        super(storage, firstName, lastName);
-        this.dictionary = dictionary;
+        this.storage = storage;
+        this.dictionary =  dictionary;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     /**
@@ -33,6 +39,7 @@ public class HangmanGuiPlayer extends HangmanPlayer
         var gameWindow = new HangmanGameWindow(
                 "Welcome to the Hangman Game, " + getFirstName() + "!",
                 word,
+                storage,
                 this);
         
         gameWindow.setVisible(true); 
@@ -41,9 +48,23 @@ public class HangmanGuiPlayer extends HangmanPlayer
     /**
      * Play game for the next word from dictionary.
      */
+    @Override
     public void play()
     {
         playGame(dictionary.getNextWord());
+    }
+
+
+    @Override
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    @Override
+    public String getLastName()
+    {
+        return lastName;
     }
 
 }

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import hangman.*;
-import hangman.utils.HangmanFileDictionary;
 import hangman.utils.HangmanFileStats;
 
 /**
@@ -22,15 +21,10 @@ import hangman.utils.HangmanFileStats;
  *        for the next word from dictionary.</li>
  * </ul>
  * @author Vladimir Igumnov
- * @version 1.1
+ * @version 1.0
  */
-public class HangmanConsole
+public class HangmanConsole extends HangmanController
 {
-	// file with names and scores of players
-	private static String playersFile = "src/main/webapp/WEB-INF/player.txt";
-	
-    // name of a dictionary file. If it remains null, then default dictionary will be used.
-    private static String dictionaryFile = null;
 	
 	/**
 	 * @param args Input parameters for running the game in Console:
@@ -42,43 +36,18 @@ public class HangmanConsole
 	public static void main(String[] args)
 	{	    
 		processArguments(args);
-		
+			
 		// Read data from terminal.
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)))
 		{
-			// Load and randomly shuffle words in dictionary file
-			HangmanDictionary dictionary;
-			
-			// if dictionary file is not provided, then load a default one.
-			if (dictionaryFile != null)
-			    dictionary = new HangmanFileDictionary(dictionaryFile);
-			else
-			    dictionary = new HangmanFileDictionary();
-			
-			System.out.println("Hi! Welcome to my hangman Game!");
-			
+		    // Load and randomly shuffle words in dictionary file
+	        HangmanDictionary dictionary = createHangmanDictionary();
+	        
 			// Create player
-			String firstName, lastName;
-			try
-			{
-				System.out.print("What's your last name?\n--> ");
-				lastName = reader.readLine();
-				System.out.print("And what's your first name?\n--> ");
-				firstName = reader.readLine();
-			} catch (IOException e)
-			{
-				System.out.println("I/O error while getting your name! Using default \"John Doe\"");
-				firstName = "John";
-				lastName = "Doe";
-			}
-
-			HangmanConsolePlayer player = new HangmanConsolePlayer(
-			        new HangmanFileStats(playersFile), 
-					firstName, 
-					lastName, 
-					dictionary,
-					reader);
-			player.play();		
+			HangmanPlayer player = createHangmanPlayer(reader, dictionary);
+			
+			// Play games until user decides to leave
+			player.play();	
 		}
 		catch (IllegalStateException | IllegalArgumentException e)
 		{
@@ -93,33 +62,44 @@ public class HangmanConsole
 		System.out.println("Good Bye!");
 	}
 
-    /**
-     * Process input parameters of the program.
-     * @param args Arguments to parse.
-     */
-    private static void processArguments(String[] args)
+	/**
+	 * Create user object for the Console game.
+	 * 
+	 * @param reader Input stream to read user info
+	 * @return Object of HangmanPlayer interface (HangmanConsolePlayer)
+	 */
+    private static HangmanPlayer createHangmanPlayer(
+            BufferedReader reader,
+            HangmanDictionary dictionary
+            )
     {
-        // check if players and/or dictionary files are provided in input
-		if (args.length > 0)
-		{	
-			for (int i = 0; i < args.length; i++)
-			{
-				if (args[i].equals("-d") && i < args.length-1)
-				{
-					i++;
-					dictionaryFile = args[i];
-				}
-				else if (args[i].equals("-p") && i < args.length-1 )
-				{
-					i++;
-					playersFile = args[i];					
-				}
-				else
-				{
-					System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
-					System.exit(0);				
-				}
-			}
-		} // end of args.length > 0
+        String firstName, lastName;
+        
+        System.out.println("Hi! Welcome to my hangman Game!");
+        
+        try
+        {
+        	System.out.print("What's your last name?\n--> ");
+        	lastName = reader.readLine();
+        	System.out.print("And what's your first name?\n--> ");
+        	firstName = reader.readLine();
+        } catch (IOException e)
+        {
+        	System.out.println("I/O error while getting your name! Using default \"John Doe\"");
+        	firstName = "John";
+        	lastName = "Doe";
+        }
+
+        HangmanPlayer player = new HangmanConsolePlayer(
+                                                        new HangmanFileStats(playersFile), 
+                                                        dictionary,
+        		                                        firstName, 
+        		                                        lastName, 
+        		                                        reader);
+        
+        System.out.println("Hi " + player.getFirstName() + ", nice to meet you!");
+        
+        return player;
     }
+
 }

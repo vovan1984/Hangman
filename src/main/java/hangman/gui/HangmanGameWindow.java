@@ -17,6 +17,9 @@ import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 
 import hangman.HangmanGame;
+import hangman.HangmanPlayer;
+import hangman.HangmanStats;
+import hangman.utils.Hangman10RoundsGame;
 
 public class HangmanGameWindow extends HangmanWindow implements ActionListener
 {
@@ -28,20 +31,23 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
     
     private Label hiddenWordLabel;
     private HangmanGame game;
-    private HangmanGuiPlayer player;
+    private HangmanPlayer player;
+    private HangmanStats storage;
     private HangmanStatePicture imageArea;
     private Map<String, JButton> buttons;
     
     public HangmanGameWindow(String title,
                              String word,
-                             HangmanGuiPlayer player)
+                             HangmanStats storage,
+                             HangmanPlayer player)
     {
         super(title);
 
         this.player = player;
+        this.storage = storage;
         
         // create a game instance
-        game = new HangmanGame(word);
+        game = new Hangman10RoundsGame(word);
         
         // list of buttons
         buttons = new HashMap<String, JButton>();
@@ -240,12 +246,12 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         }
         
         // Check if we can continue guessing the word.
-        if (!game.canContinueGame())
+        if (game.isGameCompleted())
         {
-            player.saveResult(game);
+            storage.saveResult(player, game);
 
             int dialogResult = JOptionPane.showConfirmDialog (this, 
-                    game.toString() + "\n" + "Do you want to continue?",
+                    game + "\n" + "Do you want to continue?",
                     "Thanks for your game!",
                     JOptionPane.YES_NO_OPTION);
             

@@ -49,7 +49,7 @@ public class HangmanFileStats implements HangmanStats
     }
     
     /**
-     *  Constructor for an input charset.
+     * Constructor for an input charset.
      * @param playersFilePath Path to a file with players statistics.
      * @param charset Encoding of a players file
      */
