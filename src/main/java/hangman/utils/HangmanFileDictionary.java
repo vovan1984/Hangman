@@ -151,4 +151,21 @@ public class HangmanFileDictionary implements HangmanDictionary
         
         return words[nextWord++];
     }
+    
+    /**
+     * Load and randomly shuffle words in dictionary file
+     * 
+     * @return shuffled dictionary
+     */
+    public static HangmanDictionary createDictionary(String dictionaryFile)
+    {
+        HangmanDictionary dictionary;
+        
+        // if dictionary file is not provided, then load a default one.
+        if (dictionaryFile != null)
+            dictionary = new HangmanFileDictionary(dictionaryFile);
+        else
+            dictionary = new HangmanFileDictionary();
+        return dictionary;
+    }
 }

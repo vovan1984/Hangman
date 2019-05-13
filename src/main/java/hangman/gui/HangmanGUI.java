@@ -67,14 +67,8 @@ public class HangmanGUI
         
         try
         {
-            // Load and randomly shuffle words in dictionary file.
-            HangmanDictionary dictionary;
-            
-            // if dictionary file is not provided, then load a default one.
-            if (dictionaryFile != null)
-                dictionary = new HangmanFileDictionary(dictionaryFile);
-            else
-                dictionary = new HangmanFileDictionary();
+            // Load and randomly shuffle words in dictionary file
+            HangmanDictionary dictionary = HangmanFileDictionary.createDictionary(dictionaryFile);
             
             // Load info about players who played the game previously.
             var playersInfo = new HangmanFileStats(playersFile);

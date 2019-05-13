@@ -76,13 +76,30 @@ public class HangmanConsolePlayer implements HangmanPlayer
     @Override
     public void play()
     {
+        String exitGame;
+
         // Play games in a loop until user decides to leave
-        do
+        try
         {
-            HangmanGame game = new Hangman10RoundsGame(dictionary.getNextWord());
-            playGame(game);
+            do
+            {
+                HangmanGame game = new Hangman10RoundsGame(dictionary.getNextWord());
+                playGame(game);
+                storage.saveResult(this, game);
+
+                System.out.print("Do you want to play another game ? (y/n)\n--> ");
+                exitGame = reader.readLine();
+                addToConversation("Do you want to play another game ? (y/n)\n--> " + exitGame);
+                playNext = exitGame.equalsIgnoreCase(CONTINUE);
+            }
+            while (wantsToPlayNext());   
         }
-        while (wantsToPlayNext());   
+        catch (IOException e)
+        {
+            System.out.println("IO error!");
+            e.printStackTrace();
+            return;
+        }
     }
     
     /**
@@ -91,24 +108,27 @@ public class HangmanConsolePlayer implements HangmanPlayer
      */
     private void playGame(HangmanGame game)
     {
-        String exitGame;
+        if (game.isGameCompleted())
+            throw new IllegalStateException("You are trying to continue already completed game!");
         
-        try
+        showAndAddToConversation("Ok, let's start!");        
+        showAndAddToConversation("Your word has " + game.getMaskedWord().length() + " letters");
+
+        String input;
+
+        // play while there are letters to be guessed
+        while (!game.isGameCompleted())
         {
-            play(game);
-            storage.saveResult(this, game);
-            
-            System.out.print("Do you want to play another game ? (y/n)\n--> ");
-            exitGame = reader.readLine();
-            addToConversation("Do you want to play another game ? (y/n)\n--> " + exitGame);
-            playNext = exitGame.equalsIgnoreCase(CONTINUE);
-        }
-        catch (IOException e)
-        {
-            System.out.println("IO error!");
-            e.printStackTrace();
-            return;
-        }
+            input = requestInput(game);
+
+            // try to find matches of input substring in secret word
+            boolean match = game.checkPlayerGuess(input);
+
+            // Communicate match or miss to the user
+            showResponse(game, input, match); 
+        }       
+        
+        showAndAddToConversation(game.toString());
     }
 
     /**
@@ -199,35 +219,6 @@ public class HangmanConsolePlayer implements HangmanPlayer
         
         return input;
     }
-
-    /**
-     * Play the Hangman game
-     * @param game game to play
-     */
-    private void play(HangmanGame game)
-    {
-        if (game.isGameCompleted())
-            throw new IllegalStateException("You are trying to continue already completed game!");
-        
-        showAndAddToConversation("Ok, let's start!");        
-        showAndAddToConversation("Your word has " + game.getMaskedWord().length() + " letters");
-
-        String input;
-
-        // play while there are letters to be guessed
-        while (!game.isGameCompleted())
-        {
-            input = requestInput(game);
-
-            // try to find matches of input substring in secret word
-            boolean match = game.checkPlayerGuess(input);
-
-            // Communicate match or miss to the user
-            showResponse(game, input, match); 
-        }       
-        
-        showAndAddToConversation(game.toString());
-    }
     
     /**
      * Inform player of match/miss and show the secret word with letters guessed by now.<br>
@@ -316,5 +307,4 @@ public class HangmanConsolePlayer implements HangmanPlayer
             e.printStackTrace();
         }
     }
-
 }

@@ -58,8 +58,8 @@ public class HangmanThread implements Runnable
 		// process the connection
 		try
 		{
-			// Load and randomly shuffle words in dictionary file
-			HangmanDictionary dictionary = new HangmanFileDictionary(dictionaryFile);
+	        // Load and randomly shuffle words in dictionary file
+            HangmanDictionary dictionary = HangmanFileDictionary.createDictionary(dictionaryFile);
 			
 			// open streams for reading and writing from network
 			var is = new BufferedReader(new InputStreamReader(client.getInputStream(), "UTF-8"));

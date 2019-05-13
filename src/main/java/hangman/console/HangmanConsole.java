@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import hangman.*;
+import hangman.utils.HangmanFileDictionary;
 import hangman.utils.HangmanFileStats;
 
 /**
@@ -23,8 +24,13 @@ import hangman.utils.HangmanFileStats;
  * @author Vladimir Igumnov
  * @version 1.0
  */
-public class HangmanConsole extends HangmanController
+public class HangmanConsole
 {
+    // file with names and scores of players
+    private static String playersFile = "src/main/webapp/WEB-INF/player.txt";
+    
+    // name of a dictionary file. If it remains null, then default dictionary will be used.
+    private static String dictionaryFile = null;
 	
 	/**
 	 * @param args Input parameters for running the game in Console:
@@ -41,7 +47,7 @@ public class HangmanConsole extends HangmanController
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in)))
 		{
 		    // Load and randomly shuffle words in dictionary file
-	        HangmanDictionary dictionary = createHangmanDictionary();
+	        HangmanDictionary dictionary = HangmanFileDictionary.createDictionary(dictionaryFile);
 	        
 			// Create player
 			HangmanPlayer player = createHangmanPlayer(reader, dictionary);
@@ -102,4 +108,33 @@ public class HangmanConsole extends HangmanController
         return player;
     }
 
+    /**
+     * Process input parameters of the program.
+     * @param args Arguments to parse.
+     */
+    private static void processArguments(String[] args)
+    {
+        // check if players and/or dictionary files are provided in input
+        if (args.length > 0)
+        {   
+            for (int i = 0; i < args.length; i++)
+            {
+                if (args[i].equals("-d") && i < args.length-1)
+                {
+                    i++;
+                    dictionaryFile = args[i];
+                }
+                else if (args[i].equals("-p") && i < args.length-1 )
+                {
+                    i++;
+                    playersFile = args[i];                  
+                }
+                else
+                {
+                    System.out.println("Usage: java -jar HangmanConsole.jar [-d dictionary_file] [-p players_file]");
+                    System.exit(0);             
+                }
+            }
+        } // end of args.length > 0
+    }
 }
