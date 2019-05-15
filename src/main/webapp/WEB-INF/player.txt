@@ -1,4 +1,0 @@
-[Sun May 12 19:04:55 EDT 2019] FIRSTNAME LASTNAME: 100 points in 1 round.
-[Sun May 12 19:05:07 EDT 2019] FIRSTNAME LASTNAME: 50 points in 2 rounds.
-[Sun May 12 19:12:47 EDT 2019] dsfs dsfds: 50 points in 2 rounds.
-[Sun May 12 21:31:10 EDT 2019] FIRSTN LASTNAME: 100 points in 1 round.

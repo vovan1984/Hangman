@@ -7,6 +7,18 @@
         <title>Welcome to the Hangman Game, <%= request.getParameter("FirstName") %>!</title>
     </head>
 <body>
+
+    <%
+        if (session.getAttribute("HangmanFileStats") == null)
+        {
+            out.println("Wrong page!");
+        }
+        else
+        {
+            hangman.HangmanStats hfs = (hangman.HangmanStats)session.getAttribute("HangmanFileStats");
+            out.println(hfs.toString());
+        }
+    %>
     
 </body>
 </html>

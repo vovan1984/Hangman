@@ -92,7 +92,6 @@ public class HangmanFileDictionary implements HangmanDictionary
             e.printStackTrace();
             throw new IllegalStateException("Error while reading content of a dictionary file!");
         }   
-
     }
 
     /**

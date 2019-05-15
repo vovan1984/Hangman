@@ -27,10 +27,11 @@ import hangman.HangmanStats;
 public class HangmanFileStats implements HangmanStats
 {
     // Default file with names and scores of players
-    private final static String defPlayersFile = "player.txt";
+    private final static String DEF_PLAYERS_FILE =
+        "C:/Users/Maestro/Projects/Hangman/src/main/resources/player.txt";
     
     // default charset
-    private final static Charset def = Charset.forName("ISO-8859-1");
+    private final static Charset DEF_CHARSET = Charset.forName("ISO-8859-1");
     
     public final static int NAME_IDX = 0; // index of name in a record
     public final static int SCORE_IDX = 1;// index of score in a record
@@ -40,12 +41,20 @@ public class HangmanFileStats implements HangmanStats
     private File playersFile; // statistics file.
 
     /**
+     * Default constructor. 
+     */
+    public HangmanFileStats()
+    {
+        this(DEF_PLAYERS_FILE, DEF_CHARSET);
+    }
+    
+    /**
      * Constructor for a default charset. 
      * @param playersFilePath Path to a file with players statistics.
      */
     public HangmanFileStats(String playersFilePath)
     {
-        this(playersFilePath, def);
+        this(playersFilePath, DEF_CHARSET);
     }
     
     /**
@@ -56,16 +65,14 @@ public class HangmanFileStats implements HangmanStats
     public HangmanFileStats(String playersFilePath, Charset charset)
     { 
         this.charset = charset;
-        this.playersFile = new File(playersFilePath);
-        
+         
         /*
-         *  Use default file name if provided one can't be written to
-         *  or created (say, because directory path doesn't exist).
+         *  Use default file path if provided one is empty.
          */
-        if (!playersFile.canWrite())
-        {
-            this.playersFile = new File(defPlayersFile);
-        }
+        if (playersFilePath == null || playersFilePath.equals(""))
+            this.playersFile = new File(DEF_PLAYERS_FILE);
+        else
+            this.playersFile = new File(playersFilePath);
     }
    
     /* 

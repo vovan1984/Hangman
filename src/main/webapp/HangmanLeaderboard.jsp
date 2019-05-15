@@ -4,10 +4,10 @@
 <html>
     <head>
         <meta charset="ISO-8859-1">
-        <title>Hangman Leaderboard</title>
+        <title>Hangman Game Leaderboard</title>
     </head>
 <body>
-    <header>Leaderboard for a Hangman Game</header>
+    <header>Leaderboard</header>
     <table>
         <tr>
             <th>Rank</th>
@@ -16,7 +16,10 @@
         </tr>
         <% 
             hangman.HangmanStats storage = new hangman.utils.HangmanFileStats(
-                    getServletContext().getRealPath("/WEB-INF/player.txt"));
+                    "C:/Users/Maestro/Projects/Hangman/src/main/resources/player.txt");
+        
+            session.setAttribute("HangmanFileStats", storage);
+        
             String[][] records = storage.getResults();
             
             if (records!=null)

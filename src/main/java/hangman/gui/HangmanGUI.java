@@ -27,8 +27,8 @@ import hangman.utils.HangmanFileStats;
 
 public class HangmanGUI 
 { 
-    // file with names and scores of players
-    private static String playersFile = "src/main/webapp/WEB-INF/player.txt";
+    // file with names and scores of players. If it remains null, then default file will be used.
+    private static String playersFile = null;
     
     // name of a dictionary file. If it remains null, then default dictionary will be used.  
     private static String dictionaryFile = null;
