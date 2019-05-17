@@ -1,27 +1,43 @@
 package hangman;
 
 /**
- * This interface represents a user playing provided Hangman games.
+ * This class represents a user playing Hangman games.
  * 
  * @author Vladimir Igumnov
  * @since 1.0
  */
-public interface HangmanPlayer
+public abstract class HangmanPlayer
 {
+    
+    private String firstName, lastName;
+    
+    public HangmanPlayer(String firstName,
+                         String lastName)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    
     /**
-     * Play games until and user decides to leave.
+     * Play games until user decides to exit.
      */
-    public void play();
+    public abstract void play();
     
     /**
      *  Returns first name of the player.
      * @return First name of the player.
      */
-    public String getFirstName();
+    public String getFirstName()
+    {
+        return firstName;
+    }
 
     /**
      *  Returns last name name of the player.
      * @return Last name of the player.
      */
-    public String getLastName();
+    public String getLastName()
+    {
+        return lastName;
+    }
 }

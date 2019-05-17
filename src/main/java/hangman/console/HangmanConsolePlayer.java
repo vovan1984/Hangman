@@ -20,7 +20,7 @@ import hangman.utils.HangmanUtils;
  * @author Vladimir Igumnov
  *
  */
-public class HangmanConsolePlayer implements HangmanPlayer
+public class HangmanConsolePlayer extends HangmanPlayer
 {  
     // Default encoding of resource files.
     private final static Charset DEF_ENC = Charset.forName("ISO-8859-1");
@@ -36,8 +36,6 @@ public class HangmanConsolePlayer implements HangmanPlayer
     
     // dictionary with secret words
     private final HangmanDictionary dictionary;
-    
-    private String firstName, lastName;
 
     // indication if user wants to play next game
     private boolean playNext;
@@ -60,8 +58,7 @@ public class HangmanConsolePlayer implements HangmanPlayer
             String lastName,
             BufferedReader reader)
     {  
-        this.firstName = firstName;
-        this.lastName = lastName;
+        super(firstName, lastName);
         this.reader = reader;     
         this.storage = storage;
         this.dictionary = dictionary;
@@ -139,25 +136,6 @@ public class HangmanConsolePlayer implements HangmanPlayer
         return playNext;
     }
 
-    /**
-     *  Returns first name of the player.
-     * @return First name of the player.
-     */
-    @Override
-    public String getFirstName()
-    {
-        return firstName;
-    }
-
-    /**
-     *  Returns last name name of the player.
-     * @return Last name of the player.
-     */
-    @Override
-    public String getLastName()
-    {
-        return lastName;
-    }
     
     /**
      * Return console conversation with a player.   

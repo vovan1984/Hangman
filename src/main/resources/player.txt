@@ -3,3 +3,4 @@
 [Thu May 09 08:45:30 EDT 2019] FIRSTNAME LASTNAME: 0 points in 6 rounds.
 [Fri May 10 16:36:39 EDT 2019] FIRSTNAME LASTNAME: 100 points in 1 round.
 [Fri May 10 16:36:44 EDT 2019] FIRSTNAME LASTNAME: 100 points in 1 round.
+[Fri May 17 09:09:46 EDT 2019]  : 50 points in 2 rounds.

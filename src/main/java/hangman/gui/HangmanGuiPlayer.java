@@ -11,23 +11,21 @@ import hangman.HangmanStats;
  * @author Vladimir Igumnov
  *
  */
-public class HangmanGuiPlayer implements HangmanPlayer
+public class HangmanGuiPlayer extends HangmanPlayer
 {  
     // location to store and retrieve games state
     private final HangmanStats storage; 
     private final HangmanDictionary dictionary;
-    
-    private String firstName, lastName;
+
 
     public HangmanGuiPlayer(HangmanStats storage, 
                             HangmanDictionary dictionary,
                             String firstName, 
                             String lastName)
     {
+        super(firstName, lastName);
         this.storage = storage;
         this.dictionary =  dictionary;
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
     /**
@@ -52,19 +50,6 @@ public class HangmanGuiPlayer implements HangmanPlayer
     public void play()
     {
         playGame(dictionary.getNextWord());
-    }
-
-
-    @Override
-    public String getFirstName()
-    {
-        return firstName;
-    }
-
-    @Override
-    public String getLastName()
-    {
-        return lastName;
     }
 
 }

@@ -4,4 +4,24 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<servlet-name>HangmanServlet</servlet-name>
+  	<display-name>HangmanServlet</display-name>
+  	<description></description>
+  	<servlet-class>hangman.web.HangmanServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>HangmanWeb</servlet-name>
+  	<display-name>HangmanWeb</display-name>
+  	<description></description>
+  	<servlet-class>hangman.web.HangmanWeb</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>HangmanServlet</servlet-name>
+  	<url-pattern>/HangmanServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>HangmanWeb</servlet-name>
+  	<url-pattern>/HangmanWeb</url-pattern>
+  </servlet-mapping>
 </web-app>

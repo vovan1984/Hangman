@@ -18,7 +18,7 @@
             hangman.HangmanStats storage = new hangman.utils.HangmanFileStats(
                     "C:/Users/Maestro/Projects/Hangman/src/main/resources/player.txt");
         
-            session.setAttribute("HangmanFileStats", storage);
+            session.setAttribute("HangmanStats", storage);
         
             String[][] records = storage.getResults();
             
@@ -33,7 +33,7 @@
         %>
     </table>
     
-    <form action="HangmanGame.jsp" method="post">
+    <form action="HangmanWeb" method="post">
         First name: <input type="text" placeholder="FIRSTNAME" name="FirstName">
         Last name: <input type="text" placeholder="LASTNAME" name="LastName"><br/>
         <input type="submit" value="START!">

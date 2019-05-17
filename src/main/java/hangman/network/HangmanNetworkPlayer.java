@@ -20,7 +20,7 @@ import hangman.utils.Hangman10RoundsGame;
  * @version 1.0
  *
  */
-public class HangmanNetworkPlayer implements HangmanPlayer
+public class HangmanNetworkPlayer extends HangmanPlayer
 {
     // "n" is to continue the game, "y" is for exit
     private final static String CONTINUE = "y";
@@ -30,8 +30,6 @@ public class HangmanNetworkPlayer implements HangmanPlayer
     
     // dictionary with secret words
     private final HangmanDictionary dictionary;
-    
-    private String firstName, lastName;
     
 	private final BufferedReader reader;  // read to network connection
 	private final BufferedWriter writer;  // write to network connection
@@ -47,8 +45,7 @@ public class HangmanNetworkPlayer implements HangmanPlayer
 			BufferedWriter writer,
 			String logPrefix)
 	{				
-		this.firstName = firstName;
-		this.lastName = lastName;
+	    super(firstName, lastName);
 		this.storage = storage;
 		this.dictionary = dictionary;
 		this.reader = reader;
@@ -98,7 +95,7 @@ public class HangmanNetworkPlayer implements HangmanPlayer
 	/**
      * Play games till user decides to exit.
      */
-    @Override
+	@Override
 	public void play()
 	{
 	    String exitGame = CONTINUE;
@@ -129,19 +126,7 @@ public class HangmanNetworkPlayer implements HangmanPlayer
         }
 	    
 	}
-
-    @Override
-    public String getFirstName()
-    {
-        return firstName;
-    }
-
-    @Override
-    public String getLastName()
-    {
-        return lastName;
-    }
-    
+   
     /* 
      * Get substring from the network client
      * @return Letter, substring or a full word suggestion from a player.
