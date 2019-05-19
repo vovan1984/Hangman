@@ -4,3 +4,8 @@
 [Fri May 10 16:36:39 EDT 2019] FIRSTNAME LASTNAME: 100 points in 1 round.
 [Fri May 10 16:36:44 EDT 2019] FIRSTNAME LASTNAME: 100 points in 1 round.
 [Fri May 17 09:09:46 EDT 2019]  : 50 points in 2 rounds.
+[Sat May 18 21:38:36 EDT 2019] Vladimir I: 100 points in 1 round.
+[Sat May 18 22:46:04 EDT 2019] fgh jg: 100 points in 1 round.
+[Sat May 18 22:48:42 EDT 2019] Mega Test: 50 points in 2 rounds.
+[Sat May 18 22:48:57 EDT 2019] Mega Test: 100 points in 1 round.
+[Sat May 18 22:49:17 EDT 2019] Mega Test: 25 points in 3 rounds.

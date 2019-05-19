@@ -39,6 +39,21 @@
 
 	<build>
 		<plugins>
+		    <!-- Configuration for war packaging -->  
+		    <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <packagingExcludes>
+                         WEB-INF/classes/hangman/gui/*class,
+                         WEB-INF/classes/hangman/console/*class,
+                         WEB-INF/classes/hangman/network/*class,
+                         WEB-INF/classes/console-resources/*
+                    </packagingExcludes>
+                </configuration>
+            </plugin>
+            
 			<!-- Build separate jars for console and GUI program -->
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>

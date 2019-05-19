@@ -44,35 +44,48 @@ public class HangmanWeb extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	        throws ServletException, IOException 
 	{
-	    HangmanWebPlayer player;
+	    HangmanWebPlayer player = null;
 	    
-	    // Step1: set the content type
+	    // Set the content type
 	    response.setContentType("text/html");
 	    
-	    // Step2: get the PrintWriter
+	    // Get the PrintWriter
 	    PrintWriter out = response.getWriter();
 	       
-	    // Step3: get the session
+	    // Get or setup the session
 	    HttpSession session = request.getSession();
 	    
-	    // Step4: create a player if it is not yet created
-	    if (session.getAttribute("HangmanPlayer") == null)
+	    // Validate user name
+        String firstName = request.getParameter("FirstName");
+        String lastName = request.getParameter("LastName");
+              
+        if (firstName != null && lastName != null &&
+                firstName.length() != 0 && lastName.length() != 0)
+        {
+            // Create player
+            HangmanStats stats = (HangmanStats)session.getAttribute("HangmanStats");
+            HangmanDictionary dictionary = new HangmanFileDictionary();
+            player = new HangmanWebPlayer(
+                    request.getParameter("FirstName"),
+                    request.getParameter("LastName"),
+                    stats,
+                    dictionary);
+            session.setAttribute("HangmanPlayer", player);
+            
+        }
+        else if (session.getAttribute("HangmanPlayer") != null)
 	    {
-	        HangmanStats stats = (HangmanStats)session.getAttribute("HangmanStats");
-	        HangmanDictionary dictionary = new HangmanFileDictionary();
-	        player = new HangmanWebPlayer(
-	                request.getParameter("FirstName"),
-	                request.getParameter("LastName"),
-	                stats,
-	                dictionary);
-	        session.setAttribute("HangmanPlayer", player);
-	    }
-	    else
-	    {
+            // Get existing player for the session
 	        player = (HangmanWebPlayer)session.getAttribute("HangmanPlayer");
 	        player.setInput(request.getParameter("UserInput"));
 	    }
+	    else // redirect
+	    {
+	        response.sendRedirect("HangmanLeaderboard.jsp");
+	        return;
+	    }
 	    
+	    // play the game
 	    player.setOutput(out);
 	    player.play();
 	}

@@ -41,19 +41,37 @@ public class HangmanWebPlayer extends HangmanPlayer
         
         if (input != null)
             game.checkPlayerGuess(input);
-        
-        output.println("<section>" + game.getMaskedWord() + "</section>");
-        
-        output.println("<section>");
-        output.println("<form action=\"HangmanWeb\" method=\"post\">");
-        output.println("Your guess: <input type=\"text\" name=\"UserInput\"");
-        output.println("<input type=\"text\"><br>");
-        output.println("<input type=\"submit\" value=\"Submit\">");
-        output.println("</form>");
-        output.println("</section>");
-        
+
         if (game.isGameCompleted())
+        {
             stats.saveResult(this, game);
+            output.println("<html><head><title>" 
+                         + "Thanks for your game!"
+                         + "</title></head>");
+            
+            output.println("<section><strong>"
+                         + game 
+                         + "</strong></section>");
+            
+            output.println("<form action=\"HangmanWeb\" method=\"post\">"
+                         + "<input type=\"submit\" value=\"Play again!\">"
+                         + "</form>");
+            
+            output.println("</html>");
+        }
+        else
+        {
+            output.println("<section>" + game.getMaskedWord() + "</section>");
+        
+            output.println("<section>");
+            output.println("<form action=\"HangmanWeb\" method=\"post\">");
+            output.println("Your guess: <input type=\"text\" name=\"UserInput\"");
+            output.println("<input type=\"text\"><br>");
+            output.println("<input type=\"submit\" value=\"Submit\">");
+            output.println("</form>");
+            output.println("</section>");
+        }
+
     }
 
     /**
