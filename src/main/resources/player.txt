@@ -9,3 +9,7 @@
 [Sat May 18 22:48:42 EDT 2019] Mega Test: 50 points in 2 rounds.
 [Sat May 18 22:48:57 EDT 2019] Mega Test: 100 points in 1 round.
 [Sat May 18 22:49:17 EDT 2019] Mega Test: 25 points in 3 rounds.
+[Sun May 19 07:34:21 EDT 2019] oip o: 50 points in 2 rounds.
+[Sun May 19 12:24:26 EDT 2019] hj hi: 100 points in 1 round.
+[Sun May 19 12:36:03 EDT 2019] gg hkj: 50 points in 2 rounds.
+[Sun May 19 23:07:21 EDT 2019] asdfasd dasfads: 50 points in 2 rounds.

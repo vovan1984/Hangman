@@ -17,6 +17,7 @@ import hangman.utils.HangmanFileDictionary;
  */
 public class HangmanWeb extends HttpServlet 
 {
+    private static final String START_PAGE="index.html";
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -29,13 +30,13 @@ public class HangmanWeb extends HttpServlet
     }
 
 	/**
+	 * GET method is not supported, so redirect to start page
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 	        throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	    response.sendRedirect(START_PAGE);
 	}
 
 	/**
@@ -54,6 +55,16 @@ public class HangmanWeb extends HttpServlet
 	       
 	    // Get or setup the session
 	    HttpSession session = request.getSession();
+	    
+	    // Check if user decided to leave the game
+	    String action;
+	    if ( (action = request.getParameter("action")) != null 
+	            && action.equals("Exit the game"))
+	    {
+	        session.invalidate();
+	        response.sendRedirect(START_PAGE);
+	        return;
+	    }
 	    
 	    // Validate user name
         String firstName = request.getParameter("FirstName");

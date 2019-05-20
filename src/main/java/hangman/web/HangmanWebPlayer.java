@@ -53,9 +53,11 @@ public class HangmanWebPlayer extends HangmanPlayer
                          + game 
                          + "</strong></section>");
             
-            output.println("<form action=\"HangmanWeb\" method=\"post\">"
-                         + "<input type=\"submit\" value=\"Play again!\">"
-                         + "</form>");
+            output.println(
+                    "<form action=\"HangmanWeb\" method=\"post\">"
+                  + "<input type=\"submit\" name=\"action\" value=\"Play again!\">"
+                  + "<input type=\"submit\" name=\"action\" value=\"Exit the game\">"
+                  + "</form>");
             
             output.println("</html>");
         }
