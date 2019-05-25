@@ -3,11 +3,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="ISO-8859-1">
+        <meta charset="UTF-8">
         <title>Hangman Game Leaderboard</title>
+        <link rel="icon" type="image/png" href="resources/Logo.png">
     </head>
 <body>
-    <header>Leaderboard</header>
+    <header>
+        <h1>Board of Leaders</h1>
+        <nav>
+            <a href="index.html">Description</a>
+            <a href="HangmanLeaderboard.jsp">Statistics</a>
+            <a href="HangmanWeb">Game</a>
+            <a rel="author" href="About.html">About</a>
+        </nav>
+    </header>
+    
     <table>
         <tr>
             <th>Rank</th>
@@ -33,10 +43,18 @@
         %>
     </table>
     
-    <form action="HangmanWeb" method="post">
-        First name: <input type="text" placeholder="FIRSTNAME" name="FirstName">
-        Last name: <input type="text" placeholder="LASTNAME" name="LastName"><br/>
-        <input type="submit" value="START!">
-    </form>
+    <section>
+        <form action="HangmanWeb" method="post">
+            First name: <input type="text" placeholder="FIRSTNAME" name="FirstName">
+            Last name: <input type="text" placeholder="LASTNAME" name="LastName"><br/>
+            <input type="submit" value="START!">
+        </form>
+    </section>
+    
+    <footer>
+        <small> &copy; Vladimir Igumnov<br> <a rel="author"
+            href="mailto:vladimir.igumnov@zoho.com?subject=Hangman%20game">Contact</a>
+        </small>
+    </footer>
 </body>
 </html>
