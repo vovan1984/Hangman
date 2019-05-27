@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -5,16 +7,12 @@
     <title>Hangman game</title>
     <link rel="icon" type="image/png" href="resources/Logo.png">
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to the Hangman game!</h1>
-        <nav>
-            <a href="index.html">Description</a>
-            <a href="HangmanLeaderboard.jsp">Statistics</a>
-            <a href="HangmanWeb">Game</a>
-            <a rel="author" href="About.html">About</a>
-        </nav>
-    </header>
+    <jsp:include page="HangmanHeader.jsp">
+        <jsp:param name="HeaderTitle" value="Welcome to the Hangman game!"/>
+    </jsp:include> 
+    
     <aside>
         <figure>
         <img alt="hangman gif" src="resources/Hangman.gif">
@@ -23,6 +21,7 @@
         <h3>Train your brain in style :)</h3>
         <p>Details on historical info</p>
     </aside>
+    
     <section>
         <h2>Dedicated to the Craft of Building Websites.</h2>
         <p>In this web-based game, server selects random word, and
@@ -30,14 +29,8 @@
             Player can fail for up to 10 times, however, points are
             earned only if a word is uncovered in a less than a 5
             misses.</p>
-        <form action="HangmanLeaderboard.jsp"> 
-            <input type="submit" value="NEWGAME">
-        </form>
     </section>
-    <footer>
-        <small> &copy; Vladimir Igumnov<br> <a rel="author"
-            href="mailto:vladimir.igumnov@zoho.com?subject=Hangman%20game">Contact</a>
-        </small>
-    </footer>
+    
+    <jsp:include page="HangmanFooter.html"/> 
 </body>
 </html>

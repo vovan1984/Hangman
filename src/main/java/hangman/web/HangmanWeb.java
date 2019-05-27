@@ -1,8 +1,6 @@
 package hangman.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,13 +9,14 @@ import javax.servlet.http.HttpSession;
 
 import hangman.*;
 import hangman.utils.HangmanFileDictionary;
+import hangman.utils.HangmanFileStats;
 
 /**
  * Web interface of the Hangman game
  */
 public class HangmanWeb extends HttpServlet 
 {
-    private static final String START_PAGE="index.html";
+    private static final String LOGIN_PAGE="HangmanLogin.jsp";
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -36,7 +35,7 @@ public class HangmanWeb extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 	        throws ServletException, IOException 
 	{
-	    response.sendRedirect(START_PAGE);
+	    doPost(request, response);
 	}
 
 	/**
@@ -45,59 +44,93 @@ public class HangmanWeb extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 	        throws ServletException, IOException 
 	{
-	    HangmanWebPlayer player = null;
+	    HangmanWebPlayer player;
+          
+	    // Step1: Get current session or create new one
+	    HttpSession session = getSession(request);
 	    
-	    // Set the content type
-	    response.setContentType("text/html");
-	    
-	    // Get the PrintWriter
-	    PrintWriter out = response.getWriter();
-	       
-	    // Get or setup the session
-	    HttpSession session = request.getSession();
-	    
-	    // Check if user decided to leave the game
-	    String action;
-	    if ( (action = request.getParameter("action")) != null 
-	            && action.equals("Exit the game"))
+	    /* Step2: If session can't be retrieved, or was invalidated, 
+	     redirect to login page */
+	    if (session == null)
 	    {
-	        session.invalidate();
-	        response.sendRedirect(START_PAGE);
-	        return;
+            response.sendRedirect(LOGIN_PAGE);
+            return;
 	    }
 	    
-	    // Validate user name
-        String firstName = request.getParameter("FirstName");
-        String lastName = request.getParameter("LastName");
-              
-        if (firstName != null && lastName != null &&
-                firstName.length() != 0 && lastName.length() != 0)
-        {
-            // Create player
-            HangmanStats stats = (HangmanStats)session.getAttribute("HangmanStats");
-            HangmanDictionary dictionary = new HangmanFileDictionary();
-            player = new HangmanWebPlayer(
-                    request.getParameter("FirstName"),
-                    request.getParameter("LastName"),
-                    stats,
-                    dictionary);
-            session.setAttribute("HangmanPlayer", player);
-            
-        }
-        else if (session.getAttribute("HangmanPlayer") != null)
+        // Step3: Create or retrieve player
+        if (session.getAttribute("HangmanPlayer") != null)
 	    {
             // Get existing player for the session
 	        player = (HangmanWebPlayer)session.getAttribute("HangmanPlayer");
 	        player.setInput(request.getParameter("UserInput"));
 	    }
-	    else // redirect
+	    else // create player
 	    {
-	        response.sendRedirect("HangmanLeaderboard.jsp");
-	        return;
+            // Validate user name
+            String firstName = request.getParameter("FirstName");
+            String lastName = request.getParameter("LastName");
+                  
+            if (firstName != null && lastName != null &&
+                    firstName.length() != 0 && lastName.length() != 0)
+            {   
+                // Get storage
+                HangmanStats stats; 
+                if (session.getAttribute("HangmanStats") != null)
+                   stats = (HangmanStats)session.getAttribute("HangmanStats");
+                else
+                    stats = new HangmanFileStats();
+                
+                HangmanDictionary dictionary = new HangmanFileDictionary();
+                
+                player = new HangmanWebPlayer(
+                        request.getParameter("FirstName"),
+                        request.getParameter("LastName"),
+                        stats,
+                        dictionary);
+                session.setAttribute("HangmanPlayer", player);
+            }
+            else
+            {
+	            response.sendRedirect(LOGIN_PAGE);
+	            return;
+            }
 	    }
 	    
-	    // play the game
-	    player.setOutput(out);
+	    // Step4: play the game
 	    player.play();
+	    
+	    // Step5: forward request and response to JSP for display
+	    request.getRequestDispatcher("/HangmanWeb.jsp").forward(request, response);
 	}
+
+	
+	/**
+	 * This method sets up new session or retrieves existing one.
+	 * @param request Request containing user details
+	 * 
+	 * @return Created or Retrieved session 
+	 */
+    private HttpSession getSession(HttpServletRequest request)
+    {
+        HttpSession session;
+        
+        // Get existing session
+        session = request.getSession(false);
+        
+        if (session != null)
+        {    
+            // Check if user decided to leave the game
+            String action;
+            if ( (action = request.getParameter("action")) != null 
+                && action.equals("Exit the game"))
+            {
+                session.invalidate();
+                session = null;
+            }
+        }
+        else
+            session = request.getSession(true); // create new session
+        
+        return session;
+    }
 }

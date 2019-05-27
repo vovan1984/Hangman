@@ -8,7 +8,7 @@ import java.io.IOException;
  * @since 1.0
  */
 public class HangmanUtils
-{
+{  
     /**
      * Clear the console window by ringing corresponding ANSI escape codes
      * (clear screen, followed by home).

@@ -4,19 +4,13 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Hangman Game Leaderboard</title>
+        <title>Hangman Leaderboard</title>
         <link rel="icon" type="image/png" href="resources/Logo.png">
     </head>
 <body>
-    <header>
-        <h1>Board of Leaders</h1>
-        <nav>
-            <a href="index.html">Description</a>
-            <a href="HangmanLeaderboard.jsp">Statistics</a>
-            <a href="HangmanWeb">Game</a>
-            <a rel="author" href="About.html">About</a>
-        </nav>
-    </header>
+    <jsp:include page="HangmanHeader.jsp">
+        <jsp:param name="HeaderTitle" value="Board of Leaders"/>
+    </jsp:include> 
     
     <table>
         <tr>
@@ -25,10 +19,15 @@
             <th>Score</th><th>Date</th>
         </tr>
         <% 
-            hangman.HangmanStats storage = new hangman.utils.HangmanFileStats(
-                    "C:/Users/Maestro/Projects/Hangman/src/main/resources/player.txt");
+            hangman.HangmanStats storage;
         
-            session.setAttribute("HangmanStats", storage);
+            if (session.getAttribute("HangmanStats") == null)
+            {
+                storage = new hangman.utils.HangmanFileStats();
+                session.setAttribute("HangmanStats", storage);
+            }
+            else 
+                storage = (hangman.HangmanStats)session.getAttribute("HangmanStats");
         
             String[][] records = storage.getResults();
             
@@ -43,18 +42,6 @@
         %>
     </table>
     
-    <section>
-        <form action="HangmanWeb" method="post">
-            First name: <input type="text" placeholder="FIRSTNAME" name="FirstName">
-            Last name: <input type="text" placeholder="LASTNAME" name="LastName"><br/>
-            <input type="submit" value="START!">
-        </form>
-    </section>
-    
-    <footer>
-        <small> &copy; Vladimir Igumnov<br> <a rel="author"
-            href="mailto:vladimir.igumnov@zoho.com?subject=Hangman%20game">Contact</a>
-        </small>
-    </footer>
+    <jsp:include page="HangmanFooter.html"/>
 </body>
 </html>
