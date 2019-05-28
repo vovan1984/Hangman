@@ -37,7 +37,7 @@
                     game.getFailures()));
             out.println("</section>");
             
-            out.println("<form action=\"HangmanWeb\">");
+            out.println("<form action=\"HangmanWeb\" method=\"post\">");
             out.println("<input type=\"submit\" name=\"action\" value=\"Play again!\">");
             out.println("<input type=\"submit\" name=\"action\" value=\"Exit the game\">");
             out.println("</form>"); 
@@ -51,7 +51,7 @@
             
             out.println("<section>");
             out.println("<form action=\"HangmanWeb\" method=\"post\">");
-            out.println("Your guess: <input type=\"text\" name=\"UserInput\"><br>");
+            out.println("Your guess: <input type=\"text\" name=\"UserInput\" autofocus><br>");
             out.println("<input type=\"submit\" value=\"Submit\">");
             out.println("<input type=\"submit\" name=\"action\" value=\"Exit the game\">");
             out.println("</form>");
