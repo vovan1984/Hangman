@@ -41,9 +41,7 @@ public class HangmanWebPlayer extends HangmanPlayer
         if (game.isGameCompleted())
         {
             stats.saveResult(this, game);
-          //  showGameResult();
         }
-        //else showGameStatus();
     }
 
     /**

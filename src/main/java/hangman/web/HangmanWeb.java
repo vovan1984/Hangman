@@ -96,8 +96,9 @@ public class HangmanWeb extends HttpServlet
             }
 	    }
 	    
-	    // Step4: play the game
-	    player.play();
+	    // Step4: play the game if user clicked on submit button
+        if (!request.getMethod().equals("GET"))
+	        player.play();
 	    
 	    // Step5: forward request and response to JSP for display
 	    request.getRequestDispatcher("/HangmanWeb.jsp").forward(request, response);

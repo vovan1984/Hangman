@@ -13,8 +13,12 @@
     </jsp:include> 
     
     <section>
-        Game is written by Vladimir Igumnov. <br>
-        It was created as a resume for Java Web Developer position.
+        <p>Game was written by Vladimir Igumnov.<br>
+        It was created as a resume for Java Web Developer position.<p>
+        
+        <p>Source code for all flavors of the game (console, GUI, WEB) can be
+        found at the <a href="https://github.com/vovan1984/Hangman" target="_blank">GitHub</a>
+        repository.</p>
     </section> 
            
     <jsp:include page="HangmanFooter.html"/>
