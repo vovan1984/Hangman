@@ -24,15 +24,19 @@
     %>
     
     <jsp:include page="HangmanHeader.jsp">
-        <jsp:param name="HeaderTitle" value="<%=\"Welcome to the game, \" + player.getFirstName()%>"/>
+        <jsp:param name="HeaderTitle" value="<%=\"Welcome to the Hangman game, \" 
+               + player.getFirstName()%>"/>
     </jsp:include> 
       
     <%
         if (game.isGameCompleted())
         {    
             out.println("<section>");
-            out.println("<strong>" + game + "</strong>");
+            out.println("<strong>" + game + "</strong><br>");
+            out.println(String.format("<img src=\"resources/pendu%02d.jpg\">", 
+                    game.getFailures()));
             out.println("</section>");
+            
             out.println("<form action=\"HangmanWeb\">");
             out.println("<input type=\"submit\" name=\"action\" value=\"Play again!\">");
             out.println("<input type=\"submit\" name=\"action\" value=\"Exit the game\">");
@@ -40,7 +44,11 @@
         }
         else
         {
-            out.println("<section>" + game.getMaskedWord() + "</section>");
+            out.println("<section>" + game.getMaskedWord() + "<br>");
+            out.println(String.format("<img src=\"resources/pendu%02d.jpg\">", 
+                    game.getFailures()));                        
+            out.println("</section>");
+            
             out.println("<section>");
             out.println("<form action=\"HangmanWeb\" method=\"post\">");
             out.println("Your guess: <input type=\"text\" name=\"UserInput\"><br>");

@@ -49,7 +49,8 @@
                          WEB-INF/classes/hangman/gui/*class,
                          WEB-INF/classes/hangman/console/*class,
                          WEB-INF/classes/hangman/network/*class,
-                         WEB-INF/classes/console-resources/*
+                         WEB-INF/classes/console-resources/*,
+                         WEB-INF/classes/gui-resources/*
                     </packagingExcludes>
                 </configuration>
             </plugin>

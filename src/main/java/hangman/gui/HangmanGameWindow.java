@@ -219,32 +219,8 @@ public class HangmanGameWindow extends HangmanWindow implements ActionListener
         }
         
         // display current presentation of the gallows
-        switch (game.getFailures())
-        {
-            case 0:  break;
-            case 1:  imageArea.setImg("pendu01.jpg");
-                     break;
-            case 2:  imageArea.setImg("pendu02.jpg");
-                     break;
-            case 3:  imageArea.setImg("pendu03.jpg");
-                     break;
-            case 4:  imageArea.setImg("pendu04.jpg");
-                     break;
-            case 5:  imageArea.setImg("pendu05.jpg");
-                     break;
-            case 6:  imageArea.setImg("pendu06.jpg");
-                     break;
-            case 7:  imageArea.setImg("pendu07.jpg");
-                     break;
-            case 8:  imageArea.setImg("pendu08.jpg");
-                     break;
-            case 9:  imageArea.setImg("pendu09.jpg");
-                     break;
-            case 10: imageArea.setImg("pendu10.jpg");
-                     break;
-            default: break;
-        }
-        
+        imageArea.setImg(String.format("pendu%02d.jpg", game.getFailures()));
+               
         // Check if we can continue guessing the word.
         if (game.isGameCompleted())
         {

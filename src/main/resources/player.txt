@@ -18,3 +18,8 @@
 [Sun May 26 20:29:46 EDT 2019] gjh hkjh: 50 points in 2 rounds.
 [Sun May 26 20:57:49 EDT 2019] Antouan Grizman: 50 points in 2 rounds.
 [Sun May 26 21:44:35 EDT 2019] gh ghj: 50 points in 2 rounds.
+[Mon May 27 21:05:56 EDT 2019] dsfa dsf: 0 points in 10 rounds.
+[Mon May 27 21:10:22 EDT 2019] Vladimir I: 50 points in 2 rounds.
+[Mon May 27 21:11:40 EDT 2019] Vladimir I: 0 points in 10 rounds.
+[Mon May 27 21:17:15 EDT 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
+[Mon May 27 21:18:12 EDT 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
