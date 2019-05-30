@@ -27,16 +27,17 @@
     <%
         if (game.isGameCompleted())
         {    
-            out.println("<section>");
-            out.println("<strong>" + game + "</strong><br>");
-            out.println(String.format("<img src=\"resources/images/pendu%02d.jpg\">", 
-                    game.getFailures()));
-            out.println("</section>");
+    %>
+            <section>
+                <strong><%=game %></strong><br>
+                <img src=<%=String.format("\"resources/images/pendu%02d.jpg\"", game.getFailures())%>>
+            </section>
             
-            out.println("<form action=\"HangmanWeb\" method=\"post\">");
-            out.println("<input type=\"submit\" name=\"action\" value=\"Play again!\">");
-            out.println("<input type=\"submit\" name=\"action\" value=\"Exit the game\">");
-            out.println("</form>"); 
+            <form action="HangmanWeb" method="post">
+                <input type="submit" name="action" value="Play again!">
+                <input type="submit" name="action" value="Exit the game">
+            </form> 
+     <%
         }
         else
         {

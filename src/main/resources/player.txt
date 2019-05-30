@@ -25,3 +25,5 @@
 [Mon May 27 21:18:12 EDT 2019] FIRSTNAME LASTNAME: 0 points in 10 rounds.
 [Tue May 28 07:41:07 EDT 2019] Vladimir I: 0 points in 10 rounds.
 [Wed May 29 21:55:13 EDT 2019] kj jk: 0 points in 10 rounds.
+[Wed May 29 23:09:23 EDT 2019] Vova I: 0 points in 9 rounds.
+[Wed May 29 23:09:53 EDT 2019] Vova I: 10 points in 4 rounds.
