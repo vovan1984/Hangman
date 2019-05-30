@@ -2,20 +2,15 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE HTML>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hangman game</title>
-    <link rel="icon" type="image/png" href="resources/Logo.png">
-</head>
-
+    <jsp:include page="resources/HangmanTitle.jsp"/>
 <body>
-    <jsp:include page="HangmanHeader.jsp">
+    <jsp:include page="resources/HangmanHeader.jsp">
         <jsp:param name="HeaderTitle" value="Welcome to the Hangman game!"/>
     </jsp:include> 
     
     <aside>
         <figure>
-        <img alt="hangman gif" src="resources/Hangman.gif">
+        <img alt="hangman gif" src="resources/images/Hangman.gif">
         <figcaption>Some hangman multimedia here</figcaption>
         </figure>
         <h3>Train your brain in style :)</h3>
@@ -31,6 +26,6 @@
             misses.</p>
     </section>
     
-    <jsp:include page="HangmanFooter.html"/> 
+    <jsp:include page="resources/HangmanFooter.html"/> 
 </body>
 </html>

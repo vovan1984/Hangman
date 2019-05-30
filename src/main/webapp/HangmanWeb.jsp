@@ -4,11 +4,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Hangman game</title>
-    <link rel="icon" type="image/png" href="resources/Logo.png">
-</head>
+    <jsp:include page="resources/HangmanTitle.jsp"/>
 <body>    
     <% 
         HangmanGame game = null;
@@ -23,7 +19,7 @@
         }
     %>
     
-    <jsp:include page="HangmanHeader.jsp">
+    <jsp:include page="resources/HangmanHeader.jsp">
         <jsp:param name="HeaderTitle" value="<%=\"Welcome to the Hangman game, \" 
                + player.getFirstName()%>"/>
     </jsp:include> 
@@ -33,7 +29,7 @@
         {    
             out.println("<section>");
             out.println("<strong>" + game + "</strong><br>");
-            out.println(String.format("<img src=\"resources/pendu%02d.jpg\">", 
+            out.println(String.format("<img src=\"resources/images/pendu%02d.jpg\">", 
                     game.getFailures()));
             out.println("</section>");
             
@@ -44,21 +40,23 @@
         }
         else
         {
-            out.println("<section>" + game.getMaskedWord() + "<br>");
-            out.println(String.format("<img src=\"resources/pendu%02d.jpg\">", 
-                    game.getFailures()));                        
-            out.println("</section>");
+     %>
+            <section><%= game.getMaskedWord() %><br>  
+            <img src=<%=String.format("\"resources/images/pendu%02d.jpg\"", game.getFailures())%>>         
+            </section>
             
-            out.println("<section>");
-            out.println("<form action=\"HangmanWeb\" method=\"post\">");
-            out.println("Your guess: <input type=\"text\" name=\"UserInput\" autofocus><br>");
-            out.println("<input type=\"submit\" value=\"Submit\">");
-            out.println("<input type=\"submit\" name=\"action\" value=\"Exit the game\">");
-            out.println("</form>");
-            out.println("</section>");
+            <section>
+                <form action="HangmanWeb" method="post">
+                    Your guess: <input type="text" name="UserInput" autofocus><br>
+                    <input type="submit" value="Submit">
+                    <input type="submit" name="action" value="Exit the game">
+                </form>
+            </section>
+            
+    <%        
         }
     %>
     
-    <jsp:include page="HangmanFooter.html"/> 
+    <jsp:include page="resources/HangmanFooter.html"/> 
 </body>
 </html>

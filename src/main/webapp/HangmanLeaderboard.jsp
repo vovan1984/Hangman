@@ -2,13 +2,9 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Hangman Leaderboard</title>
-        <link rel="icon" type="image/png" href="resources/Logo.png">
-    </head>
+    <jsp:include page="resources/HangmanTitle.jsp"/>
 <body>
-    <jsp:include page="HangmanHeader.jsp">
+    <jsp:include page="resources/HangmanHeader.jsp">
         <jsp:param name="HeaderTitle" value="Board of Leaders"/>
     </jsp:include> 
     
@@ -42,6 +38,6 @@
         %>
     </table>
     
-    <jsp:include page="HangmanFooter.html"/>
+    <jsp:include page="resources/HangmanFooter.html"/>
 </body>
 </html>
