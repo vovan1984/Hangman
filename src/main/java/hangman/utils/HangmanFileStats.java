@@ -27,8 +27,7 @@ import hangman.HangmanStats;
 public class HangmanFileStats implements HangmanStats
 {
     // Default file with names and scores of players
-    private final static String DEF_PLAYERS_FILE =
-        "C:/Users/Maestro/Projects/Hangman/src/main/resources/player.txt";
+    private final static String DEF_PLAYERS_FILE = "player.txt";
     
     // default charset
     private final static Charset DEF_CHARSET = Charset.forName("ISO-8859-1");
@@ -202,7 +201,8 @@ public class HangmanFileStats implements HangmanStats
                     + game.getScore() + " points in " + game.getRounds() + postfix);
         } catch (IOException e)
         {
-            System.out.println("Failed to store result of the game!");
+            System.out.println("Failed to store result of the game to "
+                    + playersFile.getAbsolutePath() + "!");
             e.printStackTrace();
         } 
     }

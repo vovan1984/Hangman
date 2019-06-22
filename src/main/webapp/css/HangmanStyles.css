@@ -1,3 +1,54 @@
 .redborder { border: 2px solid red; }
 
-header, footer, body { text-align: center }
+header, footer { text-align: center }
+
+body
+{
+	margin: 20px;
+}
+
+#HeaderTitle, footer
+{
+	background: #2e7997;  
+	color: #FFFFFF;
+    clear: both;
+    padding: 5px;
+}
+
+#ContactLink
+{
+	color: #FFFFFF;
+}
+
+section
+{
+	margin: 10px;
+}
+
+/*
+aside, section
+{
+	border: 1px solid black;
+}
+*/
+
+aside
+{
+	float: right;
+	text-align: center;
+}
+
+header a
+{
+	display: inline-block;
+	margin: 1px 2%;
+	font-size: 120%;
+	color: #000040;
+	line-height: 200%;
+}
+
+form
+{
+	text-align: center;
+	margin: 5%;
+}
