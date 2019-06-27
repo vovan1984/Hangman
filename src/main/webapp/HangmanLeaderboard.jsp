@@ -9,11 +9,15 @@
     </jsp:include> 
     
     <table>
-        <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>Score</th><th>Date</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Score</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        
         <% 
             hangman.HangmanStats storage;
         
@@ -26,8 +30,10 @@
                 storage = (hangman.HangmanStats)session.getAttribute("HangmanStats");
         
             String[][] records = storage.getResults();
-            
+                
             if (records!=null)
+            {
+                out.println("<tbody>");
                 for (int i=0; i<records.length; i++)
                 {
                     out.println("<tr>\n<td>" + (i + 1) + ".</td>");
@@ -35,8 +41,17 @@
                        out.println("<td>" + records[i][j] + "</td>");
                     out.println("</tr>");
                 }
+                out.println("</tbody>");
+            }
         %>
     </table>
+    
+    <% 
+        if (records == null) // no stats avaialble 
+    %>
+            <h3 id="NoDataMsg">Nobody played yet!</h3>
+    
+    
     
     <jsp:include page="resources/HangmanFooter.html"/>
 </body>
