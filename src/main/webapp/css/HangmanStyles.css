@@ -1,13 +1,9 @@
 .redborder { border: 2px solid red; }
 
+/* Setup headers and footers */
 header, footer { text-align: center }
 
-body
-{
-	margin: 20px;
-}
-
-#HeaderTitle, footer
+header h1, footer
 {
 	background: #2e7997;  
 	color: #FFFFFF;
@@ -15,10 +11,27 @@ body
     padding: 5px;
 }
 
+
+header a
+{
+    display: inline-block;
+    margin: 1px 2%;
+    font-size: 120%;
+    color: #000040;
+    line-height: 200%;
+}
+
 #ContactLink
 {
 	color: #FFFFFF;
 }
+
+/* Setup other styling */
+body
+{
+    margin: 1%;
+}
+
 
 section
 {
@@ -31,24 +44,10 @@ aside
 	text-align: center;
 }
 
-header a
-{
-	display: inline-block;
-	margin: 1px 2%;
-	font-size: 120%;
-	color: #000040;
-	line-height: 200%;
-}
-
 form
 {
 	text-align: center;
 	margin: 5%;
-}
-
-table, #NoDataMsg
-{
-	  
 }
 
 table 
@@ -61,10 +60,11 @@ table
 
 #NoDataMsg
 {
-	color: #ff4900;
+	color: #ff4911;
 	font-weight: bold;
 	font-varian: small-caps;
 	margin: 10px 2%;
+	text-align: center;
 }
 
 th, td 
