@@ -1,58 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
-    <jsp:include page="resources/HangmanTitle.jsp"/>
-<body>
-    <jsp:include page="resources/HangmanHeader.jsp">
-        <jsp:param name="HeaderTitle" value="Board of Leaders"/>
-    </jsp:include> 
+    <jsp:include page="HangmanHead.jsp"/>
+    <body>
+        <jsp:include page="HangmanHeader.jsp">
+            <jsp:param name="HeaderTitle" value="Board of Leaders"/>
+        </jsp:include> 
     
-    <table>
-        <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Player</th>
-                <th>Score</th>
-                <th>Date</th>
-            </tr>
-        </thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
         
-        <% 
-            hangman.HangmanStats storage;
+            <% 
+                hangman.HangmanStats storage;
         
-            if (session.getAttribute("HangmanStats") == null)
-            {
-                storage = new hangman.utils.HangmanFileStats();
-                session.setAttribute("HangmanStats", storage);
-            }
-            else 
-                storage = (hangman.HangmanStats)session.getAttribute("HangmanStats");
-        
-            String[][] records = storage.getResults();
-                
-            if (records!=null)
-            {
-                out.println("<tbody>");
-                for (int i=0; i<records.length; i++)
+                if (session.getAttribute("HangmanStats") == null)
                 {
-                    out.println("<tr>\n<td>" + (i + 1) + ".</td>");
-                    for (int j=0; j<3; j++)
-                       out.println("<td>" + records[i][j] + "</td>");
-                    out.println("</tr>");
+                    storage = new hangman.utils.HangmanFileStats();
+                    session.setAttribute("HangmanStats", storage);
                 }
-                out.println("</tbody>");
-            }
+                else 
+                    storage = (hangman.HangmanStats)session.getAttribute("HangmanStats");
+        
+                String[][] records = storage.getResults();
+                
+                if (records!=null)
+                {
+                    out.println("<tbody>");
+                    for (int i=0; i<records.length; i++)
+                    {
+                        out.println("<tr>\n<td>" + (i + 1) + ".</td>");
+                        for (int j=0; j<3; j++)
+                           out.println("<td>" + records[i][j] + "</td>");
+                        out.println("</tr>");
+                    }
+                    out.println("</tbody>");
+                }
+            %>
+        </table>
+    
+        <% 
+            if (records == null) // no stats avaialble 
         %>
-    </table>
-    
-    <% 
-        if (records == null) // no stats avaialble 
-    %>
-            <h3 id="NoDataMsg">Nobody played yet!</h3>
+                <h3 id="NoDataMsg">Nobody played yet!</h3>
     
     
     
-    <jsp:include page="resources/HangmanFooter.html"/>
-</body>
+        <jsp:include page="HangmanFooter.html"/>
+    </body>
 </html>

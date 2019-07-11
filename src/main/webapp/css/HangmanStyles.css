@@ -1,14 +1,38 @@
-.redborder { border: 2px solid red; }
-
 /* Setup headers and footers */
-header, footer { text-align: center }
 
-header h1, footer
+body
+{ 
+	min-height: calc(100vh - 61px);
+	padding: 1px 0px 60px 0px; /* add padding to avoid margin collapse with adjoining header */
+    margin: 0;
+    position: relative; /* for positioning of the footer */
+}
+
+
+main
 {
+    /*border: 2px solid red;*/
+    padding: 5px;
+    margin: 1%;
+}
+
+header, footer 
+{ 
+	text-align: center;
 	background: #2e7997;  
 	color: #FFFFFF;
     clear: both;
     padding: 5px;
+    margin: 1%;
+}
+
+
+footer 
+{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
 }
 
 
@@ -17,22 +41,16 @@ header a
     display: inline-block;
     margin: 1px 2%;
     font-size: 120%;
-    color: #000040;
+    color: #FFFFFF;
     line-height: 200%;
 }
 
-#ContactLink
+footer a
 {
 	color: #FFFFFF;
 }
 
-/* Setup other styling */
-body
-{
-    margin: 1%;
-}
-
-
+/* Setup of main styling */
 section
 {
 	margin: 10px;
@@ -42,14 +60,37 @@ aside
 {
 	float: right;
 	text-align: center;
+	margin: 0px 0px 0px 0px;
+	width: 300px;
 }
 
+figure img
+{
+	widht: 200px;
+	height: 200px;
+}
+
+blockquote, p
+{
+    margin: 0;
+}
+
+/* Setup of Login form */
 form
 {
 	text-align: center;
 	margin: 5%;
 }
 
+.redborder { border: 2px solid red; }
+
+label::after
+{
+    color: red;
+    content: " Value should not be blank!";
+}
+
+/* Setup of statistics */
 table 
 {
   border-collapse: separate;
@@ -77,4 +118,12 @@ th
   background: #42444e;
   color: #fff;
   text-align: left;
+}
+
+/* clear the area after to avoid container overflow */
+.clear:after 
+{
+    clear: both;
+    content: "";
+    display: table;
 }

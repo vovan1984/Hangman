@@ -2,10 +2,10 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-    <jsp:include page="resources/HangmanTitle.jsp"/>   
+    <jsp:include page="HangmanHead.jsp"/>   
     
     <body>
-        <jsp:include page="resources/HangmanHeader.jsp">
+        <jsp:include page="HangmanHeader.jsp">
             <jsp:param name="HeaderTitle" value="Information about player"/>
         </jsp:include> 
     
@@ -14,55 +14,68 @@
         
                 First name: <input type="text" placeholder="FIRSTNAME" id="FirstName" 
                               name="FirstName" autofocus>
-                <label id="errfname" style="color:red; visibility:hidden;">
-                    First name should not be blank!</label>
                 <br><br>
             
                 Last name: <input type="text" placeholder="LASTNAME" id="LastName" 
                               name="LastName">
-                <label id="errlname" style="color:red; visibility:hidden;">
-                    Last name should not be blank! </label>
                 <br><br>
             
                 <input type="submit" value="START!">
             </form>
         </section>
     
-        <jsp:include page="resources/HangmanFooter.html"/>
+        <jsp:include page="HangmanFooter.html"/>
     </body>
 
     <script type="application/javascript">
+    
+        function addErrAfter(node, labelId, hiddenInd)
+        {
+            node.classList.add("redborder");
+            
+            if (document.getElementById(labelId) == null)
+            {
+        	    var label = document.createElement("label");      	    
+        	    label.setAttribute("id", labelId);
+        	    node.parentNode.insertBefore(label, node.nextSibling);
+            }
+           
+            document.getElementById(labelId).style.visibility = hiddenInd;
+            
+            /* remove red border if error should be hidden */ 
+            if (hiddenInd == "hidden")
+            	node.classList.remove("redborder");
+        }
+       
         function validate()
         {
             var firstname = document.getElementById("FirstName");
             var lastname = document.getElementById("LastName");
             
-            if (firstname.value.trim() == "") 
+            var firstNameWrong = (firstname.value.trim() == "");
+            var lastNameWrong = (lastname.value.trim() == "");
+            
+            /* If both names are wrong - display error message for both */
+            if (firstNameWrong && lastNameWrong) 
             {
-                firstname.classList.add("redborder");
-                document.getElementById("errfname").style.visibility="visible";
+                addErrAfter(firstname, "errfname", "visible");
+                addErrAfter(lastname, "errlname", "visible");
             }
-            else
+            /* If only first name is wrong, then message for last name should
+               not be displayed, but should be present for alignment purposes */
+            else  if (firstNameWrong)
             {
-                firstname.classList.remove("redborder");
-                document.getElementById("errfname").style.visibility="hidden";
+                addErrAfter(firstname, "errfname", "visible");
+                addErrAfter(lastname, "errlname", "hidden");           	
+            }
+            else if (lastNameWrong)
+            {
+                addErrAfter(firstname, "errfname", "hidden");
+                addErrAfter(lastname, "errlname", "visible");             	
             }
             
-            if (lastname.value.trim() == "")
-            {
-                lastname.classList.add("redborder");
-                document.getElementById("errlname").style.visibility="visible";
-            }
-            else
-            {
-                lastname.classList.remove("redborder");
-                document.getElementById("errlname").style.visibility="hidden";
-            }
-            
-            if (firstname.value.trim() != "" && lastname.value.trim() != "")
-                return true;
-            else
-                return false;
+            // If both names are valid => validation passed           
+            return ! (firstNameWrong || lastNameWrong);
         }
     </script>
 </html>
