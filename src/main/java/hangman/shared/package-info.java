@@ -3,4 +3,4 @@
  * @author Vladimir Igumnov
  *
  */
-package hangman.utils;
+package hangman.shared;

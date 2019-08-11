@@ -1,4 +1,4 @@
-package hangman.utils;
+package hangman.shared;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import hangman.HangmanDictionary;
-import hangman.utils.HangmanFileDictionary;
 
 class HangmanFileDictionaryTest
 {

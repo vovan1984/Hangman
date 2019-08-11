@@ -19,7 +19,7 @@ import javax.swing.border.LineBorder;
 import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 import hangman.HangmanStats;
-import hangman.utils.Hangman10RoundsGame;
+import hangman.shared.Hangman10RoundsGame;
 
 public class HangmanGameWindow extends HangmanWindow implements ActionListener
 {

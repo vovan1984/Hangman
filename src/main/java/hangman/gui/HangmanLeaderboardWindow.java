@@ -16,7 +16,7 @@ import javax.swing.table.*;
 import hangman.HangmanDictionary;
 import hangman.HangmanPlayer;
 import hangman.HangmanStats;
-import hangman.utils.HangmanFileStats;
+import hangman.shared.HangmanFileStats;
 
 /**
  * This class retrieves list of players' scores in

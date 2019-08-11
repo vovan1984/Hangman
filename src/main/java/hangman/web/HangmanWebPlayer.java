@@ -1,7 +1,7 @@
 package hangman.web;
 
 import hangman.*;
-import hangman.utils.Hangman10RoundsGame;
+import hangman.shared.Hangman10RoundsGame;
 
 public class HangmanWebPlayer extends HangmanPlayer
 {

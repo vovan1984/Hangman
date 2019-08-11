@@ -5,8 +5,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import hangman.HangmanDictionary;
-import hangman.utils.HangmanFileDictionary;
-import hangman.utils.HangmanFileStats;
+import hangman.shared.HangmanFileDictionary;
+import hangman.shared.HangmanFileStats;
 
 /**
  * This class starts GUI Hangman Game with a given dictionary.

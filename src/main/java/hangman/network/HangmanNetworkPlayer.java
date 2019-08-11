@@ -10,7 +10,7 @@ import hangman.HangmanDictionary;
 import hangman.HangmanGame;
 import hangman.HangmanPlayer;
 import hangman.HangmanStats;
-import hangman.utils.Hangman10RoundsGame;
+import hangman.shared.Hangman10RoundsGame;
 
 /**
  * This class represents player for a Hangman game.<br>

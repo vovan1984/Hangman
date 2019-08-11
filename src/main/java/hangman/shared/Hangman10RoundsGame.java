@@ -1,4 +1,4 @@
-package hangman.utils;
+package hangman.shared;
 
 import hangman.HangmanGame;
 

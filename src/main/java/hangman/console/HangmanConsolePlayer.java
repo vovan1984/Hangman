@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import hangman.*;
-import hangman.utils.Hangman10RoundsGame;
-import hangman.utils.HangmanUtils;
+import hangman.shared.Hangman10RoundsGame;
+import hangman.shared.HangmanUtils;
 
 /**
  * Implementation of the Console Player able to play provided 

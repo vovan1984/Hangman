@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import hangman.*;
-import hangman.utils.HangmanFileDictionary;
-import hangman.utils.HangmanFileStats;
+import hangman.shared.HangmanFileDictionary;
+import hangman.shared.HangmanFileStats;
 
 /**
  * This class starts Console Hangman Game with a given dictionary.

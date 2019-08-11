@@ -1,4 +1,4 @@
-package hangman.utils;
+package hangman.shared;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

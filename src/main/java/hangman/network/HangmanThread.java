@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import hangman.HangmanDictionary;
-import hangman.utils.HangmanFileDictionary;
-import hangman.utils.HangmanFileStats;
+import hangman.shared.HangmanFileDictionary;
+import hangman.shared.HangmanFileStats;
 
 /**
  * Main flow of the server to client communication 

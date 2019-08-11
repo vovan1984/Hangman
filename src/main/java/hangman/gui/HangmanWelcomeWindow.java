@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import hangman.HangmanDictionary;
-import hangman.utils.HangmanFileStats;
+import hangman.shared.HangmanFileStats;
 
 /**
  * 

@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import hangman.*;
-import hangman.utils.HangmanFileDictionary;
-import hangman.utils.HangmanFileStats;
+import hangman.shared.HangmanFileDictionary;
+import hangman.shared.HangmanFileStats;
 
 /**
  * Web interface of the Hangman game
