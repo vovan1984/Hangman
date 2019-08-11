@@ -125,5 +125,5 @@ th
 {
     clear: both;
     content: "";
-    display: table;
+    display: block;
 }

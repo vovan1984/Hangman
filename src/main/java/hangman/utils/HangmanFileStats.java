@@ -189,6 +189,7 @@ public class HangmanFileStats implements HangmanStats
     @Override
     public void saveResult(HangmanPlayer player, HangmanGame game)
     {
+        System.out.println(playersFile);
         try (
                 // create file if it doesn't exist, or append to it if exists.
                 PrintStream writer 
